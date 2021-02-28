@@ -10,12 +10,12 @@ import Nav from './Nav.jsx';
 
 function TopBar({ classes }) {
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color="default">
       <Toolbar>
         <IconButton
           edge="start"
           className={classes.menuButton}
-          color="inherit"
+          color="default"
           aria-label="menu"
         >
           <MenuIcon />
@@ -27,7 +27,7 @@ function TopBar({ classes }) {
           edge="end"
           className={classes.moreButton}
           aria-label="more"
-          color="inherit"
+          color="default"
         >
           <MoreIcon />
         </IconButton>

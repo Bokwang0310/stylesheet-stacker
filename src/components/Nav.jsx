@@ -13,8 +13,8 @@ function Nav() {
         setValue(newValue);
       }}
       centered
-      indicatorColor="secondary"
-      textColor="secondary"
+      indicatorColor="primary"
+      textColor="primary"
     >
       <Tab label="Pinned" />
       <Tab label="Home" />

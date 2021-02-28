@@ -1,8 +1,8 @@
 # Memo
 
-- setting
-- main (preview)
-- pinned
+- date format
+- router
+- global state tool
 
 # Learn More
 
