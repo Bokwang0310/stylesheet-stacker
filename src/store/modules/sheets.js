@@ -4,7 +4,12 @@ import { formatDate } from 'utils';
 const ADD_SHEET = 'sheets/ADD_SHEET';
 const REMOVE_SHEET = 'sheets/REMOVE_SHEET';
 
-export const addSheet = name => ({ type: ADD_SHEET, name });
+export const addSheet = name => ({
+  type: ADD_SHEET,
+  id: nanoid(),
+  name,
+  date: formatDate(new Date())
+});
 export const removeSheet = id => ({ type: REMOVE_SHEET, id });
 
 const initialState = [
@@ -18,20 +23,16 @@ const initialState = [
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_SHEET: {
-      // impure
-      const id = nanoid();
+    case ADD_SHEET:
       return [
         ...state,
         {
-          id,
+          id: action.id,
           name: action.name,
-          // impure
-          date: formatDate(new Date()),
-          href: `/#/sheet/${id}`
+          date: action.date,
+          href: `/#/sheet/${action.id}`
         }
       ];
-    }
 
     case REMOVE_SHEET:
       return state.filter(sheet => sheet.id !== action.id);
