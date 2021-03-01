@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -5,8 +7,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-import { useState } from 'react';
 
 function AddForm({ open, closeAddForm, addSheet }) {
   const [value, setValue] = useState('');
@@ -17,10 +17,10 @@ function AddForm({ open, closeAddForm, addSheet }) {
       onClose={closeAddForm}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Add Style</DialogTitle>
+      <DialogTitle id="form-dialog-title">Add Sheet</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Plese enter the name of your style.
+          Plese enter the name of your style sheet.
         </DialogContentText>
         <TextField
           autoFocus

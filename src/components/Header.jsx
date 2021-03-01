@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-import Nav from './Nav.jsx';
+import Nav from 'components/Nav';
 
 function TopBar({ classes }) {
   return (

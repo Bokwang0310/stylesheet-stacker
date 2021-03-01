@@ -1,16 +1,13 @@
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { ThemeProvider } from '@material-ui/core/styles';
-import theme from './theme';
+import theme from 'theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { Provider } from 'react-redux';
-import store from './store';
-
-console.log(store.getState());
-window.getState = store.getState;
+import store from 'store';
 
 ReactDOM.render(
   <Provider store={store}>

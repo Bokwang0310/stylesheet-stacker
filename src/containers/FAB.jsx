@@ -1,7 +1,7 @@
-import { setOpen } from '../store/modules/addform.js';
 import { connect } from 'react-redux';
 
-import FAB from '../components/FAB.jsx';
+import { setOpen } from 'store/modules/addform';
+import FAB from 'components/FAB';
 
 const mapDispatchToProps = dispatch => ({
   openAddForm: () => dispatch(setOpen())
