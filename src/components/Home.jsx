@@ -1,14 +1,15 @@
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 
-import Item from './Item.jsx';
+// import Item from './Item.jsx';
+import ItemContainer from '../containers/ItemContainer.jsx';
 
-function Home({ items, onRemove }) {
+function Home({ sheets }) {
   return (
     <Grid>
       <List>
-        {items.map(item => {
-          return <Item key={item.id} item={item} onRemove={onRemove} />;
+        {sheets.map(sheet => {
+          return <ItemContainer key={sheet.id} sheet={sheet} />;
         })}
       </List>
     </Grid>

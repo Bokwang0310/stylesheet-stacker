@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-
-import theme from './theme';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Header from './components/Header.jsx';
-import FloatingButton from './components/FloatingButton.jsx';
-import Home from './components/Home.jsx';
-import AddForm from './components/AddForm.jsx';
+import FABContainer from './containers/FABContainer.jsx';
+// import FAB from './components/FAB.jsx';
+// import Home from './components/Home.jsx';
+import HomeContainer from './containers/HomeContainer.jsx';
+// import AddForm from './components/AddForm.jsx';
+import AddFormContainer from './containers/AddFormContainer.jsx';
 
 import { nanoid } from 'nanoid';
 import { formatDate } from './utils.js';
@@ -31,25 +31,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
-  const [items, setItems] = useState([
+  const [sheets, setSheets] = useState([
     {
       id: '1',
-      primary: 'Create your first book.',
-      secondary: '2021/03/01',
+      name: 'Create your first book.',
+      date: '2021/03/01',
       href: '/#/sheet/1'
     }
   ]);
 
-  const handleRemove = id => setItems(items.filter(item => item.id !== id));
-
-  const addItem = name => {
+  const removeSheet = id => setSheets(sheets.filter(sheet => sheet.id !== id));
+  const addSheet = name => {
     const id = nanoid();
-    setItems([
-      ...items,
+    setSheets([
+      ...sheets,
       {
         id,
-        primary: name,
-        secondary: formatDate(new Date()),
+        name,
+        date: formatDate(new Date()),
         href: `/#/sheet/${id}`
       }
     ]);
@@ -62,13 +61,12 @@ function App() {
   const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <Header classes={classes}></Header>
-      <Home classes={classes} items={items} onRemove={handleRemove} />
-      <FloatingButton classes={classes} onClickOpen={handleClickOpen} />
-      <AddForm open={open} handleClose={handleClose} handleSubmit={addItem} />
-    </ThemeProvider>
+      <HomeContainer />
+      <FABContainer classes={classes} />
+      <AddFormContainer />
+    </>
   );
 }
 

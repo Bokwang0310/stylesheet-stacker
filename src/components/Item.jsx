@@ -9,19 +9,19 @@ import IconButton from '@material-ui/core/IconButton';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-function Item({ item, onRemove }) {
+function Item({ sheet, removeSheet }) {
   return (
-    <ListItem button component="a" href={item.href}>
+    <ListItem button component="a" href={sheet.href}>
       <ListItemAvatar>
         <Avatar>
           <FolderIcon />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={item.primary} secondary={item.secondary} />
+      <ListItemText primary={sheet.name} secondary={sheet.date} />
       <ListItemSecondaryAction>
         <IconButton
           onClick={() => {
-            onRemove(item.id);
+            removeSheet(sheet.id);
           }}
           edge="end"
           aria-label="delete"

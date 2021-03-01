@@ -21,7 +21,7 @@ function TopBar({ classes }) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-          Views
+          Stacker
         </Typography>
         <IconButton
           edge="end"

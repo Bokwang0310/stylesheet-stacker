@@ -8,13 +8,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { useState } from 'react';
 
-function AddForm({ open, handleClose, handleSubmit }) {
+function AddForm({ open, closeAddForm, addSheet }) {
   const [value, setValue] = useState('');
 
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={closeAddForm}
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">Add Style</DialogTitle>
@@ -36,13 +36,13 @@ function AddForm({ open, handleClose, handleSubmit }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={closeAddForm} color="primary">
           Cancel
         </Button>
         <Button
           onClick={() => {
-            handleClose();
-            handleSubmit(value);
+            closeAddForm();
+            addSheet(value);
             setValue('');
           }}
           color="primary"

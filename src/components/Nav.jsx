@@ -17,7 +17,7 @@ function Nav() {
       textColor="primary"
     >
       <Tab label="Pinned" />
-      <Tab label="Home" />
+      <Tab label="Sheets" />
       <Tab label="Setting" />
     </Tabs>
   );
