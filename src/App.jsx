@@ -1,7 +1,13 @@
+import { Switch, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Header from 'components/Header';
 import SheetList from 'containers/SheetList';
+import Setting from 'components/Setting';
+import Pinned from 'components/Pinned';
+import Sheet from 'components/Sheet';
+import FAB from 'containers/FAB';
+import AddForm from 'containers/AddForm';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -25,8 +31,21 @@ function App() {
 
   return (
     <>
-      <Header classes={classes} />
-      <SheetList classes={classes} />
+      <Switch>
+        <Route path="/sheet/:id" component={Sheet} exact />
+        <Route
+          path="/"
+          render={props => <Header {...props} classes={classes} />}
+        />
+      </Switch>
+      <Route path="/sheets" component={SheetList} />
+      <Route path="/setting" component={Setting} />
+      <Route path="/pinned" component={Pinned} />
+      <Route
+        path={['/sheets', '/pinned']}
+        render={props => <FAB {...props} classes={classes} />}
+      />
+      <AddForm />
     </>
   );
 }

@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-// import Link from '@material-ui/core/Link';
+import { findIndexOfItem } from 'utils';
 
-function Nav() {
-  const [value, setValue] = useState(1);
+function Nav({ history }) {
+  const tabs = ['/pinned', '/sheets', '/setting'];
+
+  const [value, setValue] = useState(
+    findIndexOfItem(window.location.pathname, tabs)
+  );
+
+  const unlisten = history.listen(item => {
+    const index = findIndexOfItem(item.pathname, tabs);
+    setValue(index);
+  });
+
+  useEffect(() => () => unlisten());
 
   return (
     <Tabs
@@ -17,12 +29,11 @@ function Nav() {
       indicatorColor="primary"
       textColor="primary"
     >
-      {/* to property */}
-      <Tab label="Pinned" />
-      <Tab label="Sheets" />
-      <Tab label="Setting" />
+      <Tab label="Pinned" component={Link} to={tabs[0]} />
+      <Tab label="Sheets" component={Link} to={tabs[1]} />
+      <Tab label="Setting" component={Link} to={tabs[2]} />
     </Tabs>
   );
 }
 
-export default Nav;
+export default withRouter(Nav);

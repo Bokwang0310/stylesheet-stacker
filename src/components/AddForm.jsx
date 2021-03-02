@@ -30,9 +30,7 @@ function AddForm({ open, closeAddForm, addSheet }) {
           type="text"
           fullWidth
           value={value}
-          onChange={e => {
-            setValue(e.target.value);
-          }}
+          onChange={e => setValue(e.target.value)}
         />
       </DialogContent>
       <DialogActions>

@@ -5,3 +5,6 @@ export const formatDate = date =>
   [date.getFullYear(), date.getMonth() + 1, date.getDate()]
     .map(formatSingleDigit)
     .join('/');
+
+export const findIndexOfItem = (itemToFind, arr) =>
+  arr.findIndex(item => item === itemToFind);

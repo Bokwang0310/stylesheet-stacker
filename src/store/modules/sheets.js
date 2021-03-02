@@ -17,7 +17,7 @@ const initialState = [
     id: '1',
     name: 'Create your first book.',
     date: '2021/03/01',
-    href: '/#/sheet/1'
+    href: '/sheet/1'
   }
 ];
 
@@ -30,7 +30,7 @@ const reducers = (state = initialState, action) => {
           id: action.id,
           name: action.name,
           date: action.date,
-          href: `/#/sheet/${action.id}`
+          href: `/sheet/${action.id}`
         }
       ];
 

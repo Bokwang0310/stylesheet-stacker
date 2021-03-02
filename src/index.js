@@ -2,19 +2,23 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux';
+import store from 'store';
+
+import { BrowserRouter } from 'react-router-dom';
+
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from 'theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import { Provider } from 'react-redux';
-import store from 'store';
-
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

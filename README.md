@@ -1,8 +1,6 @@
 # Memo
 
-- date format
-- router
-- global state tool
+- go to sheet after add sheet
 
 # Learn More
 

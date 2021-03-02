@@ -1,5 +1,6 @@
-import ListItem from '@material-ui/core/ListItem';
+import { Link } from 'react-router-dom';
 
+import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -11,7 +12,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 function Item({ sheet, removeSheet }) {
   return (
-    <ListItem button component="a" href={sheet.href}>
+    <ListItem button component={Link} to={sheet.href}>
       <ListItemAvatar>
         <Avatar>
           <FolderIcon />
