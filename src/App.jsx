@@ -1,4 +1,4 @@
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Header from 'components/Header';
@@ -31,21 +31,29 @@ function App() {
 
   return (
     <>
-      <Switch>
-        <Route path="/sheet/:id" component={Sheet} exact />
-        <Route
-          path="/"
-          render={props => <Header {...props} classes={classes} />}
-        />
-      </Switch>
-      <Route path="/sheets" component={SheetList} />
-      <Route path="/setting" component={Setting} />
-      <Route path="/pinned" component={Pinned} />
-      <Route
-        path={['/sheets', '/pinned']}
-        render={props => <FAB {...props} classes={classes} />}
-      />
-      <AddForm />
+      <Route path="/" exact>
+        <Redirect to="/sheets" />
+      </Route>
+
+      <Route path={['/sheets', '/pinned', '/setting']}>
+        <Header classes={classes} />
+      </Route>
+
+      <Route path="/sheets">
+        <SheetList />
+      </Route>
+      <Route path="/setting">
+        <Setting />
+      </Route>
+      <Route path="/pinned">
+        <Pinned />
+      </Route>
+      <Route path="/sheet/:id" component={Sheet} />
+
+      <Route path={['/sheets', '/pinned']}>
+        <FAB classes={classes} />
+        <AddForm />
+      </Route>
     </>
   );
 }

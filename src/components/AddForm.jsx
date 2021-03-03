@@ -39,6 +39,8 @@ function AddForm({ open, closeAddForm, addSheet }) {
         </Button>
         <Button
           onClick={() => {
+            // TODO: handling
+            if (value === '') return;
             closeAddForm();
             addSheet(value);
             setValue('');

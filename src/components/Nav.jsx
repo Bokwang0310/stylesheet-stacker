@@ -8,16 +8,14 @@ import { findIndexOfItem } from 'utils';
 function Nav({ history }) {
   const tabs = ['/pinned', '/sheets', '/setting'];
 
-  const [value, setValue] = useState(
-    findIndexOfItem(window.location.pathname, tabs)
-  );
+  const [value, setValue] = useState(1);
 
-  const unlisten = history.listen(item => {
-    const index = findIndexOfItem(item.pathname, tabs);
-    setValue(index);
-  });
+  // const unlisten = history.listen(item => {
+  //   const index = routeIndex(findIndexOfItem(item.pathname, tabs));
+  //   setValue(index);
+  // });
 
-  useEffect(() => () => unlisten());
+  // useEffect(() => () => unlisten());
 
   return (
     <Tabs
@@ -35,5 +33,10 @@ function Nav({ history }) {
     </Tabs>
   );
 }
+
+const routeIndex = index => {
+  if (index === -1) return 1;
+  return index;
+};
 
 export default withRouter(Nav);
