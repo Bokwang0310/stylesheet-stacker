@@ -11,6 +11,7 @@ import FAB from 'containers/FAB';
 import AddForm from 'containers/AddForm';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -31,55 +32,45 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
-  const [theme, setTheme] = useState({
-    palette: {
-      primary: {
-        main: '#7e57c2'
-      },
-      secondary: {
-        main: '#7986cb'
-      }
-    }
-  });
 
-  const changeTheme = (primary, secondary) => {
-    setTheme({
-      palette: {
-        primary: {
-          main: primary
-        },
-        secondary: {
-          main: secondary
-        }
-      }
-    });
-  };
+  const [colors, setColors] = useState(['#7e57c2', '#7986cb']);
+  const [mode, setMode] = useState('light');
 
   return (
-    <MuiThemeProvider theme={createMuiTheme(theme)}>
-      <Route path="/" exact>
-        <Redirect to="/sheets" />
-      </Route>
+    <MuiThemeProvider
+      theme={createMuiTheme({
+        palette: {
+          type: mode,
+          primary: { main: colors[0] },
+          secondary: { main: colors[1] }
+        }
+      })}
+    >
+      <Box height="100vh" bgcolor="background.default">
+        <Route path="/" exact>
+          <Redirect to="/sheets" />
+        </Route>
 
-      <Route path={['/sheets', '/pinned', '/setting']}>
-        <Header classes={classes} />
-      </Route>
+        <Route path={['/sheets', '/pinned', '/setting']}>
+          <Header classes={classes} />
+        </Route>
 
-      <Route path="/sheets">
-        <SheetList />
-      </Route>
-      <Route path="/setting">
-        <Setting changeTheme={setTheme} />
-      </Route>
-      <Route path="/pinned">
-        <Pinned />
-      </Route>
-      <Route path="/sheet/:id" component={Sheet} />
+        <Route path="/sheets">
+          <SheetList />
+        </Route>
+        <Route path="/setting">
+          <Setting changeColor={setColors} changeMode={setMode} mode={mode} />
+        </Route>
+        <Route path="/pinned">
+          <Pinned />
+        </Route>
+        <Route path="/sheet/:id" component={Sheet} />
 
-      <Route path={['/sheets', '/pinned']}>
-        <FAB classes={classes} />
-        <AddForm />
-      </Route>
+        <Route path={['/sheets', '/pinned']}>
+          <FAB classes={classes} />
+          <AddForm />
+        </Route>
+      </Box>
     </MuiThemeProvider>
   );
 }

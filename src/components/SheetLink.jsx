@@ -6,6 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
 
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -14,11 +15,13 @@ function Item({ sheet, removeSheet }) {
   return (
     <ListItem button component={Link} to={sheet.href}>
       <ListItemAvatar>
-        <Avatar>
+        <Avatar color="default">
           <FolderIcon />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={sheet.name} secondary={sheet.date} />
+      <ListItemText secondary={sheet.date}>
+        <Box color="text.primary">{sheet.name}</Box>
+      </ListItemText>
       <ListItemSecondaryAction>
         <IconButton
           onClick={() => {
@@ -27,7 +30,7 @@ function Item({ sheet, removeSheet }) {
           edge="end"
           aria-label="delete"
         >
-          <DeleteIcon />
+          <DeleteIcon color="secondary" />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

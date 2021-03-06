@@ -7,17 +7,13 @@ import store from 'store';
 
 import { BrowserRouter } from 'react-router-dom';
 
-// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-// import theme from 'theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      {/* <MuiThemeProvider theme={createMuiTheme(theme)}> */}
       <CssBaseline />
       <App />
-      {/* </MuiThemeProvider> */}
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
