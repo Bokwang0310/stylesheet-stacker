@@ -1,4 +1,5 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Header from 'components/Header';
@@ -8,6 +9,8 @@ import Pinned from 'components/Pinned';
 import Sheet from 'components/Sheet';
 import FAB from 'containers/FAB';
 import AddForm from 'containers/AddForm';
+
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -28,9 +31,32 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
+  const [theme, setTheme] = useState({
+    palette: {
+      primary: {
+        main: '#7e57c2'
+      },
+      secondary: {
+        main: '#7986cb'
+      }
+    }
+  });
+
+  const changeTheme = (primary, secondary) => {
+    setTheme({
+      palette: {
+        primary: {
+          main: primary
+        },
+        secondary: {
+          main: secondary
+        }
+      }
+    });
+  };
 
   return (
-    <>
+    <MuiThemeProvider theme={createMuiTheme(theme)}>
       <Route path="/" exact>
         <Redirect to="/sheets" />
       </Route>
@@ -43,7 +69,7 @@ function App() {
         <SheetList />
       </Route>
       <Route path="/setting">
-        <Setting />
+        <Setting changeTheme={setTheme} />
       </Route>
       <Route path="/pinned">
         <Pinned />
@@ -54,7 +80,7 @@ function App() {
         <FAB classes={classes} />
         <AddForm />
       </Route>
-    </>
+    </MuiThemeProvider>
   );
 }
 

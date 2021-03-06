@@ -1,21 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { findIndexOfItem } from 'utils';
 
-function Nav({ history }) {
+function Nav() {
   const tabs = ['/pinned', '/sheets', '/setting'];
 
   const [value, setValue] = useState(1);
-
-  // const unlisten = history.listen(item => {
-  //   const index = routeIndex(findIndexOfItem(item.pathname, tabs));
-  //   setValue(index);
-  // });
-
-  // useEffect(() => () => unlisten());
 
   return (
     <Tabs
@@ -33,10 +25,5 @@ function Nav({ history }) {
     </Tabs>
   );
 }
-
-const routeIndex = index => {
-  if (index === -1) return 1;
-  return index;
-};
 
 export default withRouter(Nav);
