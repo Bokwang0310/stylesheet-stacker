@@ -33,7 +33,10 @@ const useStyles = makeStyles(theme => ({
 function App() {
   const classes = useStyles();
 
-  const [colors, setColors] = useState(['#7e57c2', '#7986cb']);
+  const [colors, setColors] = useState({
+    primary: '#7e57c2',
+    secondary: '#7986cb'
+  });
   const [mode, setMode] = useState('light');
 
   return (
@@ -41,8 +44,8 @@ function App() {
       theme={createMuiTheme({
         palette: {
           type: mode,
-          primary: { main: colors[0] },
-          secondary: { main: colors[1] }
+          primary: { main: colors.primary },
+          secondary: { main: colors.secondary }
         }
       })}
     >
@@ -59,7 +62,12 @@ function App() {
           <SheetList />
         </Route>
         <Route path="/setting">
-          <Setting changeColor={setColors} changeMode={setMode} mode={mode} />
+          <Setting
+            colors={colors}
+            changeColor={setColors}
+            changeMode={setMode}
+            mode={mode}
+          />
         </Route>
         <Route path="/pinned">
           <Pinned />

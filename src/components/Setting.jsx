@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import { ChromePicker } from 'react-color';
 
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -11,8 +12,8 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Switch from '@material-ui/core/Switch';
 import Box from '@material-ui/core/Box';
 
-function Setting({ changeColor, changeMode, mode }) {
-  const [colors, setColors] = useState(['#FC5454', '#FF8585']);
+function Setting({ colors, changeColor, changeMode, mode }) {
+  const [openPicker, setOpenPicker] = useState('');
 
   return (
     <>
@@ -44,7 +45,9 @@ function Setting({ changeColor, changeMode, mode }) {
                 label="Primary Color"
                 margin="dense"
                 type="text"
-                value={colors[0]}
+                value={colors.primary}
+                onFocus={() => setOpenPicker('primary')}
+                onBlur={() => setOpenPicker('')}
               />
             </Grid>
             <Grid item>
@@ -52,9 +55,32 @@ function Setting({ changeColor, changeMode, mode }) {
                 label="Secondary Color"
                 margin="dense"
                 type="text"
-                value={colors[1]}
+                value={colors.secondary}
+                onFocus={() => setOpenPicker('secondary')}
+                onBlur={() => setOpenPicker('')}
               />
             </Grid>
+            {openPicker === 'primary' ? (
+              <ChromePicker
+                color={colors.primary}
+                onChange={color => {
+                  changeColor({
+                    ...colors,
+                    primary: color.hex.toUpperCase()
+                  });
+                }}
+              />
+            ) : openPicker === 'secondary' ? (
+              <ChromePicker
+                color={colors.secondary}
+                onChange={color => {
+                  changeColor({
+                    ...colors,
+                    secondary: color.hex.toUpperCase()
+                  });
+                }}
+              />
+            ) : null}
           </Grid>
         </ListItem>
       </List>
