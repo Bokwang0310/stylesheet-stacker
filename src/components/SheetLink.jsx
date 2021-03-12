@@ -30,7 +30,7 @@ function Item({ sheet, removeSheet }) {
           edge="end"
           aria-label="delete"
         >
-          <DeleteIcon color="secondary" />
+          <DeleteIcon color="action" />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
