@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Header from 'components/Header';
 import SheetList from 'containers/SheetList';
 import Setting from 'components/Setting';
-import Pinned from 'components/Pinned';
 import Sheet from 'components/Sheet';
 import FAB from 'containers/FAB';
 import AddForm from 'containers/AddForm';
@@ -24,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2)
   }
@@ -37,6 +36,7 @@ function App() {
     primary: '#7e57c2',
     secondary: '#7986cb'
   });
+
   const [mode, setMode] = useState('light');
 
   return (
@@ -50,34 +50,33 @@ function App() {
       })}
     >
       <Box height="100vh" bgcolor="background.default">
-        <Route path="/" exact>
-          <Redirect to="/sheets" />
-        </Route>
+        <Box bgcolor="background.default">
+          <Route path="/" exact>
+            <Redirect to="/sheets" />
+          </Route>
 
-        <Route path={['/sheets', '/pinned', '/setting']}>
-          <Header classes={classes} />
-        </Route>
+          <Route path={['/sheets', '/pinned', '/setting']}>
+            <Header classes={classes} />
+          </Route>
 
-        <Route path="/sheets">
-          <SheetList />
-        </Route>
-        <Route path="/setting">
-          <Setting
-            colors={colors}
-            changeColor={setColors}
-            changeMode={setMode}
-            mode={mode}
-          />
-        </Route>
-        <Route path="/pinned">
-          <Pinned />
-        </Route>
-        <Route path="/sheet/:id" component={Sheet} />
+          <Route path="/sheets">
+            <SheetList />
+          </Route>
+          <Route path="/setting">
+            <Setting
+              colors={colors}
+              changeColor={setColors}
+              changeMode={setMode}
+              mode={mode}
+            />
+          </Route>
+          <Route path="/sheet/:id" component={Sheet} />
 
-        <Route path={['/sheets', '/pinned']}>
-          <FAB classes={classes} />
-          <AddForm />
-        </Route>
+          <Route path={['/sheets', '/pinned']}>
+            <FAB classes={classes} />
+            <AddForm />
+          </Route>
+        </Box>
       </Box>
     </MuiThemeProvider>
   );

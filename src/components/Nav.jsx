@@ -5,7 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 function Nav() {
-  const tabs = ['/pinned', '/sheets', '/setting'];
+  const tabs = ['/sheets', '/setting'];
 
   const [value, setValue] = useState(1);
 
@@ -19,9 +19,8 @@ function Nav() {
       indicatorColor="primary"
       textColor="primary"
     >
-      <Tab label="Pinned" component={Link} to={tabs[0]} />
-      <Tab label="Sheets" component={Link} to={tabs[1]} />
-      <Tab label="Setting" component={Link} to={tabs[2]} />
+      <Tab label="Sheets" component={Link} to={tabs[0]} />
+      <Tab label="Setting" component={Link} to={tabs[1]} />
     </Tabs>
   );
 }

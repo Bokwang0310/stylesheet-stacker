@@ -1,6 +1,10 @@
 # Memo
 
 - go to sheet after add sheet
+- when get back from sheet page, the activation is on setting section
+- [Motivation](https://youtu.be/PtVOesopqD4?t=1547)
+- radial: share, create, search
+- faboption transition speed
 
 # Learn More
 
