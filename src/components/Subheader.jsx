@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Subheader({ title }) {
+function Subheader({ title, id, sectionList, setSectionList }) {
   const classes = useStyles();
   return (
     <ListSubheader className={classes.subheader} compoenent="div">
@@ -41,6 +41,7 @@ function Subheader({ title }) {
             aria-label="modify"
             color="default"
             className={classes.modifyIcon}
+            onClick={() => console.log(`Change ${id} this section!`)}
           >
             <CreateIcon fontSize="small" />
           </IconButton>
@@ -48,6 +49,9 @@ function Subheader({ title }) {
             aria-label="modify"
             color="default"
             className={classes.deleteIcon}
+            onClick={() =>
+              setSectionList(sectionList.filter(section => section.id !== id))
+            }
           >
             <DeleteIcon fontSize="small" />
           </IconButton>

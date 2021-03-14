@@ -1,4 +1,4 @@
-import { useState, createElement } from 'react';
+import { useState, createElement, Fragment } from 'react';
 import { nanoid } from 'nanoid';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,8 +11,11 @@ import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
 import Typography from '@material-ui/core/Typography';
 
-import AddIcon from '@material-ui/icons/Add';
+import ListIcon from '@material-ui/icons/List';
 import CloseIcon from '@material-ui/icons/Close';
+import AddIcon from '@material-ui/icons/Add';
+import ShareIcon from '@material-ui/icons/Share';
+import SearchIcon from '@material-ui/icons/Search';
 
 import Subheader from 'components/Subheader';
 import FabOption from 'components/FabOption';
@@ -47,6 +50,7 @@ function Sheet({ match }) {
   const [isAdd, setAddState] = useState(true);
   const [sectionList, setSectionList] = useState([
     {
+      id: nanoid(),
       title: 'Create your own section',
       contents: [
         {
@@ -76,7 +80,7 @@ function Sheet({ match }) {
   return (
     <>
       <Box className={classes.list}>
-        {generateSection(sectionList, classes.root)}
+        {generateSection(sectionList, classes.root, setSectionList)}
       </Box>
       <Zoom in={isAdd}>
         <Fab
@@ -84,62 +88,80 @@ function Sheet({ match }) {
           color="secondary"
           onClick={() => setAddState(false)}
         >
-          <AddIcon />
+          <ListIcon />
         </Fab>
       </Zoom>
       <Zoom in={!isAdd}>
         <Fab
           className={classes.fabButton}
-          color="default"
+          color="secondary"
           onClick={() => setAddState(true)}
         >
-          <CloseIcon color="secondary" />
+          <CloseIcon />
         </Fab>
       </Zoom>
-      <FabOption isAdd={isAdd} bottom={11} />
-      <FabOption isAdd={isAdd} bottom={20} />
-      <FabOption isAdd={isAdd} bottom={29} />
+      <FabOption
+        isAdd={isAdd}
+        bottom={11}
+        onClick={() => console.log('Hello in create button')}
+      >
+        <AddIcon />
+      </FabOption>
+      <FabOption isAdd={isAdd} bottom={20}>
+        <ShareIcon />
+      </FabOption>
+      <FabOption isAdd={isAdd} bottom={29}>
+        <SearchIcon />
+      </FabOption>
     </>
   );
 }
 
-const generateSection = (sectionList, rootClass) => {
-  return sectionList.map(section => {
-    return (
-      <>
-        <List>
-          <Subheader title={section.title} />
-          {section.contents.map(content => {
-            switch (content.contentName) {
-              case 'colorScheme':
-                return (
-                  <ListItem className={rootClass}>
-                    {generateColorScheme(content.colorList)}
-                  </ListItem>
-                );
-              case 'typography':
-                return (
-                  <ListItem>{generateTypography(content.typography)}</ListItem>
-                );
-              case 'button':
-                return <ListItem>{generateButton(content.button)}</ListItem>;
-              case 'customElement':
-                return (
-                  <ListItem>
-                    {generateCustomElement(content.customElement)}
-                  </ListItem>
-                );
+const generateSection = (sectionList, rootClass, setSectionList) =>
+  sectionList.map(section => (
+    <Fragment key={nanoid()}>
+      <List>
+        <Subheader
+          title={section.title}
+          id={section.id}
+          sectionList={sectionList}
+          setSectionList={setSectionList}
+        />
+        {section.contents.map(content => {
+          switch (content.contentName) {
+            case 'colorScheme':
+              return (
+                <ListItem key={nanoid()} className={rootClass}>
+                  {generateColorScheme(content.colorList)}
+                </ListItem>
+              );
+            case 'typography':
+              return (
+                <ListItem key={nanoid()}>
+                  {generateTypography(content.typography)}
+                </ListItem>
+              );
+            case 'button':
+              return (
+                <ListItem key={nanoid()}>
+                  {generateButton(content.button)}
+                </ListItem>
+              );
+            case 'customElement':
+              return (
+                <ListItem key={nanoid()}>
+                  {generateCustomElement(content.customElement)}
+                </ListItem>
+              );
 
-              default:
-                throw new Error();
-            }
-          })}
-        </List>
-        <Divider />
-      </>
-    );
-  });
-};
+            default:
+              throw new Error();
+          }
+        })}
+      </List>
+      <Divider />
+    </Fragment>
+  ));
 
 const generateColorScheme = colorList =>
   colorList.map(color => (
@@ -148,15 +170,25 @@ const generateColorScheme = colorList =>
 
 const generateTypography = typographyList =>
   typographyList.map(typography => (
-    <Typography variant={typography.variant}>{typography.text}</Typography>
+    <Typography key={nanoid()} variant={typography.variant}>
+      {typography.text}
+    </Typography>
   ));
 
 const generateButton = buttonList =>
-  buttonList.map(button => <button style={button.css}>{button.text}</button>);
+  buttonList.map(button => (
+    <button key={nanoid()} style={button.css}>
+      {button.text}
+    </button>
+  ));
 
 const generateCustomElement = elementList =>
   elementList.map(element =>
-    createElement(element.type, { style: element.css }, element.inner)
+    createElement(
+      element.type,
+      { style: element.css, key: nanoid() },
+      element.inner
+    )
   );
 
 // make (plain text css to javascript object css) function

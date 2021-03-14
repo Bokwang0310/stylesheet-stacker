@@ -5,6 +5,7 @@
 - [Motivation](https://youtu.be/PtVOesopqD4?t=1547)
 - radial: share, create section, search
 - faboption transition speed
+- delete dialog
 
 # Learn More
 
