@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, createElement } from 'react';
+import { nanoid } from 'nanoid';
 
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -8,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
+import Typography from '@material-ui/core/Typography';
 
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -43,29 +45,38 @@ function Sheet({ match }) {
   const classes = useStyles();
 
   const [isAdd, setAddState] = useState(true);
+  const [sectionList, setSectionList] = useState([
+    {
+      title: 'Create your own section',
+      contents: [
+        {
+          contentName: 'colorScheme',
+          colorList: ['#c1f1f3', '#E99B9B', '#9BDEE9'],
+        },
+        {
+          contentName: 'typography',
+          typography: [
+            { variant: 'h4', text: 'First world!', css: {} },
+            { variant: 'h5', text: 'Second Hello!', css: {} },
+            { variant: 'h6', text: 'Wow my name!', css: {} },
+          ],
+        },
+        { contentName: 'button', button: [{ text: 'My btn', css: {} }] },
+        {
+          contentName: 'customElement',
+          customElement: [
+            { type: 'button', css: {}, inner: 'hello?' },
+            { type: 'input', css: {} },
+          ],
+        },
+      ],
+    },
+  ]);
 
   return (
     <>
       <Box className={classes.list}>
-        <List>
-          <Subheader title="My Color Schemes" />
-          <ListItem className={classes.root}>
-            <Paper elevation={3} />
-            <Paper elevation={3} />
-            <Paper elevation={3} />
-            <Paper elevation={3} />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <Subheader title="AAAAAA" />
-          {papers(5, classes.root)}
-        </List>
-        <Divider />
-        <List>
-          <Subheader title="BBBBBBB" />
-          {papers(5, classes.root)}
-        </List>
+        {generateSection(sectionList, classes.root)}
       </Box>
       <Zoom in={isAdd}>
         <Fab
@@ -92,22 +103,62 @@ function Sheet({ match }) {
   );
 }
 
-function papers(count, rootClass) {
-  let result = [];
-  for (let i = 0; i < count; i++) {
-    const jsx = (
-      <ListItem className={rootClass} key={i}>
-        <Paper elevation={3} />
-        <Paper elevation={3} />
-        <Paper elevation={3} />
-        <Paper elevation={3} />
-        <Paper elevation={3} />
-        <Paper elevation={3} />
-      </ListItem>
+const generateSection = (sectionList, rootClass) => {
+  return sectionList.map(section => {
+    return (
+      <>
+        <List>
+          <Subheader title={section.title} />
+          {section.contents.map(content => {
+            switch (content.contentName) {
+              case 'colorScheme':
+                return (
+                  <ListItem className={rootClass}>
+                    {generateColorScheme(content.colorList)}
+                  </ListItem>
+                );
+              case 'typography':
+                return (
+                  <ListItem>{generateTypography(content.typography)}</ListItem>
+                );
+              case 'button':
+                return <ListItem>{generateButton(content.button)}</ListItem>;
+              case 'customElement':
+                return (
+                  <ListItem>
+                    {generateCustomElement(content.customElement)}
+                  </ListItem>
+                );
+
+              default:
+                throw new Error();
+            }
+          })}
+        </List>
+        <Divider />
+      </>
     );
-    result.push(jsx);
-  }
-  return result;
-}
+  });
+};
+
+const generateColorScheme = colorList =>
+  colorList.map(color => (
+    <Paper key={nanoid()} elevation={3} style={{ backgroundColor: color }} />
+  ));
+
+const generateTypography = typographyList =>
+  typographyList.map(typography => (
+    <Typography variant={typography.variant}>{typography.text}</Typography>
+  ));
+
+const generateButton = buttonList =>
+  buttonList.map(button => <button style={button.css}>{button.text}</button>);
+
+const generateCustomElement = elementList =>
+  elementList.map(element =>
+    createElement(element.type, { style: element.css }, element.inner)
+  );
+
+// make (plain text css to javascript object css) function
 
 export default Sheet;

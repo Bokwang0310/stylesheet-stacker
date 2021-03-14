@@ -5,13 +5,27 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
 import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
   subheader: {
     fontSize: '18px',
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
   },
-  subheaderIcon: { marginLeft: theme.spacing(2) }
+  modifyIcon: {
+    padding: '0px',
+    marginLeft: theme.spacing(1),
+    marginRight: '2px',
+    marginTop: '0px',
+    marginBottom: '3px',
+  },
+  deleteIcon: {
+    padding: '0px',
+    marginLeft: '2px',
+    marginRight: theme.spacing(1),
+    marginTop: '0px',
+    marginBottom: '3px',
+  },
 }));
 
 function Subheader({ title }) {
@@ -26,9 +40,16 @@ function Subheader({ title }) {
           <IconButton
             aria-label="modify"
             color="default"
-            className={classes.subheaderIcon}
+            className={classes.modifyIcon}
           >
             <CreateIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            aria-label="modify"
+            color="default"
+            className={classes.deleteIcon}
+          >
+            <DeleteIcon fontSize="small" />
           </IconButton>
         </Grid>
       </Grid>

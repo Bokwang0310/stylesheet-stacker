@@ -14,19 +14,19 @@ import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   moreButton: {
-    marginLeft: theme.spacing(2)
+    marginLeft: theme.spacing(2),
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   fab: {
     position: 'fixed',
     bottom: theme.spacing(2),
-    right: theme.spacing(2)
-  }
+    right: theme.spacing(2),
+  },
 }));
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
 
   const [colors, setColors] = useState({
     primary: '#7e57c2',
-    secondary: '#7986cb'
+    secondary: '#7986cb',
   });
 
   const [mode, setMode] = useState('light');
@@ -45,8 +45,8 @@ function App() {
         palette: {
           type: mode,
           primary: { main: colors.primary },
-          secondary: { main: colors.secondary }
-        }
+          secondary: { main: colors.secondary },
+        },
       })}
     >
       <Box height="100vh" bgcolor="background.default">
