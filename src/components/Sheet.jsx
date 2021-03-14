@@ -19,6 +19,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import Subheader from 'components/Subheader';
 import FabOption from 'components/FabOption';
+import Addform from 'components/AddForm';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,6 +78,8 @@ function Sheet({ match }) {
     },
   ]);
 
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <Box className={classes.list}>
@@ -103,7 +106,9 @@ function Sheet({ match }) {
       <FabOption
         isAdd={isAdd}
         bottom={11}
-        onClick={() => console.log('Hello in create button')}
+        onClick={() => {
+          setOpen(true);
+        }}
       >
         <AddIcon />
       </FabOption>
@@ -113,6 +118,20 @@ function Sheet({ match }) {
       <FabOption isAdd={isAdd} bottom={29}>
         <SearchIcon />
       </FabOption>
+      <Addform
+        open={open}
+        closeAddForm={() => setOpen(false)}
+        addSheet={title => {
+          setSectionList([
+            ...sectionList,
+            {
+              id: nanoid(),
+              title,
+              contents: [],
+            },
+          ]);
+        }}
+      />
     </>
   );
 }
