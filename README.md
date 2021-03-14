@@ -6,6 +6,8 @@
 - radial: share, create section, search
 - faboption transition speed
 - delete dialog
+- make (plain text css to javascript object css) function
+- Check empty string in add form
 
 # Learn More
 

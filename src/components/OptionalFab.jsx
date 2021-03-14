@@ -12,7 +12,7 @@ const useStyles = bottom =>
     },
   }));
 
-function FabOption({ isAdd, bottom, children, onClick }) {
+function OptionalFab({ isAdd, bottom, children, onClick }) {
   const style = useStyles(bottom)().option;
 
   return (
@@ -24,4 +24,4 @@ function FabOption({ isAdd, bottom, children, onClick }) {
   );
 }
 
-export default FabOption;
+export default OptionalFab;

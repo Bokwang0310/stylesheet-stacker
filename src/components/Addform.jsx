@@ -8,20 +8,18 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function AddForm({ open, closeAddForm, addSheet }) {
+function Addform({ open, closeAddform, handleSubmit, children, title }) {
   const [value, setValue] = useState('');
 
   return (
     <Dialog
       open={open}
-      onClose={closeAddForm}
+      onClose={closeAddform}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Add Sheet</DialogTitle>
+      <DialogTitle id="form-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Plese enter the name of your style sheet.
-        </DialogContentText>
+        <DialogContentText>{children}</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
@@ -34,15 +32,14 @@ function AddForm({ open, closeAddForm, addSheet }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeAddForm} color="primary">
+        <Button onClick={closeAddform} color="primary">
           Cancel
         </Button>
         <Button
           onClick={() => {
-            // TODO: handling
             if (value === '') return;
-            closeAddForm();
-            addSheet(value);
+            closeAddform();
+            handleSubmit(value);
             setValue('');
           }}
           color="primary"
@@ -54,4 +51,4 @@ function AddForm({ open, closeAddForm, addSheet }) {
   );
 }
 
-export default AddForm;
+export default Addform;

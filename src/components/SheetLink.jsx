@@ -11,7 +11,7 @@ import Box from '@material-ui/core/Box';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-function Item({ sheet, removeSheet }) {
+function SheetLink({ sheet, removeSheet }) {
   return (
     <ListItem button component={Link} to={sheet.href}>
       <ListItemAvatar>
@@ -37,4 +37,4 @@ function Item({ sheet, removeSheet }) {
   );
 }
 
-export default Item;
+export default SheetLink;

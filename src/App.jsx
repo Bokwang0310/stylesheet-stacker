@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  makeStyles,
+} from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
 import Header from 'components/Header';
 import SheetList from 'containers/SheetList';
 import Setting from 'components/Setting';
 import Sheet from 'components/Sheet';
-import FAB from 'containers/FAB';
-import AddForm from 'containers/AddForm';
-
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import MainFab from 'containers/MainFab';
+import Addform from 'containers/Addform';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -73,8 +76,10 @@ function App() {
           <Route path="/sheet/:id" component={Sheet} />
 
           <Route path={['/sheets', '/pinned']}>
-            <FAB classes={classes} />
-            <AddForm />
+            <MainFab classes={classes} />
+            <Addform title="Add Sheet">
+              Plese enter the name of your style sheet.
+            </Addform>
           </Route>
         </Box>
       </Box>

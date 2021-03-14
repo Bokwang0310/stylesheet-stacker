@@ -1,17 +1,17 @@
-import { default as MuiFAB } from '@material-ui/core/Fab';
+import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-function FloatingButton({ classes, openAddForm }) {
+function MainFab({ classes, openAddForm }) {
   return (
-    <MuiFAB
+    <Fab
       className={classes.fab}
       aria-label="add"
       color="secondary"
       onClick={() => openAddForm()}
     >
       <AddIcon />
-    </MuiFAB>
+    </Fab>
   );
 }
 
-export default FloatingButton;
+export default MainFab;

@@ -8,7 +8,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 
 import Nav from 'components/Nav';
 
-function TopBar({ classes }) {
+function Header({ classes }) {
   return (
     <AppBar position="static" color="default">
       <Toolbar>
@@ -37,4 +37,4 @@ function TopBar({ classes }) {
   );
 }
 
-export default TopBar;
+export default Header;
