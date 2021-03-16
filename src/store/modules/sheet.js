@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid';
 
-const OPEN_ADDFORM = 'sheet/OPEN_ADDFORM';
-const CLOSE_ADDFORM = 'sheet/CLOSE_ADDFORM';
+const SET_OPEN_ADDFORM = 'sheet/SET_OPEN_ADDFORM';
+export const setOpenAddform = open => ({ type: SET_OPEN_ADDFORM, open });
 
-const UNFOLD_FAB = 'sheet/UNFOLD_FAB';
-const FOLD_FAB = 'sheet/FOLD_FAB';
+const SET_OPEN_FAB = 'sheet/SET_OPEN_FAB';
+export const setOpenFab = open => ({ type: SET_OPEN_FAB, open });
 
 const CREATE_SECTION = 'sheet/CREATE_SECTION';
 const DELETE_SECTION = 'sheet/DELETE_SECTION';
@@ -12,12 +12,6 @@ const DELETE_SECTION = 'sheet/DELETE_SECTION';
 const CREATE_ITEM = 'sheet/CREATE_ITEM';
 const UPDATE_ITEM = 'sheet/UPDATE_ITEM';
 const DELETE_ITEM = 'sheet/DELETE_ITEM';
-
-export const openAddform = () => ({ type: OPEN_ADDFORM });
-export const closeAddform = () => ({ type: CLOSE_ADDFORM });
-
-export const unfoldFab = () => ({ type: UNFOLD_FAB });
-export const foldFab = () => ({ type: FOLD_FAB });
 
 export const createSection = sectionType => ({
   type: CREATE_SECTION,
@@ -43,8 +37,8 @@ export const deleteItem = (sectionID, itemID) => ({
 });
 
 const initialState = {
-  isOpenAddform: false,
-  isUnfoldFab: true,
+  openAddform: false,
+  openFab: false,
   sectionList: [
     {
       id: nanoid(),
@@ -92,27 +86,16 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case OPEN_ADDFORM:
+    case SET_OPEN_ADDFORM:
       return {
         ...state,
-        isOpenAddform: true,
+        isOpenAddform: action.open,
       };
 
-    case CLOSE_ADDFORM:
+    case SET_OPEN_FAB:
       return {
         ...state,
-        isOpenAddform: false,
-      };
-
-    case UNFOLD_FAB:
-      return {
-        ...state,
-        isUnfoldFab: true,
-      };
-    case FOLD_FAB:
-      return {
-        ...state,
-        isUnfoldFab: false,
+        openFab: action.open,
       };
 
     case CREATE_SECTION:

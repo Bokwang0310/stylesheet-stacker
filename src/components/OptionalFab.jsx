@@ -12,11 +12,11 @@ const useStyles = bottom =>
     },
   }));
 
-function OptionalFab({ isAdd, bottom, children, onClick }) {
+function OptionalFab({ open, bottom, children, onClick }) {
   const style = useStyles(bottom)().option;
 
   return (
-    <Slide in={!isAdd} direction="up" mountOnEnter unmountOnExit>
+    <Slide in={open} direction="up" mountOnEnter unmountOnExit>
       <Fab className={style} onClick={onClick}>
         {children}
       </Fab>
