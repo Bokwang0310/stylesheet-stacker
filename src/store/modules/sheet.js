@@ -1,8 +1,5 @@
 import { nanoid } from 'nanoid';
 
-const SET_OPEN_ADDFORM = 'sheet/SET_OPEN_ADDFORM';
-export const setOpenAddform = open => ({ type: SET_OPEN_ADDFORM, open });
-
 const CREATE_SECTION = 'sheet/CREATE_SECTION';
 const DELETE_SECTION = 'sheet/DELETE_SECTION';
 
@@ -34,7 +31,6 @@ export const deleteItem = (sectionID, itemID) => ({
 });
 
 const initialState = {
-  openAddform: false,
   sectionList: [
     {
       id: nanoid(),
@@ -82,12 +78,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_OPEN_ADDFORM:
-      return {
-        ...state,
-        isOpenAddform: action.open,
-      };
-
     case CREATE_SECTION:
       return {
         ...state,

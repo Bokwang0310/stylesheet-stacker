@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import { setOpenAddform } from 'store/modules/sheet';
+import { setOpen } from 'store/modules/sheetAddform';
 import Sheet from 'components/Sheet';
 
 const mapStateToProps = state => ({
-  open: state.sheet.openAddform,
+  open: state.sheetAddform.open,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setOpen: open => dispatch(setOpenAddform(open)),
+  setOpen: () => dispatch(setOpen()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sheet);

@@ -9,10 +9,11 @@ import SearchIcon from '@material-ui/icons/Search';
 import SheetFab from 'containers/SheetFab';
 import OptionalFab from 'containers/OptionalFab';
 import Section from 'containers/Section';
-import Addform from 'components/Addform';
+// import Addform from 'components/Addform';
+import SheetAddform from 'containers/SheetAddform';
 import Subheader from 'components/Subheader';
 
-function Sheet({ match, open, setClose }) {
+function Sheet({ match, setOpen }) {
   const { id } = match.params;
 
   return (
@@ -23,7 +24,7 @@ function Sheet({ match, open, setClose }) {
       </Box>
       <SheetFab iconA={<ListIcon />} iconB={<CloseIcon />} />
       <OptionalFab bottom={11}>
-        <AddIcon />
+        <AddIcon onClick={() => setOpen()} />
       </OptionalFab>
       <OptionalFab bottom={20}>
         <ShareIcon />
@@ -31,16 +32,14 @@ function Sheet({ match, open, setClose }) {
       <OptionalFab bottom={29}>
         <SearchIcon />
       </OptionalFab>
-      <Addform
+      <SheetAddform
         title="Add Section"
-        open={open}
-        closeAddform={() => setClose()}
         handleSubmit={title => {
           console.log(title, id);
         }}
       >
         Enter the name of your section.
-      </Addform>
+      </SheetAddform>
     </>
   );
 }
