@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import css2Obj from 'css-to-object';
+const cssToObj = css => css2Obj(css, { camelCase: true });
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,7 +69,7 @@ const generateTypography = typographyList =>
 
 const generateButton = buttonList =>
   buttonList.map(button => (
-    <button key={nanoid()} style={button.css}>
+    <button key={nanoid()} style={cssToObj(button.css)}>
       {button.text}
     </button>
   ));
@@ -76,7 +78,7 @@ const generateCustomElement = elementList =>
   elementList.map(element =>
     createElement(
       element.type,
-      { style: element.css, key: nanoid() },
+      { style: cssToObj(element.css), key: nanoid() },
       element.inner
     )
   );

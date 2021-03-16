@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 function Subheader({ title, id, sectionList, setSectionList }) {
   const classes = useStyles();
+
   return (
     <ListSubheader className={classes.subheader} compoenent="div">
       <Grid container direction="row" alignItems="center">

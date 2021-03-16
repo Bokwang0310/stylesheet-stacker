@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import ListIcon from '@material-ui/icons/List';
@@ -15,17 +14,9 @@ import Addform from 'components/Addform';
 import SheetFab from 'components/SheetFab';
 import Section from 'components/Section';
 
-const useStyles = makeStyles(() => ({
-  title: {
-    flexGrow: 1,
-  },
-}));
-
 function Sheet({ match }) {
   const { id } = match.params;
   id.toString(); //
-
-  const classes = useStyles();
 
   const [open, setOpen] = useState(false);
   const [isAdd, setAddState] = useState(true);
@@ -41,17 +32,36 @@ function Sheet({ match }) {
         {
           contentName: 'typography',
           typography: [
-            { variant: 'h4', text: 'First world!', css: {} },
-            { variant: 'h5', text: 'Second Hello!', css: {} },
-            { variant: 'h6', text: 'Wow my name!', css: {} },
+            {
+              variant: 'h4',
+              text: 'First world!',
+              css: '{background-color: "red";}',
+            },
+            {
+              variant: 'h5',
+              text: 'Second Hello!',
+              css: '{background-color: "red";}',
+            },
+            {
+              variant: 'h6',
+              text: 'Wow my name!',
+              css: '{background-color: "red";}',
+            },
           ],
         },
-        { contentName: 'button', button: [{ text: 'My btn', css: {} }] },
+        {
+          contentName: 'button',
+          button: [{ text: 'My btn', css: '{background-color: "red";}' }],
+        },
         {
           contentName: 'customElement',
           customElement: [
-            { type: 'button', css: {}, inner: 'hello?' },
-            { type: 'input', css: {} },
+            {
+              type: 'button',
+              css: '{background-color: "red";}',
+              inner: 'hello?',
+            },
+            { type: 'input', css: '{ margin-left: 10px; }' },
           ],
         },
       ],
@@ -60,7 +70,7 @@ function Sheet({ match }) {
 
   return (
     <>
-      <Box className={classes.list}>
+      <Box>
         <Section sectionList={sectionList} setSectionList={setSectionList} />
       </Box>
       <SheetFab
