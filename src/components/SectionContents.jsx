@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { detectMobile } from 'utils';
 import css2Obj from 'css-to-object';
 const cssToObj = css => css2Obj(css, { camelCase: true });
 
@@ -55,9 +56,28 @@ function SectionContents({ contents }) {
   });
 }
 
+const handleMouseEnter = e => {
+  if (detectMobile()) return;
+  console.log('in mouse enter');
+};
+const handleMouseLeave = e => {
+  if (detectMobile()) return;
+  console.log('in mouse leave');
+};
+const handleTouchStart = e => {
+  console.log('in touch start');
+};
+
 const generateColorScheme = colorList =>
   colorList.map(color => (
-    <Paper key={nanoid()} elevation={3} style={{ backgroundColor: color }} />
+    <Paper
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      key={nanoid()}
+      elevation={3}
+      style={{ backgroundColor: color }}
+    />
   ));
 
 const generateTypography = typographyList =>

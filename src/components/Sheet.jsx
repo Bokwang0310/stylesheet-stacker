@@ -64,6 +64,26 @@ function Sheet({ match }) {
             { type: 'input', css: '{ margin-left: 10px; }' },
           ],
         },
+        {
+          contentName: 'customElement',
+          customElement: [
+            {
+              type: 'button',
+              css: '{background-color: "red";}',
+              inner: 'hello?',
+            },
+            {
+              type: 'button',
+              css: '{background-color: "red";}',
+              inner: 'hello?',
+            },
+            {
+              type: 'button',
+              css: '{background-color: "red";}',
+              inner: 'hello?',
+            },
+          ],
+        },
       ],
     },
   ]);
