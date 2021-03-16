@@ -5,7 +5,7 @@ export const setOpen = () => ({ type: SET_OPEN });
 export const setClose = () => ({ type: SET_CLOSE });
 
 const initialState = {
-  open: false
+  open: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,13 +13,13 @@ const reducer = (state = initialState, action) => {
     case SET_OPEN:
       return {
         ...state,
-        open: true
+        open: true,
       };
 
     case SET_CLOSE:
       return {
         ...state,
-        open: false
+        open: false,
       };
 
     default:
