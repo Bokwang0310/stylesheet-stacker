@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { setOpenFab } from 'store/modules/sheet';
+import { setOpenFab } from 'store/modules/sheetFab';
 import SheetFab from 'components/SheetFab';
 
 const mapStateToProps = state => ({
-  open: state.sheet.openFab,
+  open: state.sheetFab.openFab,
 });
 
 const mapDispatchToProps = dispatch => ({
