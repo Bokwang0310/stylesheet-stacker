@@ -14,26 +14,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function SheetFab({ isA, setA, iconA, iconB }) {
+function SheetFab({ isA, setA, setB, iconA, iconB }) {
   const classes = useStyles();
 
   return (
     <>
       <Zoom in={isA}>
-        <Fab
-          className={classes.fab}
-          color="secondary"
-          onClick={() => setA(false)}
-        >
+        <Fab className={classes.fab} color="secondary" onClick={() => setB()}>
           {iconA}
         </Fab>
       </Zoom>
       <Zoom in={!isA}>
-        <Fab
-          className={classes.fab}
-          color="secondary"
-          onClick={() => setA(true)}
-        >
+        <Fab className={classes.fab} color="secondary" onClick={() => setA()}>
           {iconB}
         </Fab>
       </Zoom>

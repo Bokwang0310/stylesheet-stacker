@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import Box from '@material-ui/core/Box';
@@ -12,90 +11,32 @@ import SearchIcon from '@material-ui/icons/Search';
 import OptionalFab from 'components/OptionalFab';
 import Addform from 'components/Addform';
 import SheetFab from 'components/SheetFab';
-import Section from 'components/Section';
+// import Section from 'components/Section';
+import Section from 'containers/Section';
+import Subheader from 'components/Subheader';
 
-function Sheet({ match }) {
+function Sheet({
+  match,
+  open,
+  setOpen,
+  setClose,
+  isAdd,
+  setAddStateTrue,
+  setAddStateFalse,
+}) {
   const { id } = match.params;
   id.toString(); //
-
-  const [open, setOpen] = useState(false);
-  const [isAdd, setAddState] = useState(true);
-  const [sectionList, setSectionList] = useState([
-    {
-      id: nanoid(),
-      title: 'Create your own section',
-      contents: [
-        {
-          contentName: 'colorScheme',
-          colorList: ['#c1f1f3', '#E99B9B', '#9BDEE9'],
-        },
-        {
-          contentName: 'typography',
-          typography: [
-            {
-              variant: 'h4',
-              text: 'First world!',
-              css: '{background-color: "red";}',
-            },
-            {
-              variant: 'h5',
-              text: 'Second Hello!',
-              css: '{background-color: "red";}',
-            },
-            {
-              variant: 'h6',
-              text: 'Wow my name!',
-              css: '{background-color: "red";}',
-            },
-          ],
-        },
-        {
-          contentName: 'button',
-          button: [{ text: 'My btn', css: '{background-color: "red";}' }],
-        },
-        {
-          contentName: 'customElement',
-          customElement: [
-            {
-              type: 'button',
-              css: '{background-color: "red";}',
-              inner: 'hello?',
-            },
-            { type: 'input', css: '{ margin-left: 10px; }' },
-          ],
-        },
-        {
-          contentName: 'customElement',
-          customElement: [
-            {
-              type: 'button',
-              css: '{background-color: "red";}',
-              inner: 'hello?',
-            },
-            {
-              type: 'button',
-              css: '{background-color: "red";}',
-              inner: 'hello?',
-            },
-            {
-              type: 'button',
-              css: '{background-color: "red";}',
-              inner: 'hello?',
-            },
-          ],
-        },
-      ],
-    },
-  ]);
 
   return (
     <>
       <Box>
-        <Section sectionList={sectionList} setSectionList={setSectionList} />
+        <Subheader title="My Title" />
+        <Section />
       </Box>
       <SheetFab
         isA={isAdd}
-        setA={setAddState}
+        setA={setAddStateTrue}
+        setB={setAddStateFalse}
         iconA={<ListIcon />}
         iconB={<CloseIcon />}
       />
@@ -103,7 +44,7 @@ function Sheet({ match }) {
         isAdd={isAdd}
         bottom={11}
         onClick={() => {
-          setOpen(true);
+          setOpen();
         }}
       >
         <AddIcon />
@@ -117,16 +58,9 @@ function Sheet({ match }) {
       <Addform
         title="Add Section"
         open={open}
-        closeAddform={() => setOpen(false)}
+        closeAddform={() => setClose()}
         handleSubmit={title => {
-          setSectionList([
-            ...sectionList,
-            {
-              id: nanoid(),
-              title,
-              contents: [],
-            },
-          ]);
+          console.log(title);
         }}
       >
         Enter the name of your section.

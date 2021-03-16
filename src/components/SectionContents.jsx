@@ -22,38 +22,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function SectionContents({ contents }) {
+function SectionContents({ section }) {
   const classes = useStyles();
 
-  return contents.map(content => {
-    switch (content.contentName) {
-      case 'colorScheme':
-        return (
-          <ListItem key={nanoid()} className={classes.root}>
-            {generateColorScheme(content.colorList)}
-          </ListItem>
-        );
-      case 'typography':
-        return (
-          <ListItem key={nanoid()}>
-            {generateTypography(content.typography)}
-          </ListItem>
-        );
-      case 'button':
-        return (
-          <ListItem key={nanoid()}>{generateButton(content.button)}</ListItem>
-        );
-      case 'customElement':
-        return (
-          <ListItem key={nanoid()}>
-            {generateCustomElement(content.customElement)}
-          </ListItem>
-        );
+  switch (section.type) {
+    case 'colorScheme':
+      return (
+        <ListItem className={classes.root}>
+          {generateColorScheme(section.itemList)}
+        </ListItem>
+      );
+    case 'typography':
+      return <ListItem>{generateTypography(section.itemList)}</ListItem>;
+    case 'button':
+      return <ListItem>{generateButton(section.itemList)}</ListItem>;
+    case 'customElement':
+      return <ListItem>{generateCustomElement(section.itemList)}</ListItem>;
 
-      default:
-        throw new Error();
-    }
-  });
+    default:
+      throw new Error();
+  }
 }
 
 const handleMouseEnter = e => {

@@ -10,7 +10,8 @@ import Box from '@material-ui/core/Box';
 
 import Header from 'components/Header';
 import Setting from 'components/Setting';
-import Sheet from 'components/Sheet';
+// import Sheet from 'components/Sheet';
+import Sheet from 'containers/Sheet';
 import SheetList from 'containers/SheetList';
 import MainFab from 'containers/MainFab';
 import Addform from 'containers/Addform';
