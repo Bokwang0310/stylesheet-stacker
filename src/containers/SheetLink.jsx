@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { removeSheet } from 'store/modules/sheets';
+import { removeSheet } from 'store/modules/sheetList';
 
 import SheetLink from 'components/SheetLink';
 

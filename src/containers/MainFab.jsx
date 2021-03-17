@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { setOpen } from 'store/modules/addform';
+import { setOpen } from 'store/modules/mainAddform';
 
 import MainFab from 'components/MainFab';
 

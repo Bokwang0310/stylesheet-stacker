@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
-import sheets from './sheets';
-import addform from './addform';
+import sheetList from './sheetList';
+import mainAddform from './mainAddform';
 import sheet from './sheet';
 import sheetFab from './sheetFab';
 import sheetAddform from './sheetAddform';
 
 export default combineReducers({
-  sheets,
-  addform,
+  sheetList,
+  mainAddform,
   sheet,
   sheetFab,
   sheetAddform,

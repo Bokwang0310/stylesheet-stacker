@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import { setClose } from 'store/modules/addform';
-import { addSheet } from 'store/modules/sheets';
+import { setClose } from 'store/modules/mainAddform';
+import { addSheet } from 'store/modules/sheetList';
 
 import Addform from 'components/Addform';
 
