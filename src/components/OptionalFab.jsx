@@ -15,12 +15,12 @@ const useStyles = bottom =>
   }));
 
 function OptionalFab({ bottom, children, onClick }) {
-  const style = useStyles(bottom)().option;
+  const classes = useStyles(bottom)();
   const open = useSelector(state => state.sheetFab.openFab);
 
   return (
     <Slide in={open} direction="up" mountOnEnter unmountOnExit>
-      <Fab className={style} onClick={onClick}>
+      <Fab className={classes.option} onClick={onClick}>
         {children}
       </Fab>
     </Slide>

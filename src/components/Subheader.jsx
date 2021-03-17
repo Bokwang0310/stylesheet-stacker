@@ -1,4 +1,3 @@
-import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -7,26 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const useStyles = makeStyles(theme => ({
-  subheader: {
-    fontSize: '18px',
-    backgroundColor: theme.palette.background.default,
-  },
-  modifyIcon: {
-    padding: '0px',
-    marginLeft: theme.spacing(1),
-    marginRight: '2px',
-    marginTop: '0px',
-    marginBottom: '3px',
-  },
-  deleteIcon: {
-    padding: '0px',
-    marginLeft: '2px',
-    marginRight: theme.spacing(1),
-    marginTop: '0px',
-    marginBottom: '3px',
-  },
-}));
+import useStyles from 'styles';
 
 function Subheader({ title }) {
   const classes = useStyles();

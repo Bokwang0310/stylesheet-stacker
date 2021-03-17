@@ -5,13 +5,10 @@
 - set transition speed of option fab button
 - create deleting alert dialog
 - check empty string in addform
-- implement function to add(modify) item in section
 - support enter key to complete input
 - delete search option fab
-- change store module name (sheets -> sheetList)
 - delete input when cancel addform
 - combine store (addforms)
-- separate style
 
 # Memo
 

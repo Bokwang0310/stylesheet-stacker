@@ -1,26 +1,13 @@
 import { createElement } from 'react';
 import { nanoid } from 'nanoid';
 
-import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { detectMobile } from 'utils';
+import useStyles from 'styles';
 import css2Obj from 'css-to-object';
 const cssToObj = css => css2Obj(css, { camelCase: true });
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: theme.spacing(10),
-      height: theme.spacing(10),
-      backgroundColor: '#c1f1f3',
-    },
-  },
-}));
 
 function SectionContents({ section }) {
   const classes = useStyles();
@@ -28,7 +15,7 @@ function SectionContents({ section }) {
   switch (section.type) {
     case 'colorScheme':
       return (
-        <ListItem className={classes.root}>
+        <ListItem className={classes.colorPaperRoot}>
           {generateColorScheme(section.itemList)}
         </ListItem>
       );

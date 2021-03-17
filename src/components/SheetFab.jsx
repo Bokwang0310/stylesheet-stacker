@@ -1,19 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
 
 import { setOpenFab } from 'store/modules/sheetFab';
-
-const useStyles = makeStyles(theme => ({
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-    zIndex: 3,
-  },
-}));
+import useStyles from 'styles';
 
 function SheetFab({ iconA, iconB }) {
   const open = useSelector(state => state.sheetFab.openFab);
@@ -24,7 +15,7 @@ function SheetFab({ iconA, iconB }) {
     <>
       <Zoom in={!open}>
         <Fab
-          className={classes.fab}
+          className={classes.sheetFab}
           color="secondary"
           onClick={() => dispatch(setOpenFab(true))}
         >
@@ -33,7 +24,7 @@ function SheetFab({ iconA, iconB }) {
       </Zoom>
       <Zoom in={open}>
         <Fab
-          className={classes.fab}
+          className={classes.sheetFab}
           color="secondary"
           onClick={() => dispatch(setOpenFab(false))}
         >

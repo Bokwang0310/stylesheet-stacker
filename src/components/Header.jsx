@@ -7,8 +7,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 import Nav from 'components/Nav';
+import useStyles from 'styles';
 
-function Header({ classes }) {
+function Header() {
+  const classes = useStyles();
+
   return (
     <AppBar position="static" color="default">
       <Toolbar>
@@ -20,7 +23,7 @@ function Header({ classes }) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h6" className={classes.header}>
           Stacker
         </Typography>
         <IconButton

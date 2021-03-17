@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import {
-  MuiThemeProvider,
-  createMuiTheme,
-  makeStyles,
-} from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import Header from 'components/Header';
@@ -18,26 +14,8 @@ import MainAddform from 'components/MainAddform';
 
 import { addSheet } from 'store/modules/sheetList';
 
-const useStyles = makeStyles(theme => ({
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  moreButton: {
-    marginLeft: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
-
 function App() {
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   const [colors, setColors] = useState({
     primary: '#7e57c2',
@@ -63,7 +41,7 @@ function App() {
           </Route>
 
           <Route path={['/sheets', '/pinned', '/setting']}>
-            <Header classes={classes} />
+            <Header />
           </Route>
 
           <Route path="/sheets">
@@ -80,7 +58,7 @@ function App() {
           <Route path="/sheet/:id" component={Sheet} />
 
           <Route path={['/sheets', '/pinned']}>
-            <MainFab classes={classes} />
+            <MainFab />
             <MainAddform
               title="Add Sheet"
               handleSubmit={value => dispatch(addSheet(value))}
