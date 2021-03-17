@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -11,7 +12,11 @@ import Box from '@material-ui/core/Box';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-function SheetLink({ sheet, removeSheet }) {
+import { removeSheet } from 'store/modules/sheetList';
+
+function SheetLink({ sheet }) {
+  const dispatch = useDispatch();
+
   return (
     <ListItem button component={Link} to={sheet.href}>
       <ListItemAvatar>
@@ -25,7 +30,7 @@ function SheetLink({ sheet, removeSheet }) {
       <ListItemSecondaryAction>
         <IconButton
           onClick={() => {
-            removeSheet(sheet.id);
+            dispatch(removeSheet(sheet.id));
           }}
           edge="end"
           aria-label="delete"

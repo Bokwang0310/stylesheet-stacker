@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Slide from '@material-ui/core/Slide';
@@ -12,8 +14,9 @@ const useStyles = bottom =>
     },
   }));
 
-function OptionalFab({ open, bottom, children, onClick }) {
+function OptionalFab({ bottom, children, onClick }) {
   const style = useStyles(bottom)().option;
+  const open = useSelector(state => state.sheetFab.openFab);
 
   return (
     <Slide in={open} direction="up" mountOnEnter unmountOnExit>

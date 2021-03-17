@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+
 import Box from '@material-ui/core/Box';
 
 import ListIcon from '@material-ui/icons/List';
@@ -6,14 +8,16 @@ import AddIcon from '@material-ui/icons/Add';
 import ShareIcon from '@material-ui/icons/Share';
 import SearchIcon from '@material-ui/icons/Search';
 
-import SheetFab from 'containers/SheetFab';
-import OptionalFab from 'containers/OptionalFab';
-import Section from 'containers/Section';
-// import Addform from 'components/Addform';
-import SheetAddform from 'containers/SheetAddform';
+import SheetFab from 'components/SheetFab';
+import OptionalFab from 'components/OptionalFab';
+import Section from 'components/Section';
+import SheetAddform from 'components/SheetAddform';
 import Subheader from 'components/Subheader';
 
+import { createSection } from 'store/modules/sheet';
+
 function Sheet({ match, setOpen }) {
+  const dispatch = useDispatch();
   const { id } = match.params;
 
   return (
@@ -24,7 +28,7 @@ function Sheet({ match, setOpen }) {
       </Box>
       <SheetFab iconA={<ListIcon />} iconB={<CloseIcon />} />
       <OptionalFab bottom={11}>
-        <AddIcon onClick={() => setOpen()} />
+        <AddIcon onClick={() => dispatch(setOpen())} />
       </OptionalFab>
       <OptionalFab bottom={20}>
         <ShareIcon />
@@ -35,7 +39,7 @@ function Sheet({ match, setOpen }) {
       <SheetAddform
         title="Add Section"
         handleSubmit={title => {
-          console.log(title, id);
+          dispatch(createSection(title));
         }}
       >
         Enter the name of your section.

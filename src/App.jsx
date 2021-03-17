@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import {
   MuiThemeProvider,
@@ -10,10 +11,12 @@ import Box from '@material-ui/core/Box';
 
 import Header from 'components/Header';
 import Setting from 'components/Setting';
-import Sheet from 'containers/Sheet';
-import SheetList from 'containers/SheetList';
-import MainFab from 'containers/MainFab';
-import MainAddform from 'containers/MainAddform';
+import Sheet from 'components/Sheet';
+import SheetList from 'components/SheetList';
+import MainFab from 'components/MainFab';
+import MainAddform from 'components/MainAddform';
+
+import { addSheet } from 'store/modules/sheetList';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -33,6 +36,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const [colors, setColors] = useState({
@@ -77,7 +81,10 @@ function App() {
 
           <Route path={['/sheets', '/pinned']}>
             <MainFab classes={classes} />
-            <MainAddform title="Add Sheet">
+            <MainAddform
+              title="Add Sheet"
+              handleSubmit={value => dispatch(addSheet(value))}
+            >
               Plese enter the name of your style sheet.
             </MainAddform>
           </Route>

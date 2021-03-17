@@ -8,13 +8,16 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function Addform({ open, closeAddform, handleSubmit, children, title }) {
+import { useAddform } from 'hooks';
+
+function Addform({ handleSubmit, children, title }) {
   const [value, setValue] = useState('');
+  const { open, setClose } = useAddform('mainAddform');
 
   return (
     <Dialog
       open={open}
-      onClose={closeAddform}
+      onClose={() => setClose()}
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
@@ -32,13 +35,13 @@ function Addform({ open, closeAddform, handleSubmit, children, title }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeAddform} color="primary">
+        <Button onClick={() => setClose()} color="primary">
           Cancel
         </Button>
         <Button
           onClick={() => {
             if (value === '') return;
-            closeAddform();
+            setClose();
             handleSubmit(value);
             setValue('');
           }}

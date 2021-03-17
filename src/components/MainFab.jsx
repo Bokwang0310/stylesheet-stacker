@@ -1,13 +1,19 @@
+import { useDispatch } from 'react-redux';
+
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-function MainFab({ classes, openAddForm }) {
+import { setOpen } from 'store/modules/mainAddform';
+
+function MainFab({ classes }) {
+  const dispatch = useDispatch();
+
   return (
     <Fab
       className={classes.fab}
       aria-label="add"
       color="secondary"
-      onClick={() => openAddForm()}
+      onClick={() => dispatch(setOpen())}
     >
       <AddIcon />
     </Fab>
