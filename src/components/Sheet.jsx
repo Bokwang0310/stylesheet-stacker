@@ -14,9 +14,10 @@ import Section from 'components/Section';
 import SheetAddform from 'components/SheetAddform';
 import Subheader from 'components/Subheader';
 
+import { setOpen } from 'store/modules/sheetAddform';
 import { createSection } from 'store/modules/sheet';
 
-function Sheet({ match, setOpen }) {
+function Sheet({ match }) {
   const dispatch = useDispatch();
   const { id } = match.params;
 
@@ -38,8 +39,8 @@ function Sheet({ match, setOpen }) {
       </OptionalFab>
       <SheetAddform
         title="Add Section"
-        handleSubmit={title => {
-          dispatch(createSection(title));
+        handleSubmit={type => {
+          dispatch(createSection(type));
         }}
       >
         Enter the name of your section.

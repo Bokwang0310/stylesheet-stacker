@@ -135,17 +135,17 @@ const generateSection = type => {
       return {
         id: nanoid(),
         type,
-        contents: [{ id: nanoid(), color: '#c1f1f3' }],
+        itemList: [{ id: nanoid(), color: '#c1f1f3' }],
       };
 
     case 'typography':
       return {
         id: nanoid(),
         type,
-        contents: [
+        itemList: [
           {
             id: nanoid(),
-            variant: 'h2',
+            variant: 'h4',
             text: 'Example Typography',
             css: '{ color: "tomato"; }',
           },
@@ -156,7 +156,7 @@ const generateSection = type => {
       return {
         id: nanoid(),
         type,
-        contents: [
+        itemList: [
           {
             id: nanoid(),
             text: 'Example Button',
@@ -169,7 +169,7 @@ const generateSection = type => {
       return {
         id: nanoid(),
         type,
-        contents: [{ type: 'input', css: '{ margin-left: 10px; }' }],
+        itemList: [{ type: 'input', css: '{ color: "red"; }' }],
       };
 
     default:
