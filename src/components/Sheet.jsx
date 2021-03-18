@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Box from '@material-ui/core/Box';
@@ -20,11 +21,12 @@ import { createSection } from 'store/modules/sheet';
 function Sheet({ match }) {
   const dispatch = useDispatch();
   const { id } = match.params;
+  const [title, setTitle] = useState('My Title');
 
   return (
     <>
       <Box>
-        <Subheader title="My Title" />
+        <Subheader title={title} changeTitle={setTitle} />
         <Section />
       </Box>
       <SheetFab iconA={<ListIcon />} iconB={<CloseIcon />} />
