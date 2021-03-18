@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Box from '@material-ui/core/Box';
 
@@ -7,21 +7,25 @@ import ListIcon from '@material-ui/icons/List';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 import ShareIcon from '@material-ui/icons/Share';
-import SearchIcon from '@material-ui/icons/Search';
+import CreateIcon from '@material-ui/icons/Create';
 
 import SheetFab from 'components/SheetFab';
 import OptionalFab from 'components/OptionalFab';
 import Section from 'components/Section';
 import SheetAddform from 'components/SheetAddform';
 import Subheader from 'components/Subheader';
+import ItemForm from 'components/ItemForm';
 
 import { setOpen } from 'store/modules/sheetAddform';
 import { createSection } from 'store/modules/sheet';
+import { toggleModifyMode } from 'store/modules/mode';
 
 function Sheet({ match }) {
   const dispatch = useDispatch();
   const { id } = match.params;
+  id.toString(); //
   const [title, setTitle] = useState('My Title');
+  const openItemForm = useSelector(state => state.mode.openItemForm);
 
   return (
     <>
@@ -34,10 +38,10 @@ function Sheet({ match }) {
         <AddIcon onClick={() => dispatch(setOpen())} />
       </OptionalFab>
       <OptionalFab bottom={20}>
-        <ShareIcon />
+        <CreateIcon onClick={() => dispatch(toggleModifyMode())} />
       </OptionalFab>
       <OptionalFab bottom={29}>
-        <SearchIcon />
+        <ShareIcon />
       </OptionalFab>
       <SheetAddform
         title="Add Section"
@@ -47,6 +51,7 @@ function Sheet({ match }) {
       >
         Enter the name of your section.
       </SheetAddform>
+      {openItemForm ? <ItemForm /> : null}
     </>
   );
 }

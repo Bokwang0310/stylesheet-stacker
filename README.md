@@ -9,10 +9,11 @@
 - delete search option fab
 - delete input when cancel addform
 - combine store (addforms)
+- connect sheetList store and sheet component
 
 # Memo
 
-- radial menu list: [share, create section]
+- radial menu list: [share, create section, modify]
 
 # Working On It!
 

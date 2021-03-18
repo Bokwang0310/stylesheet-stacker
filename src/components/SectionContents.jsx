@@ -1,13 +1,39 @@
 import { createElement } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+
+import ModifyIcon from '@material-ui/icons/Create';
+
+import { openItemForm, setModifyTarget } from 'store/modules/mode';
+
 import { detectMobile } from 'utils';
 import useStyles from 'styles';
 import css2Obj from 'css-to-object';
 const cssToObj = css => css2Obj(css, { camelCase: true });
+
+const ModifyButton = ({ id }) => {
+  const classes = useStyles();
+  const modifyMode = useSelector(state => state.mode.modifyMode);
+  const dispatch = useDispatch();
+
+  return modifyMode ? (
+    <IconButton
+      onClick={() => {
+        dispatch(setModifyTarget(id));
+        dispatch(openItemForm());
+      }}
+      size="small"
+      className={classes.modifySectionButton}
+    >
+      <ModifyIcon fontSize="small" />
+    </IconButton>
+  ) : null;
+};
 
 function SectionContents({ section }) {
   const classes = useStyles();
@@ -16,15 +42,39 @@ function SectionContents({ section }) {
     case 'colorScheme':
       return (
         <ListItem className={classes.colorPaperRoot}>
-          {generateColorScheme(section.itemList)}
+          {[
+            <ModifyButton id={section.id} key={nanoid()} />,
+            ...generateColorScheme(section.itemList),
+          ]}
         </ListItem>
       );
     case 'typography':
-      return <ListItem>{generateTypography(section.itemList)}</ListItem>;
+      return (
+        <ListItem>
+          {[
+            <ModifyButton id={section.id} key={nanoid()} />,
+            ...generateTypography(section.itemList),
+          ]}
+        </ListItem>
+      );
     case 'button':
-      return <ListItem>{generateButton(section.itemList)}</ListItem>;
+      return (
+        <ListItem>
+          {[
+            <ModifyButton id={section.id} key={nanoid()} />,
+            ...generateButton(section.itemList),
+          ]}
+        </ListItem>
+      );
     case 'customElement':
-      return <ListItem>{generateCustomElement(section.itemList)}</ListItem>;
+      return (
+        <ListItem>
+          {[
+            <ModifyButton id={section.id} key={nanoid()} />,
+            ...generateCustomElement(section.itemList),
+          ]}
+        </ListItem>
+      );
 
     default:
       throw new Error();
@@ -44,27 +94,29 @@ const handleTouchStart = e => {
 };
 
 const generateColorScheme = colorList =>
-  colorList.map(color => (
-    <Paper
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
-      key={nanoid()}
-      elevation={3}
-      style={{ backgroundColor: color }}
-    />
-  ));
+  colorList.map(color => {
+    return (
+      <Paper
+        key={color.id}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        elevation={3}
+        style={{ backgroundColor: color.color }}
+      />
+    );
+  });
 
 const generateTypography = typographyList =>
   typographyList.map(typography => (
-    <Typography key={nanoid()} variant={typography.variant}>
+    <Typography key={typography.id} variant={typography.variant}>
       {typography.text}
     </Typography>
   ));
 
 const generateButton = buttonList =>
   buttonList.map(button => (
-    <button key={nanoid()} style={cssToObj(button.css)}>
+    <button key={button.id} style={cssToObj(button.css)}>
       {button.text}
     </button>
   ));
@@ -73,7 +125,7 @@ const generateCustomElement = elementList =>
   elementList.map(element =>
     createElement(
       element.type,
-      { style: cssToObj(element.css), key: nanoid() },
+      { style: cssToObj(element.css), key: element.id },
       element.inner
     )
   );

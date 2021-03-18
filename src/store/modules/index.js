@@ -5,6 +5,7 @@ import mainAddform from './mainAddform';
 import sheet from './sheet';
 import sheetFab from './sheetFab';
 import sheetAddform from './sheetAddform';
+import mode from './mode';
 
 export default combineReducers({
   sheetList,
@@ -12,4 +13,5 @@ export default combineReducers({
   sheet,
   sheetFab,
   sheetAddform,
+  mode,
 });

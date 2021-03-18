@@ -18,11 +18,12 @@ const useStyles = makeStyles(theme => ({
   colorPaperRoot: {
     display: 'flex',
     flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
+    '& > .MuiPaper-elevation3': {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+      marginRight: theme.spacing(2),
       width: theme.spacing(10),
       height: theme.spacing(10),
-      backgroundColor: '#c1f1f3',
     },
   },
   sheetFab: {
@@ -52,6 +53,9 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+  },
+  modifySectionButton: {
+    marginRight: theme.spacing(2),
   },
 }));
 

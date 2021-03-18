@@ -36,7 +36,7 @@ const initialState = {
       id: nanoid(),
       type: 'colorScheme',
       itemList: [
-        { id: nanoid(), color: '#c1f1f3' },
+        { id: nanoid(), color: '#C1F1F3' },
         { id: nanoid(), color: '#E99B9B' },
         { id: nanoid(), color: '#9BDEE9' },
       ],
