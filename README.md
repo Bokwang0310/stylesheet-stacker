@@ -10,6 +10,7 @@
 - delete input when cancel addform
 - combine store (addforms)
 - connect sheetList store and sheet component
+- check changing css in sheet form
 
 # Memo
 

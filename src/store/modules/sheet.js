@@ -251,19 +251,16 @@ const patchItem = (sectionList, sectionID, itemID, payload) =>
         case 'typography':
           return {
             ...item,
-            variant: payload.variant,
-            text: payload.text,
-            css: payload.css,
+            ...payload,
           };
 
         case 'button':
-          return { ...item, text: payload.text, css: payload.css };
+          return { ...item, ...payload };
 
         case 'customElement':
           return {
             ...item,
-            type: payload.type,
-            css: payload.css,
+            ...payload,
           };
 
         default:
