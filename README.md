@@ -1,15 +1,20 @@
 # TODO
 
-- ERR | when get back from sheet page, the activation is on setting section
+- ERR | when get back from sheet page, the activation is on setting section (+ sheetFab open init)
 - make it go to the sheets page after adding the sheet
 - set transition speed of option fab button
 - create deleting alert dialog
 - check empty string in addform
-- support enter key to complete input
-- delete search option fab
-- delete input when cancel addform
 - combine store (addforms)
-- connect sheetList store and sheet component
+- delete input when cancel addform
+
+> Low priority
+
+- support enter key to complete input
+
+- change sheet name
+- auto close optional fab
+- delete search optional fab
 
 # Memo
 

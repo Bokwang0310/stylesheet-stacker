@@ -6,7 +6,6 @@ import Box from '@material-ui/core/Box';
 import ListIcon from '@material-ui/icons/List';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
-import ShareIcon from '@material-ui/icons/Share';
 import CreateIcon from '@material-ui/icons/Create';
 
 import SheetFab from 'components/SheetFab';
@@ -23,14 +22,12 @@ import { toggleModifyMode } from 'store/modules/mode';
 function Sheet({ match }) {
   const dispatch = useDispatch();
   const { id } = match.params;
-  id.toString(); //
-  const [title, setTitle] = useState('My Title');
   const openItemForm = useSelector(state => state.mode.openItemForm);
 
   return (
     <>
       <Box>
-        <Subheader title={title} changeTitle={setTitle} />
+        <Subheader id={id} />
         <Section />
       </Box>
       <SheetFab iconA={<ListIcon />} iconB={<CloseIcon />} />
@@ -39,9 +36,6 @@ function Sheet({ match }) {
       </OptionalFab>
       <OptionalFab bottom={20}>
         <CreateIcon onClick={() => dispatch(toggleModifyMode())} />
-      </OptionalFab>
-      <OptionalFab bottom={29}>
-        <ShareIcon />
       </OptionalFab>
       <SheetAddform
         title="Add Section"

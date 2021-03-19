@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Grid from '@material-ui/core/Grid';
@@ -10,10 +11,15 @@ import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import useStyles from 'styles';
+import { updateSheet } from 'store/modules/sheetList';
 
-function Subheader({ title, changeTitle }) {
+function Subheader({ id }) {
   const classes = useStyles();
   const [modifyMode, setModifyMode] = useState(false);
+  const dispatch = useDispatch();
+  const title = useSelector(
+    state => state.sheetList.filter(sheet => sheet.id === id)[0].name
+  );
 
   return (
     <ListSubheader className={classes.subheader} compoenent="div">
@@ -24,7 +30,7 @@ function Subheader({ title, changeTitle }) {
               type="text"
               autoFocus
               value={title}
-              onChange={e => changeTitle(e.target.value)}
+              onChange={e => dispatch(updateSheet(id, e.target.value))}
               onBlur={() => setModifyMode(false)}
               margin="dense"
             />

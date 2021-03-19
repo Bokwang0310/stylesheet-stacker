@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Slide from '@material-ui/core/Slide';
+
+import { setOpenFab } from 'store/modules/sheetFab';
 
 const useStyles = bottom =>
   makeStyles(theme => ({
@@ -14,13 +16,19 @@ const useStyles = bottom =>
     },
   }));
 
-function OptionalFab({ bottom, children, onClick }) {
+function OptionalFab({ bottom, children }) {
   const classes = useStyles(bottom)();
+  const dispatch = useDispatch();
   const open = useSelector(state => state.sheetFab.openFab);
 
   return (
     <Slide in={open} direction="up" mountOnEnter unmountOnExit>
-      <Fab className={classes.option} onClick={onClick}>
+      <Fab
+        className={classes.option}
+        onClick={() => {
+          dispatch(setOpenFab(false));
+        }}
+      >
         {children}
       </Fab>
     </Slide>
