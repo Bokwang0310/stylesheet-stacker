@@ -14,7 +14,13 @@ import { openItemForm, setModifyTarget } from 'store/modules/mode';
 import { detectMobile } from 'utils';
 import useStyles from 'styles';
 import css2Obj from 'css-to-object';
-const cssToObj = css => css2Obj(css, { camelCase: true });
+const cssToObj = css => {
+  try {
+    return css2Obj(css, { camelCase: true });
+  } catch {
+    return {};
+  }
+};
 
 const ModifyButton = ({ id }) => {
   const classes = useStyles();
