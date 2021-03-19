@@ -1,24 +1,23 @@
 # TODO
 
-- ERR | when get back from sheet page, the activation is on setting section (+ sheetFab open init)
-- make it go to the sheets page after adding the sheet
+- initialize state of sheet fab when came out of `/sheet`
+- make it go to the sheet page after adding the sheet
 - set transition speed of option fab button
 - create deleting alert dialog
-- check empty string in addform
 - combine store (addforms)
 - delete input when cancel addform
+- create store of setting page
+- make form hook (check empty string, support enter key)
 
 > Low priority
 
-- support enter key to complete input
-
-- change sheet name
-- auto close optional fab
-- delete search optional fab
+- deploy to netlify
+- set favicon
+- test PWA and optimize
 
 # Memo
 
-- radial menu list: [share, create section, modify]
+- radial menu list: [create section, toggle modify mode]
 
 # Working On It!
 

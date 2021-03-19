@@ -1,19 +1,16 @@
-import { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-function Nav() {
+function Nav({ history }) {
   const tabs = ['/sheets', '/setting'];
-
-  const [value, setValue] = useState(1);
 
   return (
     <Tabs
-      value={value}
+      value={tabs.findIndex(tabPath => history.location.pathname === tabPath)}
       onChange={(_, newValue) => {
-        setValue(newValue);
+        history.push(newValue);
       }}
       centered
       indicatorColor="primary"
