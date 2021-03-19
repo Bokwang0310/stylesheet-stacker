@@ -50,7 +50,7 @@ function SectionContents({ section }) {
       );
     case 'typography':
       return (
-        <ListItem>
+        <ListItem className={classes.typographyRoot}>
           {[
             <ModifyButton id={section.id} key={nanoid()} />,
             ...generateTypography(section.itemList),
@@ -59,7 +59,7 @@ function SectionContents({ section }) {
       );
     case 'button':
       return (
-        <ListItem>
+        <ListItem className={classes.buttonRoot}>
           {[
             <ModifyButton id={section.id} key={nanoid()} />,
             ...generateButton(section.itemList),
@@ -68,7 +68,7 @@ function SectionContents({ section }) {
       );
     case 'customElement':
       return (
-        <ListItem>
+        <ListItem className={classes.sectionContentRoot}>
           {[
             <ModifyButton id={section.id} key={nanoid()} />,
             ...generateCustomElement(section.itemList),

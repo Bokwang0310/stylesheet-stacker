@@ -15,6 +15,25 @@ const useStyles = makeStyles(theme => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  sectionContentRoot: { display: 'flex', flexWrap: 'wrap' },
+  typographyRoot: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+      marginRight: theme.spacing(2),
+    },
+  },
+  buttonRoot: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > button': {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+      marginRight: theme.spacing(2),
+    },
+  },
   colorPaperRoot: {
     display: 'flex',
     flexWrap: 'wrap',
