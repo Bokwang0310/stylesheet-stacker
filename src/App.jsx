@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -11,6 +11,7 @@ import SheetList from 'components/SheetList';
 import Sheet from 'components/Sheet';
 import MainFab from 'components/MainFab';
 import MainAddform from 'components/MainAddform';
+import NotFoundPage from 'components/NotFoundPage';
 
 import { addSheet } from 'store/modules/sheetList';
 
@@ -40,32 +41,37 @@ function App() {
             <Redirect to="/sheets" />
           </Route>
 
-          <Route path={['/sheets', '/pinned', '/setting']}>
+          <Route path={['/sheets', '/setting']} exact>
             <Header />
           </Route>
 
-          <Route path="/sheets">
-            <SheetList />
-          </Route>
-          <Route path="/setting">
-            <Setting
-              colors={colors}
-              changeColor={setColors}
-              changeMode={setMode}
-              mode={mode}
-            />
-          </Route>
-          <Route path="/sheet/:id" component={Sheet} />
+          <Switch>
+            <Route path="/sheets" exact>
+              <SheetList />
+              <MainFab />
+              <MainAddform
+                title="Add Sheet"
+                handleSubmit={value => dispatch(addSheet(value))}
+              >
+                Plese enter the name of your style sheet.
+              </MainAddform>
+            </Route>
 
-          <Route path={['/sheets', '/pinned']}>
-            <MainFab />
-            <MainAddform
-              title="Add Sheet"
-              handleSubmit={value => dispatch(addSheet(value))}
-            >
-              Plese enter the name of your style sheet.
-            </MainAddform>
-          </Route>
+            <Route path="/setting" exact>
+              <Setting
+                colors={colors}
+                changeColor={setColors}
+                changeMode={setMode}
+                mode={mode}
+              />
+            </Route>
+
+            <Route path="/sheet/:id" component={Sheet} />
+
+            <Route path="*">
+              <NotFoundPage />
+            </Route>
+          </Switch>
         </Box>
       </Box>
     </MuiThemeProvider>

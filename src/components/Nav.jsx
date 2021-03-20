@@ -4,11 +4,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 function Nav({ history }) {
-  const tabs = ['/sheets', '/setting'];
-
+  const tabs = ['/sheets', '/setting', '/sheets/', '/setting/'];
+  const currentPathIndex = tabs.findIndex(
+    tabPath => history.location.pathname === tabPath
+  );
   return (
     <Tabs
-      value={tabs.findIndex(tabPath => history.location.pathname === tabPath)}
+      value={currentPathIndex === 0 || currentPathIndex === 2 ? 0 : 1}
       onChange={(_, newValue) => {
         history.push(newValue);
       }}
