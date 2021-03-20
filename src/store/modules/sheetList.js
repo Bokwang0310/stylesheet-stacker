@@ -26,23 +26,27 @@ const initialState = [
 const reducers = (state = initialState, action) => {
   switch (action.type) {
     case ADD_SHEET:
-      return [
-        ...state,
-        {
-          id: action.id,
-          name: action.name,
-          date: action.date,
-          href: `/sheet/${action.id}`,
-        },
-      ];
+      return isEmptyString(action.name)
+        ? state
+        : [
+            ...state,
+            {
+              id: action.id,
+              name: action.name,
+              date: action.date,
+              href: `/sheet/${action.id}`,
+            },
+          ];
 
     case REMOVE_SHEET:
       return state.filter(sheet => sheet.id !== action.id);
 
     case UPDATE_SHEET:
-      return state.map(sheet =>
-        sheet.id !== action.id ? sheet : { ...sheet, name: action.name }
-      );
+      return isEmptyString(action.name)
+        ? state
+        : state.map(sheet =>
+            sheet.id !== action.id ? sheet : { ...sheet, name: action.name }
+          );
 
     default:
       return state;
@@ -50,3 +54,5 @@ const reducers = (state = initialState, action) => {
 };
 
 export default reducers;
+
+const isEmptyString = str => !str.trim();

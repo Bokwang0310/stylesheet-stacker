@@ -1,19 +1,19 @@
 # TODO
 
+- ERR | keep alive color form
 - initialize state of sheet fab when came out of `/sheet`
 - make it go to the sheet page after adding the sheet
-- set transition speed of option fab button
 - create deleting alert dialog
-- combine store (addforms)
-- delete input when cancel addform
+- support enter key
+- handle cutomElement type
 - create store of setting page
-- make form hook (check empty string, support enter key)
 
 > Low priority
 
 - deploy to netlify
 - set favicon
 - test PWA and optimize
+- combine store (addforms)
 
 # Memo
 

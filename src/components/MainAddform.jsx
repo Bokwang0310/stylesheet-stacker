@@ -37,12 +37,17 @@ function MainAddform({ handleSubmit, title, children }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => dispatch(setClose())} color="primary">
+        <Button
+          onClick={() => {
+            dispatch(setClose());
+            setValue('');
+          }}
+          color="primary"
+        >
           Cancel
         </Button>
         <Button
           onClick={() => {
-            if (value === '') return;
             dispatch(setClose());
             handleSubmit(value);
             setValue('');

@@ -15,11 +15,12 @@ import { updateSheet } from 'store/modules/sheetList';
 
 function Subheader({ id }) {
   const classes = useStyles();
-  const [modifyMode, setModifyMode] = useState(false);
   const dispatch = useDispatch();
+  const [modifyMode, setModifyMode] = useState(false);
   const title = useSelector(
     state => state.sheetList.filter(sheet => sheet.id === id)[0].name
   );
+  const [tempTitle, setTempTitle] = useState(title);
 
   return (
     <ListSubheader className={classes.subheader} compoenent="div">
@@ -29,9 +30,12 @@ function Subheader({ id }) {
             <TextField
               type="text"
               autoFocus
-              value={title}
-              onChange={e => dispatch(updateSheet(id, e.target.value))}
-              onBlur={() => setModifyMode(false)}
+              value={tempTitle}
+              onChange={e => setTempTitle(e.target.value)}
+              onBlur={e => {
+                setModifyMode(false);
+                dispatch(updateSheet(id, e.target.value));
+              }}
               margin="dense"
             />
           ) : (
