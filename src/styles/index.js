@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
   typographyRoot: {
     display: 'flex',
     flexWrap: 'wrap',
+    overflowWrap: 'anywhere',
     '& > *': {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1),
@@ -54,6 +55,7 @@ const useStyles = makeStyles(theme => ({
   subheader: {
     fontSize: '18px',
     backgroundColor: theme.palette.background.default,
+    zIndex: 3,
   },
   modifyIcon: {
     padding: '0px',

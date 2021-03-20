@@ -19,7 +19,10 @@ function MainAddform({ handleSubmit, title, children }) {
   return (
     <Dialog
       open={open}
-      onClose={() => dispatch(setClose())}
+      onClose={() => {
+        dispatch(setClose());
+        setValue('');
+      }}
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
