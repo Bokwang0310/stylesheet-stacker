@@ -13,6 +13,7 @@ import Section from 'components/Section';
 import SheetAddform from 'components/SheetAddform';
 import Subheader from 'components/Subheader';
 import ItemForm from 'components/ItemForm';
+import NotFoundPage from 'components/NotFoundPage';
 
 import { setOpen } from 'store/modules/sheetAddform';
 import { createSection } from 'store/modules/sheet';
@@ -22,6 +23,10 @@ function Sheet({ match }) {
   const dispatch = useDispatch();
   const { id } = match.params;
   const openItemForm = useSelector(state => state.mode.openItemForm);
+  const idList = useSelector(state => state.sheetList.map(sheet => sheet.id));
+  if (!idList.includes(id)) {
+    return <NotFoundPage />;
+  }
 
   return (
     <>
