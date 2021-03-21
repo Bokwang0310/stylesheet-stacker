@@ -1,3 +1,5 @@
+import css2Obj from 'css-to-object';
+
 const formatSingleDigit = num =>
   String(num).length < 2 ? `0${num}` : String(num);
 
@@ -23,4 +25,12 @@ export const detectMobile = () => {
   return toMatch.some(toMatchItem => {
     return navigator.userAgent.match(toMatchItem);
   });
-}
+};
+
+export const cssToObj = css => {
+  try {
+    return css2Obj(css, { camelCase: true });
+  } catch {
+    return {};
+  }
+};

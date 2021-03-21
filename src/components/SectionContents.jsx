@@ -11,16 +11,8 @@ import ModifyIcon from '@material-ui/icons/Create';
 
 import { openItemForm, setModifyTarget } from 'store/modules/mode';
 
-import { detectMobile } from 'utils';
+import { detectMobile, cssToObj } from 'utils';
 import useStyles from 'styles';
-import css2Obj from 'css-to-object';
-const cssToObj = css => {
-  try {
-    return css2Obj(css, { camelCase: true });
-  } catch {
-    return {};
-  }
-};
 
 const ModifyButton = ({ id }) => {
   const classes = useStyles();
