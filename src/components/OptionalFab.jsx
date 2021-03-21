@@ -16,7 +16,7 @@ const useStyles = bottom =>
     },
   }));
 
-function OptionalFab({ bottom, children }) {
+function OptionalFab({ bottom, children, onClick }) {
   const classes = useStyles(bottom)();
   const dispatch = useDispatch();
   const open = useSelector(state => state.sheetFab.openFab);
@@ -27,6 +27,7 @@ function OptionalFab({ bottom, children }) {
         className={classes.option}
         onClick={() => {
           dispatch(setOpenFab(false));
+          onClick();
         }}
       >
         {children}

@@ -35,11 +35,11 @@ function Sheet({ match }) {
         <Section />
       </Box>
       <SheetFab iconA={<ListIcon />} iconB={<CloseIcon />} />
-      <OptionalFab bottom={11}>
-        <AddIcon onClick={() => dispatch(setOpen())} />
+      <OptionalFab bottom={11} onClick={() => dispatch(setOpen())}>
+        <AddIcon />
       </OptionalFab>
-      <OptionalFab bottom={20}>
-        <CreateIcon onClick={() => dispatch(toggleModifyMode())} />
+      <OptionalFab bottom={20} onClick={() => dispatch(toggleModifyMode())}>
+        <CreateIcon />
       </OptionalFab>
       <SheetAddform
         title="Add Section"

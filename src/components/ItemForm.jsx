@@ -20,6 +20,8 @@ function ItemForm() {
       open={open}
       onClose={() => dispatch(closeItemForm())}
       aria-labelledby="form-dialog-title"
+      fullScreen
+      maxWidth="xl"
     >
       <DialogTitle id="item-form-dialog-title">Modify</DialogTitle>
       <DialogContent>

@@ -78,6 +78,26 @@ const useStyles = makeStyles(theme => ({
   modifySectionButton: {
     marginRight: theme.spacing(2),
   },
+  typeInput: {
+    width: theme.spacing(8),
+  },
+  cssInput: {
+    width: '100%',
+  },
+  addIconContainer: {
+    backgroundColor: 'red',
+    paddingLeft: 0,
+  },
+  itemFormListItemContainer: {
+    paddingBottom: theme.spacing(3),
+    '& > li': {
+      paddingTop: 0,
+      paddingBottom: 0,
+    },
+  },
+  variantInput: {
+    width: theme.spacing(6),
+  },
 }));
 
 export default useStyles;
