@@ -98,6 +98,15 @@ const useStyles = makeStyles(theme => ({
   variantInput: {
     width: theme.spacing(6),
   },
+  colorPicker: {
+    zIndex: 3,
+  },
+  colorPickerPopOver: {
+    position: 'fixed',
+    zIndex: 2,
+    width: '100vw',
+    height: '100vh',
+  },
 }));
 
 export default useStyles;

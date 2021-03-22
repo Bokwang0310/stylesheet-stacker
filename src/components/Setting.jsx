@@ -12,11 +12,20 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Switch from '@material-ui/core/Switch';
 import Box from '@material-ui/core/Box';
 
+import useStyles from 'styles';
+
 function Setting({ colors, changeColor, changeMode, mode }) {
   const [openPicker, setOpenPicker] = useState('');
+  const classes = useStyles();
 
   return (
     <>
+      {openPicker ? (
+        <div
+          className={classes.colorPickerPopOver}
+          onClick={() => setOpenPicker('')}
+        />
+      ) : null}
       <List
         subheader={
           <ListSubheader color="primary" component="div">
@@ -47,7 +56,6 @@ function Setting({ colors, changeColor, changeMode, mode }) {
                 type="text"
                 value={colors.primary}
                 onFocus={() => setOpenPicker('primary')}
-                onBlur={() => setOpenPicker('')}
               />
             </Grid>
             <Grid item>
@@ -57,26 +65,29 @@ function Setting({ colors, changeColor, changeMode, mode }) {
                 type="text"
                 value={colors.secondary}
                 onFocus={() => setOpenPicker('secondary')}
-                onBlur={() => setOpenPicker('')}
               />
             </Grid>
             {openPicker === 'primary' ? (
               <ChromePicker
+                className={classes.colorPicker}
+                disableAlpha
                 color={colors.primary}
                 onChange={color => {
                   changeColor({
                     ...colors,
-                    primary: color.hex.toUpperCase()
+                    primary: color.hex.toUpperCase(),
                   });
                 }}
               />
             ) : openPicker === 'secondary' ? (
               <ChromePicker
+                className={classes.colorPicker}
+                disableAlpha
                 color={colors.secondary}
                 onChange={color => {
                   changeColor({
                     ...colors,
-                    secondary: color.hex.toUpperCase()
+                    secondary: color.hex.toUpperCase(),
                   });
                 }}
               />
