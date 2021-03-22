@@ -1,23 +1,17 @@
 import { useState } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
-import Header from 'components/Header';
-import Setting from 'components/Setting';
-import SheetList from 'components/SheetList';
-import Sheet from 'components/Sheet';
-import MainFab from 'components/MainFab';
-import MainAddform from 'components/MainAddform';
-import NotFoundPage from 'components/NotFoundPage';
+import SheetListPage from 'pages/SheetListPage';
+import SettingPage from 'pages/SettingPage';
+import SheetPage from 'pages/SheetPage';
+import NotFoundPage from 'pages/NotFoundPage';
 
-import { addSheet } from 'store/modules/sheetList';
+import Header from 'components/Header';
 
 function App() {
-  const dispatch = useDispatch();
-
   const [colors, setColors] = useState({
     primary: '#7e57c2',
     secondary: '#7986cb',
@@ -47,18 +41,11 @@ function App() {
 
           <Switch>
             <Route path="/sheets" exact>
-              <SheetList />
-              <MainFab />
-              <MainAddform
-                title="Add Sheet"
-                handleSubmit={value => dispatch(addSheet(value))}
-              >
-                Plese enter the name of your style sheet.
-              </MainAddform>
+              <SheetListPage />
             </Route>
 
             <Route path="/setting" exact>
-              <Setting
+              <SettingPage
                 colors={colors}
                 changeColor={setColors}
                 changeMode={setMode}
@@ -66,7 +53,7 @@ function App() {
               />
             </Route>
 
-            <Route path="/sheet/:id" component={Sheet} />
+            <Route path="/sheet/:id" component={SheetPage} />
 
             <Route path="*">
               <NotFoundPage />

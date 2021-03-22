@@ -14,7 +14,7 @@ import Box from '@material-ui/core/Box';
 
 import useStyles from 'styles';
 
-function Setting({ colors, changeColor, changeMode, mode }) {
+function SettingPage({ colors, changeColor, changeMode, mode }) {
   const [openPicker, setOpenPicker] = useState('');
   const classes = useStyles();
 
@@ -102,4 +102,4 @@ function Setting({ colors, changeColor, changeMode, mode }) {
   );
 }
 
-export default Setting;
+export default SettingPage;

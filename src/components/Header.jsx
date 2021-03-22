@@ -13,7 +13,7 @@ function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar position="static" color="default">
+    <AppBar position="sticky" color="default">
       <Toolbar>
         <IconButton
           edge="start"
