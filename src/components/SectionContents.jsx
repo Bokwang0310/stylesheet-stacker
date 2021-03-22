@@ -11,7 +11,7 @@ import ModifyIcon from '@material-ui/icons/Create';
 
 import { openItemForm, setModifyTarget } from 'store/modules/mode';
 
-import { detectMobile, cssToObj } from 'utils';
+import { detectMobile, cssToObj, checkValidTagName } from 'utils';
 import useStyles from 'styles';
 
 const ModifyButton = ({ id }) => {
@@ -122,7 +122,7 @@ const generateButton = buttonList =>
 const generateCustomElement = elementList =>
   elementList.map(element =>
     createElement(
-      element.type,
+      checkValidTagName(element.type) ? element.type : 'p',
       { style: cssToObj(element.css), key: element.id },
       element.inner
     )

@@ -5,7 +5,6 @@
 - make it go to the sheet page after adding the sheet
 - create deleting alert dialog
 - support enter key
-- handle cutomElement type
 - create store of setting page
 
 > Low priority

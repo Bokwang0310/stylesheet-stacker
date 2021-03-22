@@ -34,3 +34,14 @@ export const cssToObj = css => {
     return {};
   }
 };
+
+export const checkValidTagName = tagNameToTest => {
+  try {
+    return (
+      document.createElement(tagNameToTest).toString() !==
+      '[object HTMLUnknownElement]'
+    );
+  } catch {
+    return false;
+  }
+};
