@@ -17,7 +17,7 @@ function Typography({ sectionID, item }) {
   const dispatch = useDispatch();
 
   return (
-    <div key={item.id}>
+    <div key={item.id} className={classes.itemFormListItemContainer}>
       <ListItem>
         <FormControl
           className={`${classes.formControl} ${classes.variantInput}`}
