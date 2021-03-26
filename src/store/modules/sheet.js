@@ -30,6 +30,39 @@ export const deleteItem = (sectionID, itemID) => ({
   itemID,
 });
 
+// const mustChangeTo = [
+//   {
+//     id: '1',
+//     sectionList: [
+//       {
+//         id: nanoid(),
+//         type: 'colorScheme',
+//         itemList: [{ id: nanoid(), color: '#9BDEE9' }],
+//       },
+//     ],
+//   },
+//   {
+//     id: '2',
+//     sectionList: [
+//       {
+//         id: nanoid(),
+//         type: 'colorScheme',
+//         itemList: [{ id: nanoid(), color: '#9BDEE9' }],
+//       },
+//     ],
+//   },
+//   {
+//     id: '3',
+//     sectionList: [
+//       {
+//         id: nanoid(),
+//         type: 'colorScheme',
+//         itemList: [{ id: nanoid(), color: '#9BDEE9' }],
+//       },
+//     ],
+//   },
+// ];
+
 const initialState = {
   sectionList: [
     {

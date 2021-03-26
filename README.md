@@ -1,11 +1,9 @@
 # TODO
 
-- ERR | keep alive color form
+- sheetID 기반으로 종이들 다 매핑해주ㅕ야 해서 store 구조 다 갈아여함,..,
 - initialize state of sheet fab when came out of `/sheet`
 - make it go to the sheet page after adding the sheet
 - create deleting alert dialog
-- support enter key
-- create store of setting page
 
 > Low priority
 

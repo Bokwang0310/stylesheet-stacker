@@ -30,12 +30,12 @@ function SettingPage() {
 
   return (
     <>
-      {openPicker ? (
+      {openPicker && (
         <div
           className={classes.colorPickerPopOver}
           onClick={() => setOpenPicker('')}
         />
-      ) : null}
+      )}
       <List
         subheader={
           <ListSubheader color="primary" component="div">
@@ -61,6 +61,7 @@ function SettingPage() {
           <Grid container spacing={2}>
             <Grid item>
               <TextField
+                inputProps={{ readOnly: true }}
                 label="Primary Color"
                 margin="dense"
                 type="text"
@@ -70,6 +71,7 @@ function SettingPage() {
             </Grid>
             <Grid item>
               <TextField
+                inputProps={{ readOnly: true }}
                 label="Secondary Color"
                 margin="dense"
                 type="text"
