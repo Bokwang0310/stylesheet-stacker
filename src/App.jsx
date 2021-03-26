@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -12,23 +12,20 @@ import NotFoundPage from 'pages/NotFoundPage';
 import Header from 'components/Header';
 
 function App() {
-  const [colors, setColors] = useState({
-    primary: '#7e57c2',
-    secondary: '#7986cb',
+  const { primaryColor, secondaryColor, nightMode } = useSelector(
+    state => state.setting
+  );
+
+  const theme = createMuiTheme({
+    palette: {
+      type: nightMode ? 'dark' : 'light',
+      primary: { main: primaryColor },
+      secondary: { main: secondaryColor },
+    },
   });
 
-  const [mode, setMode] = useState('light');
-
   return (
-    <MuiThemeProvider
-      theme={createMuiTheme({
-        palette: {
-          type: mode,
-          primary: { main: colors.primary },
-          secondary: { main: colors.secondary },
-        },
-      })}
-    >
+    <MuiThemeProvider theme={theme}>
       <Box height="100vh" bgcolor="background.default">
         <Box bgcolor="background.default">
           <Route path="/" exact>
@@ -45,12 +42,7 @@ function App() {
             </Route>
 
             <Route path="/setting" exact>
-              <SettingPage
-                colors={colors}
-                changeColor={setColors}
-                changeMode={setMode}
-                mode={mode}
-              />
+              <SettingPage />
             </Route>
 
             <Route path="/sheet/:id" component={SheetPage} />

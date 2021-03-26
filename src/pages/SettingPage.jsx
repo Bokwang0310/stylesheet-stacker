@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { ChromePicker } from 'react-color';
 
 import Grid from '@material-ui/core/Grid';
@@ -13,10 +14,19 @@ import Switch from '@material-ui/core/Switch';
 import Box from '@material-ui/core/Box';
 
 import useStyles from 'styles';
+import {
+  changePrimaryColor,
+  changeSecondaryColor,
+  toggleNightMode,
+} from 'store/modules/setting';
 
-function SettingPage({ colors, changeColor, changeMode, mode }) {
+function SettingPage() {
   const [openPicker, setOpenPicker] = useState('');
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { primaryColor, secondaryColor, nightMode } = useSelector(
+    state => state.setting
+  );
 
   return (
     <>
@@ -40,10 +50,10 @@ function SettingPage({ colors, changeColor, changeMode, mode }) {
           <ListItemSecondaryAction>
             <Switch
               edge="end"
-              onChange={e => {
-                changeMode(e.target.checked ? 'dark' : 'light');
+              onChange={() => {
+                dispatch(toggleNightMode());
               }}
-              checked={mode === 'light' ? false : true}
+              checked={nightMode}
             ></Switch>
           </ListItemSecondaryAction>
         </ListItem>
@@ -54,7 +64,7 @@ function SettingPage({ colors, changeColor, changeMode, mode }) {
                 label="Primary Color"
                 margin="dense"
                 type="text"
-                value={colors.primary}
+                value={primaryColor}
                 onFocus={() => setOpenPicker('primary')}
               />
             </Grid>
@@ -63,7 +73,7 @@ function SettingPage({ colors, changeColor, changeMode, mode }) {
                 label="Secondary Color"
                 margin="dense"
                 type="text"
-                value={colors.secondary}
+                value={secondaryColor}
                 onFocus={() => setOpenPicker('secondary')}
               />
             </Grid>
@@ -71,24 +81,18 @@ function SettingPage({ colors, changeColor, changeMode, mode }) {
               <ChromePicker
                 className={classes.colorPicker}
                 disableAlpha
-                color={colors.primary}
+                color={primaryColor}
                 onChange={color => {
-                  changeColor({
-                    ...colors,
-                    primary: color.hex.toUpperCase(),
-                  });
+                  dispatch(changePrimaryColor(color.hex.toUpperCase()));
                 }}
               />
             ) : openPicker === 'secondary' ? (
               <ChromePicker
                 className={classes.colorPicker}
                 disableAlpha
-                color={colors.secondary}
+                color={secondaryColor}
                 onChange={color => {
-                  changeColor({
-                    ...colors,
-                    secondary: color.hex.toUpperCase(),
-                  });
+                  dispatch(changeSecondaryColor(color.hex.toUpperCase()));
                 }}
               />
             ) : null}
