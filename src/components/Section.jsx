@@ -6,9 +6,11 @@ import List from '@material-ui/core/List';
 
 import SectionContents from 'components/SectionContents';
 
-function Section() {
-  const sectionList = useSelector(state => state.sheet.sectionList);
-  return sectionList.map(section => (
+function Section({ id }) {
+  const sheetList = useSelector(state => state.sheet);
+  console.log(sheetList);
+  const targetSheet = sheetList.filter(sheet => sheet.id === id)[0];
+  return targetSheet.sectionList.map(section => (
     <Fragment key={nanoid()}>
       <List>
         <SectionContents section={section} />

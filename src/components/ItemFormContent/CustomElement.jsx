@@ -8,7 +8,7 @@ import DeleteButton from 'components/ItemFormContent/DeleteButton';
 import { updateItem, deleteItem } from 'store/modules/sheet';
 import useStyles from 'styles';
 
-function CustomElement({ sectionID, item }) {
+function CustomElement({ sectionID, item, sheetID }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -21,14 +21,19 @@ function CustomElement({ sectionID, item }) {
           value={item.type}
           onChange={e =>
             dispatch(
-              updateItem(sectionID, item.id, {
-                type: e.target.value,
-              })
+              updateItem(
+                sectionID,
+                item.id,
+                {
+                  type: e.target.value,
+                },
+                sheetID
+              )
             )
           }
         />
         <DeleteButton
-          onClick={() => dispatch(deleteItem(sectionID, item.id))}
+          onClick={() => dispatch(deleteItem(sectionID, item.id, sheetID))}
         />
       </ListItem>
       <ListItem>
@@ -38,9 +43,14 @@ function CustomElement({ sectionID, item }) {
           value={item.css}
           onChange={e =>
             dispatch(
-              updateItem(sectionID, item.id, {
-                css: e.target.value,
-              })
+              updateItem(
+                sectionID,
+                item.id,
+                {
+                  css: e.target.value,
+                },
+                sheetID
+              )
             )
           }
         />

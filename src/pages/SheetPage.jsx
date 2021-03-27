@@ -19,7 +19,7 @@ import { setOpen } from 'store/modules/sheetAddform';
 import { createSection } from 'store/modules/sheet';
 import { toggleModifyMode } from 'store/modules/mode';
 
-function Sheet({ match }) {
+function SheetPage({ match }) {
   const dispatch = useDispatch();
   const { id } = match.params;
   const openItemForm = useSelector(state => state.mode.openItemForm);
@@ -32,7 +32,7 @@ function Sheet({ match }) {
     <>
       <Box>
         <Subheader id={id} />
-        <Section />
+        <Section id={id} />
       </Box>
       <SheetFab iconA={<ListIcon />} iconB={<CloseIcon />} />
       <OptionalFab bottom={11} onClick={() => dispatch(setOpen())}>
@@ -44,14 +44,14 @@ function Sheet({ match }) {
       <SheetAddform
         title="Add Section"
         handleSubmit={type => {
-          dispatch(createSection(type));
+          dispatch(createSection(type, id));
         }}
       >
         Enter the name of your section.
       </SheetAddform>
-      {openItemForm ? <ItemForm /> : null}
+      {openItemForm ? <ItemForm id={id} /> : null}
     </>
   );
 }
 
-export default Sheet;
+export default SheetPage;

@@ -10,7 +10,7 @@ import Typography from 'components/ItemFormContent/Typography';
 import Button from 'components/ItemFormContent/Button';
 import CustomElement from 'components/ItemFormContent/CustomElement';
 
-function ItemFormContent({ section }) {
+function ItemFormContent({ section, id }) {
   const dispatch = useDispatch();
 
   switch (section.type) {
@@ -19,11 +19,16 @@ function ItemFormContent({ section }) {
         <>
           <DialogContentText>Change Color scheme</DialogContentText>
           {section.itemList.map(item => (
-            <ColorScheme key={item.id} sectionID={section.id} item={item} />
+            <ColorScheme
+              key={item.id}
+              sectionID={section.id}
+              item={item}
+              sheetID={id}
+            />
           ))}
           <AddButton
             onClick={() =>
-              dispatch(createItem(section.id, { color: '#ffffff' }))
+              dispatch(createItem(section.id, { color: '#ffffff' }, id))
             }
           />
         </>
@@ -34,16 +39,25 @@ function ItemFormContent({ section }) {
         <>
           <DialogContentText>Change Typograpyh</DialogContentText>
           {section.itemList.map(item => (
-            <Typography key={item.id} sectionID={section.id} item={item} />
+            <Typography
+              key={item.id}
+              sectionID={section.id}
+              item={item}
+              sheetID={id}
+            />
           ))}
           <AddButton
             onClick={() =>
               dispatch(
-                createItem(section.id, {
-                  variant: 'h4',
-                  text: 'Exmaple Typography',
-                  css: '{ background-color: red; }',
-                })
+                createItem(
+                  section.id,
+                  {
+                    variant: 'h4',
+                    text: 'Exmaple Typography',
+                    css: '{ background-color: red; }',
+                  },
+                  id
+                )
               )
             }
           />
@@ -55,15 +69,24 @@ function ItemFormContent({ section }) {
         <>
           <DialogContentText>Change Button</DialogContentText>
           {section.itemList.map(item => (
-            <Button key={item.id} sectionID={section.id} item={item} />
+            <Button
+              key={item.id}
+              sectionID={section.id}
+              item={item}
+              sheetID={id}
+            />
           ))}
           <AddButton
             onClick={() =>
               dispatch(
-                createItem(section.id, {
-                  text: 'Ex Btn',
-                  css: '{ color: red; }',
-                })
+                createItem(
+                  section.id,
+                  {
+                    text: 'Ex Btn',
+                    css: '{ color: red; }',
+                  },
+                  id
+                )
               )
             }
           />
@@ -75,15 +98,24 @@ function ItemFormContent({ section }) {
         <>
           <DialogContentText>Change your custom element</DialogContentText>
           {section.itemList.map(item => (
-            <CustomElement key={item.id} sectionID={section.id} item={item} />
+            <CustomElement
+              key={item.id}
+              sectionID={section.id}
+              item={item}
+              sheetID={id}
+            />
           ))}
           <AddButton
             onClick={() =>
               dispatch(
-                createItem(section.id, {
-                  type: 'input',
-                  css: '{ color: red; }',
-                })
+                createItem(
+                  section.id,
+                  {
+                    type: 'input',
+                    css: '{ color: red; }',
+                  },
+                  id
+                )
               )
             }
           />

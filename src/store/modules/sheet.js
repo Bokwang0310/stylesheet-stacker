@@ -1,5 +1,7 @@
 import { nanoid } from 'nanoid';
 
+const CREATE_SHEET = 'sheet/CREATE_SHEET';
+
 const CREATE_SECTION = 'sheet/CREATE_SECTION';
 const DELETE_SECTION = 'sheet/DELETE_SECTION';
 
@@ -7,62 +9,40 @@ const CREATE_ITEM = 'sheet/CREATE_ITEM';
 const UPDATE_ITEM = 'sheet/UPDATE_ITEM';
 const DELETE_ITEM = 'sheet/DELETE_ITEM';
 
-export const createSection = sectionType => ({
+export const createSheet = id => ({ type: CREATE_SHEET, sheetID: id });
+
+export const createSection = (sectionType, sheetID) => ({
   type: CREATE_SECTION,
   sectionType,
+  sheetID,
 });
-export const deleteSection = id => ({ type: DELETE_SECTION, id });
+export const deleteSection = (sectionID, sheetID) => ({
+  type: DELETE_SECTION,
+  id: sectionID,
+  sheetID,
+});
 
-export const createItem = (id, payload) => ({
+export const createItem = (sectionID, payload, sheetID) => ({
   type: CREATE_ITEM,
-  id,
+  id: sectionID,
   payload,
+  sheetID,
 });
-export const updateItem = (sectionID, itemID, payload) => ({
+export const updateItem = (sectionID, itemID, payload, sheetID) => ({
   type: UPDATE_ITEM,
   sectionID,
   itemID,
   payload,
+  sheetID,
 });
-export const deleteItem = (sectionID, itemID) => ({
+export const deleteItem = (sectionID, itemID, sheetID) => ({
   type: DELETE_ITEM,
   sectionID,
   itemID,
+  sheetID,
 });
 
-// const mustChangeTo = [
-//   {
-//     id: '1',
-//     sectionList: [
-//       {
-//         id: nanoid(),
-//         type: 'colorScheme',
-//         itemList: [{ id: nanoid(), color: '#9BDEE9' }],
-//       },
-//     ],
-//   },
-//   {
-//     id: '2',
-//     sectionList: [
-//       {
-//         id: nanoid(),
-//         type: 'colorScheme',
-//         itemList: [{ id: nanoid(), color: '#9BDEE9' }],
-//       },
-//     ],
-//   },
-//   {
-//     id: '3',
-//     sectionList: [
-//       {
-//         id: nanoid(),
-//         type: 'colorScheme',
-//         itemList: [{ id: nanoid(), color: '#9BDEE9' }],
-//       },
-//     ],
-//   },
-// ];
-
+/*
 const initialState = {
   sectionList: [
     {
@@ -108,52 +88,99 @@ const initialState = {
     },
   ],
 };
+*/
+
+const initialState = [
+  {
+    id: '1',
+    sectionList: [
+      {
+        id: nanoid(),
+        type: 'colorScheme',
+        itemList: [{ id: nanoid(), color: '#C1F1F3' }],
+      },
+    ],
+  },
+];
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_SECTION:
-      return {
+    case CREATE_SHEET:
+      return [
         ...state,
-        sectionList: [
-          ...state.sectionList,
-          generateSection(action.sectionType),
-        ],
-      };
+        {
+          id: action.sheetID,
+          sectionList: [],
+        },
+      ];
+
+    case CREATE_SECTION:
+      return state.map(sheet =>
+        sheet.id !== action.sheetID
+          ? sheet
+          : {
+              ...sheet,
+              sectionList: [
+                ...sheet.sectionList,
+                generateSection(action.sectionType),
+              ],
+            }
+      );
 
     case DELETE_SECTION:
-      return {
-        ...state,
-        sectionList: state.sectionList.filter(
-          section => section.id !== action.id
-        ),
-      };
+      return state.map(sheet =>
+        sheet.id !== action.sheetID
+          ? sheet
+          : {
+              ...sheet,
+              sectionList: sheet.sectionList.filter(
+                section => section.id !== action.id
+              ),
+            }
+      );
 
     case CREATE_ITEM:
-      return {
-        ...state,
-        sectionList: generateItem(state.sectionList, action.id, action.payload),
-      };
+      return state.map(sheet =>
+        sheet.id !== action.sheetID
+          ? sheet
+          : {
+              ...sheet,
+              sectionList: generateItem(
+                sheet.sectionList,
+                action.id,
+                action.payload
+              ),
+            }
+      );
 
     case UPDATE_ITEM:
-      return {
-        ...state,
-        sectionList: patchItem(
-          state.sectionList,
-          action.sectionID,
-          action.itemID,
-          action.payload
-        ),
-      };
+      return state.map(sheet =>
+        sheet.id !== action.sheetID
+          ? sheet
+          : {
+              ...sheet,
+              sectionList: patchItem(
+                sheet.sectionList,
+                action.sectionID,
+                action.itemID,
+                action.payload
+              ),
+            }
+      );
 
     case DELETE_ITEM:
-      return {
-        ...state,
-        sectionList: removeItem(
-          state.sectionList,
-          action.sectionID,
-          action.itemID
-        ),
-      };
+      return state.map(sheet =>
+        sheet.id !== action.sheetID
+          ? sheet
+          : {
+              ...sheet,
+              sectionList: removeItem(
+                sheet.sectionList,
+                action.sectionID,
+                action.itemID
+              ),
+            }
+      );
 
     default:
       return state;
@@ -202,7 +229,7 @@ const generateSection = type => {
       return {
         id: nanoid(),
         type,
-        itemList: [{ type: 'input', css: '{ color: "red"; }' }],
+        itemList: [{ id: nanoid(), type: 'input', css: '{ color: "red"; }' }],
       };
 
     default:
@@ -282,19 +309,13 @@ const patchItem = (sectionList, sectionID, itemID, payload) =>
           };
 
         case 'typography':
-          return {
-            ...item,
-            ...payload,
-          };
+          return { ...item, ...payload };
 
         case 'button':
           return { ...item, ...payload };
 
         case 'customElement':
-          return {
-            ...item,
-            ...payload,
-          };
+          return { ...item, ...payload };
 
         default:
           return item;

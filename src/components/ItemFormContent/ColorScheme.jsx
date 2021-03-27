@@ -8,7 +8,7 @@ import DeleteButton from 'components/ItemFormContent/DeleteButton';
 import { updateItem, deleteItem } from 'store/modules/sheet';
 import useStyles from 'styles';
 
-function ColorScheme({ sectionID, item }) {
+function ColorScheme({ sectionID, item, sheetID }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -20,11 +20,13 @@ function ColorScheme({ sectionID, item }) {
           key={item.id}
           value={item.color}
           onChange={e => {
-            dispatch(updateItem(sectionID, item.id, { color: e.target.value }));
+            dispatch(
+              updateItem(sectionID, item.id, { color: e.target.value }, sheetID)
+            );
           }}
         />
         <DeleteButton
-          onClick={() => dispatch(deleteItem(sectionID, item.id))}
+          onClick={() => dispatch(deleteItem(sectionID, item.id, sheetID))}
         />
       </ListItem>
     </div>

@@ -45,3 +45,5 @@ export const checkValidTagName = tagNameToTest => {
     return false;
   }
 };
+
+export const isEmptyString = str => !str.trim();

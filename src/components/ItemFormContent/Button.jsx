@@ -8,7 +8,7 @@ import DeleteButton from 'components/ItemFormContent/DeleteButton';
 import useStyles from 'styles';
 import { updateItem, deleteItem } from 'store/modules/sheet';
 
-function Button({ sectionID, item }) {
+function Button({ sectionID, item, sheetID }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -20,14 +20,19 @@ function Button({ sectionID, item }) {
           value={item.text}
           onChange={e =>
             dispatch(
-              updateItem(sectionID, item.id, {
-                text: e.target.value,
-              })
+              updateItem(
+                sectionID,
+                item.id,
+                {
+                  text: e.target.value,
+                },
+                sheetID
+              )
             )
           }
         />
         <DeleteButton
-          onClick={() => dispatch(deleteItem(sectionID, item.id))}
+          onClick={() => dispatch(deleteItem(sectionID, item.id, sheetID))}
         />
       </ListItem>
       <ListItem>
@@ -37,9 +42,14 @@ function Button({ sectionID, item }) {
           className={classes.cssInput}
           onChange={e =>
             dispatch(
-              updateItem(sectionID, item.id, {
-                css: e.target.value,
-              })
+              updateItem(
+                sectionID,
+                item.id,
+                {
+                  css: e.target.value,
+                },
+                sheetID
+              )
             )
           }
         />

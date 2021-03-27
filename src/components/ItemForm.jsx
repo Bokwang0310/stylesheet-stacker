@@ -9,10 +9,11 @@ import Button from '@material-ui/core/Button';
 import ItemFormContent from 'components/ItemFormContent';
 import { closeItemForm } from 'store/modules/mode';
 
-function ItemForm() {
-  const open = useSelector(state => state.mode.openItemForm);
+function ItemForm({ id }) {
   const dispatch = useDispatch();
-  const sectionList = useSelector(state => state.sheet.sectionList);
+  const open = useSelector(state => state.mode.openItemForm);
+  const sheetList = useSelector(state => state.sheet);
+  const targetSheet = sheetList.filter(sheet => sheet.id === id)[0];
   const targetSectionID = useSelector(state => state.mode.modifyTarget);
 
   return (
@@ -27,8 +28,11 @@ function ItemForm() {
       <DialogContent>
         <ItemFormContent
           section={
-            sectionList.filter(section => section.id === targetSectionID)[0]
+            targetSheet.sectionList.filter(
+              section => section.id === targetSectionID
+            )[0]
           }
+          id={id}
         />
       </DialogContent>
       <DialogActions>

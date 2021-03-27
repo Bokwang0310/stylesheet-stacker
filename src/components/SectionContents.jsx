@@ -119,13 +119,16 @@ const generateButton = buttonList =>
     </button>
   ));
 
-const generateCustomElement = elementList =>
-  elementList.map(element =>
-    createElement(
+const generateCustomElement = elementList => {
+  console.log(elementList);
+  return elementList.map(element => {
+    // console.log(element);
+    return createElement(
       checkValidTagName(element.type) ? element.type : 'p',
       { style: cssToObj(element.css), key: element.id },
       element.inner
-    )
-  );
+    );
+  });
+};
 
 export default SectionContents;

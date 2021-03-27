@@ -12,7 +12,7 @@ import DeleteButton from 'components/ItemFormContent/DeleteButton';
 import useStyles from 'styles';
 import { updateItem, deleteItem } from 'store/modules/sheet';
 
-function Typography({ sectionID, item }) {
+function Typography({ sectionID, item, sheetID }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -26,9 +26,14 @@ function Typography({ sectionID, item }) {
             value={item.variant}
             onChange={e =>
               dispatch(
-                updateItem(sectionID, item.id, {
-                  variant: e.target.value,
-                })
+                updateItem(
+                  sectionID,
+                  item.id,
+                  {
+                    variant: e.target.value,
+                  },
+                  sheetID
+                )
               )
             }
           >
@@ -45,14 +50,19 @@ function Typography({ sectionID, item }) {
           value={item.text}
           onChange={e =>
             dispatch(
-              updateItem(sectionID, item.id, {
-                text: e.target.value,
-              })
+              updateItem(
+                sectionID,
+                item.id,
+                {
+                  text: e.target.value,
+                },
+                sheetID
+              )
             )
           }
         />
         <DeleteButton
-          onClick={() => dispatch(deleteItem(sectionID, item.id))}
+          onClick={() => dispatch(deleteItem(sectionID, item.id, sheetID))}
         />
       </ListItem>
       <ListItem>
@@ -62,9 +72,14 @@ function Typography({ sectionID, item }) {
           className={classes.cssInput}
           onChange={e =>
             dispatch(
-              updateItem(sectionID, item.id, {
-                css: e.target.value,
-              })
+              updateItem(
+                sectionID,
+                item.id,
+                {
+                  css: e.target.value,
+                },
+                sheetID
+              )
             )
           }
         />

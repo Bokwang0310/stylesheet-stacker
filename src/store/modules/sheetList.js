@@ -1,13 +1,12 @@
-import { nanoid } from 'nanoid';
-import { formatDate } from 'utils';
+import { formatDate, isEmptyString } from 'utils';
 
 const ADD_SHEET = 'sheets/ADD_SHEET';
 const UPDATE_SHEET = 'sheets/UPDATE_SHEET';
 const REMOVE_SHEET = 'sheets/REMOVE_SHEET';
 
-export const addSheet = name => ({
+export const addSheet = (name, id) => ({
   type: ADD_SHEET,
-  id: nanoid(),
+  id,
   name,
   date: formatDate(new Date()),
 });
@@ -26,17 +25,16 @@ const initialState = [
 const reducers = (state = initialState, action) => {
   switch (action.type) {
     case ADD_SHEET:
-      return isEmptyString(action.name)
-        ? state
-        : [
-            ...state,
-            {
-              id: action.id,
-              name: action.name,
-              date: action.date,
-              href: `/sheet/${action.id}`,
-            },
-          ];
+      if (isEmptyString(action.name)) return state;
+      return [
+        ...state,
+        {
+          id: action.id,
+          name: action.name,
+          date: action.date,
+          href: `/sheet/${action.id}`,
+        },
+      ];
 
     case REMOVE_SHEET:
       return state.filter(sheet => sheet.id !== action.id);
@@ -54,5 +52,3 @@ const reducers = (state = initialState, action) => {
 };
 
 export default reducers;
-
-const isEmptyString = str => !str.trim();

@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +8,9 @@ import SheetLink from 'components/SheetLink';
 import MainFab from 'components/MainFab';
 import MainAddform from 'components/MainAddform';
 
+import { createSheet } from 'store/modules/sheet';
 import { addSheet } from 'store/modules/sheetList';
+import { isEmptyString } from 'utils';
 
 function SheetListPage() {
   const dispatch = useDispatch();
@@ -24,7 +27,12 @@ function SheetListPage() {
       </Grid>
       <MainAddform
         title="Add Sheet"
-        handleSubmit={value => dispatch(addSheet(value))}
+        handleSubmit={value => {
+          const id = nanoid();
+          dispatch(addSheet(value, id));
+          if (isEmptyString(value)) return;
+          dispatch(createSheet(id));
+        }}
       >
         Plese enter the name of your style sheet.
       </MainAddform>

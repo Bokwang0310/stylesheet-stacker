@@ -1,6 +1,6 @@
 # TODO
 
-- sheetID 기반으로 종이들 다 매핑해주ㅕ야 해서 store 구조 다 갈아여함,..,
+- create deleting section
 - initialize state of sheet fab when came out of `/sheet`
 - make it go to the sheet page after adding the sheet
 - create deleting alert dialog
