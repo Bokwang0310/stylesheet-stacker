@@ -26,14 +26,9 @@ function Typography({ sectionID, item, sheetID }) {
             value={item.variant}
             onChange={e =>
               dispatch(
-                updateItem(
-                  sectionID,
-                  item.id,
-                  {
-                    variant: e.target.value,
-                  },
-                  sheetID
-                )
+                updateItem(sheetID, sectionID, item.id, {
+                  variant: e.target.value,
+                })
               )
             }
           >
@@ -50,19 +45,14 @@ function Typography({ sectionID, item, sheetID }) {
           value={item.text}
           onChange={e =>
             dispatch(
-              updateItem(
-                sectionID,
-                item.id,
-                {
-                  text: e.target.value,
-                },
-                sheetID
-              )
+              updateItem(sheetID, sectionID, item.id, {
+                text: e.target.value,
+              })
             )
           }
         />
         <DeleteButton
-          onClick={() => dispatch(deleteItem(sectionID, item.id, sheetID))}
+          onClick={() => dispatch(deleteItem(sheetID, sectionID, item.id))}
         />
       </ListItem>
       <ListItem>
@@ -72,14 +62,9 @@ function Typography({ sectionID, item, sheetID }) {
           className={classes.cssInput}
           onChange={e =>
             dispatch(
-              updateItem(
-                sectionID,
-                item.id,
-                {
-                  css: e.target.value,
-                },
-                sheetID
-              )
+              updateItem(sheetID, sectionID, item.id, {
+                css: e.target.value,
+              })
             )
           }
         />

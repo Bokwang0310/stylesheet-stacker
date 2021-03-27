@@ -53,8 +53,8 @@ function SheetPage({ match }) {
       </OptionalFab>
       <SheetAddform
         title="Add Section"
-        handleSubmit={type => {
-          dispatch(createSection(type, id));
+        handleSubmit={sectionType => {
+          dispatch(createSection(id, sectionType));
         }}
       >
         Enter the name of your section.

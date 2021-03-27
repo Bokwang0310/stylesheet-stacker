@@ -1,5 +1,5 @@
 /**
- * 리팩토링 급함, 리듀서 순수하게
+ * 리팩토링 급함
  */
 import { nanoid } from 'nanoid';
 
@@ -13,37 +13,41 @@ const UPDATE_ITEM = 'sheet/UPDATE_ITEM';
 const DELETE_ITEM = 'sheet/DELETE_ITEM';
 
 // sheetList의 id와 매핑 할 목적으로 새 시트가 추가될 때 실행시켜서 새 시트를 만듦
-export const createSheet = id => ({ type: CREATE_SHEET, sheetID: id });
+export const createSheet = sheetID => ({ type: CREATE_SHEET, sheetID });
 
-export const createSection = (sectionType, sheetID) => ({
+export const createSection = (sheetID, sectionType) => ({
   type: CREATE_SECTION,
+  sheetID,
+  sectionID: nanoid(),
+  itemID: nanoid(),
   sectionType,
-  sheetID,
 });
-export const deleteSection = (sectionID, sheetID) => ({
+// 만들자
+export const deleteSection = (sheetID, sectionID) => ({
   type: DELETE_SECTION,
-  id: sectionID,
   sheetID,
+  sectionID,
 });
 
-export const createItem = (sectionID, payload, sheetID) => ({
+export const createItem = (sheetID, sectionID, payload) => ({
   type: CREATE_ITEM,
-  id: sectionID,
-  payload,
   sheetID,
+  sectionID,
+  itemID: nanoid,
+  payload,
 });
-export const updateItem = (sectionID, itemID, payload, sheetID) => ({
+export const updateItem = (sheetID, sectionID, itemID, payload) => ({
   type: UPDATE_ITEM,
+  sheetID,
   sectionID,
   itemID,
   payload,
-  sheetID,
 });
-export const deleteItem = (sectionID, itemID, sheetID) => ({
+export const deleteItem = (sheetID, sectionID, itemID) => ({
   type: DELETE_ITEM,
+  sheetID,
   sectionID,
   itemID,
-  sheetID,
 });
 
 const initialState = [
@@ -78,7 +82,11 @@ const reducer = (state = initialState, action) => {
               ...sheet,
               sectionList: [
                 ...sheet.sectionList,
-                generateSection(action.sectionType),
+                generateSection(
+                  action.sectionID,
+                  action.itemID,
+                  action.sectionType
+                ),
               ],
             }
       );
@@ -90,7 +98,7 @@ const reducer = (state = initialState, action) => {
           : {
               ...sheet,
               sectionList: sheet.sectionList.filter(
-                section => section.id !== action.id
+                section => section.id !== action.sectionID
               ),
             }
       );
@@ -103,7 +111,8 @@ const reducer = (state = initialState, action) => {
               ...sheet,
               sectionList: generateItem(
                 sheet.sectionList,
-                action.id,
+                action.sectionID,
+                action.itemID,
                 action.payload
               ),
             }
@@ -145,22 +154,22 @@ const reducer = (state = initialState, action) => {
 
 export default reducer;
 
-const generateSection = type => {
+const generateSection = (sectionID, itemID, type) => {
   switch (type) {
     case 'colorScheme':
       return {
-        id: nanoid(),
+        id: sectionID,
         type,
-        itemList: [{ id: nanoid(), color: '#c1f1f3' }],
+        itemList: [{ id: itemID, color: '#c1f1f3' }],
       };
 
     case 'typography':
       return {
-        id: nanoid(),
+        id: sectionID,
         type,
         itemList: [
           {
-            id: nanoid(),
+            id: itemID,
             variant: 'h4',
             text: 'Example Typography',
             css: '{ color: "tomato"; }',
@@ -170,11 +179,11 @@ const generateSection = type => {
 
     case 'button':
       return {
-        id: nanoid(),
+        id: sectionID,
         type,
         itemList: [
           {
-            id: nanoid(),
+            id: itemID,
             text: 'Example Button',
             css: '{ color: "skyblue"; }',
           },
@@ -183,9 +192,9 @@ const generateSection = type => {
 
     case 'customElement':
       return {
-        id: nanoid(),
+        id: sectionID,
         type,
-        itemList: [{ id: nanoid(), type: 'input', css: '{ color: "red"; }' }],
+        itemList: [{ id: itemID, type: 'input', css: '{ color: "red"; }' }],
       };
 
     default:
@@ -193,17 +202,14 @@ const generateSection = type => {
   }
 };
 
-const generateItem = (sectionList, id, payload) =>
+const generateItem = (sectionList, sectionID, itemID, payload) =>
   sectionList.map(section => {
-    if (section.id !== id) return section;
+    if (section.id !== sectionID) return section;
     switch (section.type) {
       case 'colorScheme':
         return {
           ...section,
-          itemList: [
-            ...section.itemList,
-            { id: nanoid(), color: payload.color },
-          ],
+          itemList: [...section.itemList, { id: itemID, color: payload.color }],
         };
 
       case 'typography':
@@ -212,7 +218,7 @@ const generateItem = (sectionList, id, payload) =>
           itemList: [
             ...section.itemList,
             {
-              id: nanoid(),
+              id: itemID,
               variant: payload.variant,
               text: payload.text,
               css: payload.css,
@@ -226,7 +232,7 @@ const generateItem = (sectionList, id, payload) =>
           itemList: [
             ...section.itemList,
             {
-              id: nanoid(),
+              id: itemID,
               text: payload.text,
               css: payload.css,
             },
@@ -239,7 +245,7 @@ const generateItem = (sectionList, id, payload) =>
           itemList: [
             ...section.itemList,
             {
-              id: nanoid(),
+              id: itemID,
               type: payload.type,
               css: payload.css,
             },

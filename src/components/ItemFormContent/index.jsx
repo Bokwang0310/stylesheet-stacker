@@ -28,7 +28,7 @@ function ItemFormContent({ section, id }) {
           ))}
           <AddButton
             onClick={() =>
-              dispatch(createItem(section.id, { color: '#ffffff' }, id))
+              dispatch(createItem(id, section.id, { color: '#ffffff' }))
             }
           />
         </>
@@ -49,15 +49,11 @@ function ItemFormContent({ section, id }) {
           <AddButton
             onClick={() =>
               dispatch(
-                createItem(
-                  section.id,
-                  {
-                    variant: 'h4',
-                    text: 'Exmaple Typography',
-                    css: '{ background-color: red; }',
-                  },
-                  id
-                )
+                createItem(id, section.id, {
+                  variant: 'h4',
+                  text: 'Exmaple Typography',
+                  css: '{ background-color: red; }',
+                })
               )
             }
           />
@@ -79,14 +75,10 @@ function ItemFormContent({ section, id }) {
           <AddButton
             onClick={() =>
               dispatch(
-                createItem(
-                  section.id,
-                  {
-                    text: 'Ex Btn',
-                    css: '{ color: red; }',
-                  },
-                  id
-                )
+                createItem(id, section.id, {
+                  text: 'Ex Btn',
+                  css: '{ color: red; }',
+                })
               )
             }
           />
@@ -108,14 +100,10 @@ function ItemFormContent({ section, id }) {
           <AddButton
             onClick={() =>
               dispatch(
-                createItem(
-                  section.id,
-                  {
-                    type: 'input',
-                    css: '{ color: red; }',
-                  },
-                  id
-                )
+                createItem(id, section.id, {
+                  type: 'input',
+                  css: '{ color: red; }',
+                })
               )
             }
           />

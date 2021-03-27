@@ -21,12 +21,12 @@ function ColorScheme({ sectionID, item, sheetID }) {
           value={item.color}
           onChange={e => {
             dispatch(
-              updateItem(sectionID, item.id, { color: e.target.value }, sheetID)
+              updateItem(sheetID, sectionID, item.id, { color: e.target.value })
             );
           }}
         />
         <DeleteButton
-          onClick={() => dispatch(deleteItem(sectionID, item.id, sheetID))}
+          onClick={() => dispatch(deleteItem(sheetID, sectionID, item.id))}
         />
       </ListItem>
     </div>
