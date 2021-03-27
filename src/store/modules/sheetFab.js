@@ -1,4 +1,5 @@
 const SET_OPEN_FAB = 'sheetFab/SET_OPEN_FAB';
+
 export const setOpenFab = open => ({ type: SET_OPEN_FAB, open });
 
 const initialState = {

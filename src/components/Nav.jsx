@@ -1,9 +1,10 @@
-import { Link, withRouter } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-function Nav({ history }) {
+function Nav() {
+  const history = useHistory();
   const tabs = ['/sheets', '/setting', '/sheets/', '/setting/'];
   const currentPathIndex = tabs.findIndex(
     tabPath => history.location.pathname === tabPath
@@ -24,4 +25,4 @@ function Nav({ history }) {
   );
 }
 
-export default withRouter(Nav);
+export default Nav;

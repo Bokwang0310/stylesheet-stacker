@@ -1,3 +1,7 @@
+/**
+ * sheet 페이지의 수정 모드와 폼을 관리하는 파일
+ * 파일 이름 수정 필요할 듯
+ */
 const SET_MODIFY_MODE = 'mode/SET_MODIFY_MODE';
 const TOGGLE_MODIFY_MODE = 'mode/TOGGLE_MODIFY_MODE';
 

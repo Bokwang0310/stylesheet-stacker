@@ -17,6 +17,16 @@
 
 - radial menu list: [create section, toggle modify mode]
 
+# Sheet Structure
+
+- Sheet (SectionList)
+- Sheet
+  - Section (ItemList)
+  - Section
+    - Item
+    - Item
+    - Item
+
 # Working On It!
 
 [Motivation](https://youtu.be/PtVOesopqD4?t=1547)

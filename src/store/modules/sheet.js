@@ -1,3 +1,6 @@
+/**
+ * 리팩토링 급함, 리듀서 순수하게
+ */
 import { nanoid } from 'nanoid';
 
 const CREATE_SHEET = 'sheet/CREATE_SHEET';
@@ -9,6 +12,7 @@ const CREATE_ITEM = 'sheet/CREATE_ITEM';
 const UPDATE_ITEM = 'sheet/UPDATE_ITEM';
 const DELETE_ITEM = 'sheet/DELETE_ITEM';
 
+// sheetList의 id와 매핑 할 목적으로 새 시트가 추가될 때 실행시켜서 새 시트를 만듦
 export const createSheet = id => ({ type: CREATE_SHEET, sheetID: id });
 
 export const createSection = (sectionType, sheetID) => ({
@@ -41,54 +45,6 @@ export const deleteItem = (sectionID, itemID, sheetID) => ({
   itemID,
   sheetID,
 });
-
-/*
-const initialState = {
-  sectionList: [
-    {
-      id: nanoid(),
-      type: 'colorScheme',
-      itemList: [
-        { id: nanoid(), color: '#C1F1F3' },
-        { id: nanoid(), color: '#E99B9B' },
-        { id: nanoid(), color: '#9BDEE9' },
-      ],
-    },
-    {
-      id: nanoid(),
-      type: 'typography',
-      itemList: [
-        {
-          id: nanoid(),
-          variant: 'h4',
-          text: 'First world!',
-          css: '{ background-color: "red"; }',
-        },
-      ],
-    },
-    {
-      id: nanoid(),
-      type: 'button',
-      itemList: [
-        { id: nanoid(), text: 'My btn', css: '{ background-color: "red"; }' },
-      ],
-    },
-    {
-      id: nanoid(),
-      type: 'customElement',
-      itemList: [
-        {
-          id: nanoid(),
-          type: 'button',
-          css: '{ background-color: "red"; }',
-          inner: 'hello?',
-        },
-        { id: nanoid(), type: 'input', css: '{ margin-left: 10px; }' },
-      ],
-    },
-  ],
-};
-*/
 
 const initialState = [
   {

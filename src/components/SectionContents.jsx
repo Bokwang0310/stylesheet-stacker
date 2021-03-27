@@ -19,18 +19,20 @@ const ModifyButton = ({ id }) => {
   const modifyMode = useSelector(state => state.mode.modifyMode);
   const dispatch = useDispatch();
 
-  return modifyMode ? (
-    <IconButton
-      onClick={() => {
-        dispatch(setModifyTarget(id));
-        dispatch(openItemForm());
-      }}
-      size="small"
-      className={classes.modifySectionButton}
-    >
-      <ModifyIcon fontSize="small" />
-    </IconButton>
-  ) : null;
+  return (
+    modifyMode && (
+      <IconButton
+        onClick={() => {
+          dispatch(setModifyTarget(id));
+          dispatch(openItemForm());
+        }}
+        size="small"
+        className={classes.modifySectionButton}
+      >
+        <ModifyIcon fontSize="small" />
+      </IconButton>
+    )
+  );
 };
 
 function SectionContents({ section }) {
@@ -120,9 +122,7 @@ const generateButton = buttonList =>
   ));
 
 const generateCustomElement = elementList => {
-  console.log(elementList);
   return elementList.map(element => {
-    // console.log(element);
     return createElement(
       checkValidTagName(element.type) ? element.type : 'p',
       { style: cssToObj(element.css), key: element.id },
