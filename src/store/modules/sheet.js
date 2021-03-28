@@ -155,23 +155,25 @@ const reducer = (state = initialState, action) => {
 export default reducer;
 
 const generateSection = (sectionID, itemID, type) => {
+  const sourceObj = {
+    id: sectionID,
+    type,
+  };
   switch (type) {
     case 'colorScheme':
       return {
-        id: sectionID,
-        type,
+        ...sourceObj,
         itemList: [{ id: itemID, color: '#c1f1f3' }],
       };
 
     case 'typography':
       return {
-        id: sectionID,
-        type,
+        ...sourceObj,
         itemList: [
           {
             id: itemID,
             variant: 'h4',
-            text: 'Example Typography',
+            text: 'Example',
             css: '{ color: "tomato"; }',
           },
         ],
@@ -179,12 +181,11 @@ const generateSection = (sectionID, itemID, type) => {
 
     case 'button':
       return {
-        id: sectionID,
-        type,
+        ...sourceObj,
         itemList: [
           {
             id: itemID,
-            text: 'Example Button',
+            text: 'Example',
             css: '{ color: "skyblue"; }',
           },
         ],
@@ -192,8 +193,7 @@ const generateSection = (sectionID, itemID, type) => {
 
     case 'customElement':
       return {
-        id: sectionID,
-        type,
+        ...sourceObj,
         itemList: [{ id: itemID, type: 'input', css: '{ color: "red"; }' }],
       };
 
