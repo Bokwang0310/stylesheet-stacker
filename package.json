@@ -32,6 +32,7 @@
       "react-app/jest"
     ]
   },
+  "homepage": "https://stylesheet-stacker.netlify.app/",
   "browserslist": {
     "production": [
       ">0.2%",
