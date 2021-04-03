@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -10,18 +9,18 @@ import AddIcon from '@material-ui/icons/Add';
 import CreateIcon from '@material-ui/icons/Create';
 import HomeIcon from '@material-ui/icons/Home';
 
-import NotFoundPage from '../pages/NotFoundPage';
-import SheetFab from '../components/SheetFab';
-import OptionalFab from '../components/OptionalFab';
-import Section from '../components/Section';
-import SheetAddform from '../components/SheetAddform';
-import Subheader from '../components/Subheader';
-import ItemForm from '../components/ItemForm';
+import NotFoundPage from 'pages/NotFoundPage';
+import SheetFab from 'components/SheetFab';
+import OptionalFab from 'components/OptionalFab';
+import Section from 'components/Section';
+import SheetAddform from 'components/SheetAddform';
+import Subheader from 'components/Subheader';
+import ItemForm from 'components/ItemForm';
 
-import { RootState } from '../store/modules';
-import { setOpen } from '../store/modules/sheetAddform';
-import { createSection } from '../store/modules/sheet';
-import { toggleModifyMode } from '../store/modules/mode';
+import { RootState } from 'store/modules';
+import { setOpen } from 'store/modules/sheetAddform';
+import { createSection } from 'store/modules/sheet';
+import { toggleModifyMode } from 'store/modules/mode';
 
 type Param = {
   id: string;
@@ -30,7 +29,6 @@ type Param = {
 function SheetPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const { id } = history.;
   const { id } = useParams<Param>();
   const openItemForm = useSelector(
     (state: RootState) => state.mode.openItemForm

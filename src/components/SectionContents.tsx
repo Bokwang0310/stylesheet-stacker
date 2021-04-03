@@ -11,11 +11,11 @@ import IconButton from '@material-ui/core/IconButton';
 import ModifyIcon from '@material-ui/icons/Create';
 
 import { openItemForm, setModifyTarget } from 'store/modules/mode';
-import { RootState } from '../store/modules';
+import { RootState } from 'store/modules';
 
 import { detectMobile, cssToObj, checkValidTagName } from 'utils';
 import useStyles from 'styles';
-import { SheetType, ItemType } from '../store/modules/sheet';
+import { SheetType, ItemType } from 'store/modules/sheet';
 
 const ModifyButton = ({ id }: { id: string }) => {
   const classes = useStyles();

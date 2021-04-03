@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -10,8 +9,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { RootState } from '../store/modules';
-import { setClose } from '../store/modules/mainAddform';
+import { RootState } from 'store/modules';
+import { setClose } from 'store/modules/mainAddform';
 
 function MainAddform({
   handleSubmit,

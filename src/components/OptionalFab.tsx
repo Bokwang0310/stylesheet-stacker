@@ -1,12 +1,11 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Slide from '@material-ui/core/Slide';
 
-import { RootState } from '../store/modules';
-import { setOpenFab } from '../store/modules/sheetFab';
+import { RootState } from 'store/modules';
+import { setOpenFab } from 'store/modules/sheetFab';
 
 const useStyles = (bottom: number) =>
   makeStyles(theme => ({

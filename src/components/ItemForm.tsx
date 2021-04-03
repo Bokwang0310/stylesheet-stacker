@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -7,9 +6,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
-import { RootState } from '../store/modules';
-import ItemFormContent from '../components/ItemFormContent';
-import { closeItemForm } from '../store/modules/mode';
+import { RootState } from 'store/modules';
+import ItemFormContent from 'components/ItemFormContent';
+import { closeItemForm } from 'store/modules/mode';
 
 function ItemForm({ id }: { id: string }) {
   const dispatch = useDispatch();

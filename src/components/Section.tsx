@@ -1,11 +1,10 @@
-import React from 'react';
 import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 
 import List from '@material-ui/core/List';
 
-import { RootState } from '../store/modules';
+import { RootState } from 'store/modules';
 import SectionContents from 'components/SectionContents';
 
 function Section({ id }: { id: string }) {

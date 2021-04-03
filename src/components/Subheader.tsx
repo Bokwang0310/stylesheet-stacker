@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { RootState } from '../store/modules';
+import { RootState } from 'store/modules';
 import useStyles from 'styles';
 import { updateSheet } from 'store/modules/sheetList';
 

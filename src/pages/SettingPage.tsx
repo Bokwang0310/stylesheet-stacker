@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ChromePicker } from 'react-color';
@@ -14,13 +13,13 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Switch from '@material-ui/core/Switch';
 import Box from '@material-ui/core/Box';
 
-import useStyles from '../styles';
-import { RootState } from '../store/modules';
+import useStyles from 'styles';
+import { RootState } from 'store/modules';
 import {
   changePrimaryColor,
   changeSecondaryColor,
   toggleNightMode,
-} from '../store/modules/setting';
+} from 'store/modules/setting';
 
 function SettingPage() {
   const [openPicker, setOpenPicker] = useState('');
