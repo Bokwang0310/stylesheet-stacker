@@ -1,7 +1,7 @@
 import React from 'react';
 import { createElement } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
@@ -10,23 +10,27 @@ import IconButton from '@material-ui/core/IconButton';
 
 import ModifyIcon from '@material-ui/icons/Create';
 
-import { openItemForm, setModifyTarget } from 'store/modules/mode';
-import { RootState } from 'store/modules';
-
 import { detectMobile, cssToObj, checkValidTagName } from 'utils';
 import useStyles from 'styles';
 import { SheetType, ItemType } from 'store/modules/sheet';
+import { itemFormState } from 'state/form';
+import { modifyModeState, modifyTargetState } from 'state/modifyMode';
 
-const ModifyButton = ({ id }: { id: string }) => {
+type Props = { id: string };
+
+const ModifyButton = ({ id }: Props) => {
   const classes = useStyles();
-  const modifyMode = useSelector((state: RootState) => state.mode.modifyMode);
-  const dispatch = useDispatch();
+
+  const modifyMode = useRecoilValue(modifyModeState);
+  const setModifyTarget = useSetRecoilState(modifyTargetState);
+
+  const setFormState = useSetRecoilState(itemFormState);
 
   return modifyMode ? (
     <IconButton
       onClick={() => {
-        dispatch(setModifyTarget(id));
-        dispatch(openItemForm());
+        setModifyTarget(id);
+        setFormState(true);
       }}
       size="small"
       className={classes.modifySectionButton}
@@ -84,14 +88,14 @@ function SectionContents({ section }: { section: SheetType }) {
 
 const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
   if (detectMobile()) return;
-  console.log('in mouse enter');
+  // console.log('in mouse enter');
 };
 const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
   if (detectMobile()) return;
-  console.log('in mouse leave');
+  // console.log('in mouse leave');
 };
 const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-  console.log('in touch start');
+  // console.log('in touch start');
 };
 
 const generateColorScheme = (colorList: ItemType[]) =>

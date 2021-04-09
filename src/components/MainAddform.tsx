@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useRecoilState } from 'recoil';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -9,8 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { RootState } from 'store/modules';
-import { setClose } from 'store/modules/mainAddform';
+import { mainAddformState } from 'state/form';
 
 function MainAddform({
   handleSubmit,
@@ -22,14 +21,13 @@ function MainAddform({
   children: string;
 }) {
   const [value, setValue] = useState('');
-  const dispatch = useDispatch();
-  const open = useSelector((state: RootState) => state.mainAddform.open);
+  const [addformState, setAddformState] = useRecoilState(mainAddformState);
 
   return (
     <Dialog
-      open={open}
+      open={addformState}
       onClose={() => {
-        dispatch(setClose());
+        setAddformState(false);
         setValue('');
       }}
       aria-labelledby="form-dialog-title"
@@ -51,7 +49,7 @@ function MainAddform({
       <DialogActions>
         <Button
           onClick={() => {
-            dispatch(setClose());
+            setAddformState(false);
             setValue('');
           }}
           color="primary"
@@ -60,7 +58,7 @@ function MainAddform({
         </Button>
         <Button
           onClick={() => {
-            dispatch(setClose());
+            setAddformState(false);
             handleSubmit(value);
             setValue('');
           }}

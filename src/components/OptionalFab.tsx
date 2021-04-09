@@ -1,11 +1,35 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useRecoilState } from 'recoil';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Slide from '@material-ui/core/Slide';
 
-import { RootState } from 'store/modules';
-import { setOpenFab } from 'store/modules/sheetFab';
+import { sheetFabState } from 'state/sheetFab';
+
+type Props = {
+  bottom: number;
+  children: JSX.Element;
+  onClick: () => void;
+};
+
+function OptionalFab({ bottom, children, onClick }: Props) {
+  const [fabState, setFabState] = useRecoilState(sheetFabState);
+  const classes = useStyles(bottom)();
+
+  return (
+    <Slide in={fabState} direction="up" mountOnEnter unmountOnExit>
+      <Fab
+        className={classes.option}
+        onClick={() => {
+          setFabState(false);
+          onClick();
+        }}
+      >
+        {children}
+      </Fab>
+    </Slide>
+  );
+}
 
 const useStyles = (bottom: number) =>
   makeStyles(theme => ({
@@ -16,33 +40,5 @@ const useStyles = (bottom: number) =>
       zIndex: 2,
     },
   }));
-
-function OptionalFab({
-  bottom,
-  children,
-  onClick,
-}: {
-  bottom: number;
-  children: JSX.Element;
-  onClick: () => void;
-}) {
-  const classes = useStyles(bottom)();
-  const dispatch = useDispatch();
-  const open = useSelector((state: RootState) => state.sheetFab.openFab);
-
-  return (
-    <Slide in={open} direction="up" mountOnEnter unmountOnExit>
-      <Fab
-        className={classes.option}
-        onClick={() => {
-          dispatch(setOpenFab(false));
-          onClick();
-        }}
-      >
-        {children}
-      </Fab>
-    </Slide>
-  );
-}
 
 export default OptionalFab;

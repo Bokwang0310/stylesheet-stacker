@@ -8,16 +8,15 @@ import DeleteButton from 'components/ItemFormContent/DeleteButton';
 import { ItemType } from 'store/modules/sheet';
 import useStyles from 'styles';
 import { updateItem, deleteItem } from 'store/modules/sheet';
+import { ButtonItem } from 'state/sheets';
 
-function Button({
-  sectionID,
-  item,
-  sheetID,
-}: {
+type Props = {
   sectionID: string;
-  item: ItemType;
+  item: ButtonItem & { id: string };
   sheetID: string;
-}) {
+};
+
+function Button({ sectionID, item, sheetID }: Props) {
   const classes = useStyles();
   const dispatch = useDispatch();
 

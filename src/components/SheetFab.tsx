@@ -1,39 +1,36 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useRecoilState } from 'recoil';
 
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
 
-import { setOpenFab } from 'store/modules/sheetFab';
 import useStyles from 'styles';
-import { RootState } from '../store/modules';
+import { sheetFabState } from 'state/sheetFab';
 
-function SheetFab({
-  iconA,
-  iconB,
-}: {
+type Props = {
   iconA: JSX.Element;
   iconB: JSX.Element;
-}) {
-  const open = useSelector((state: RootState) => state.sheetFab.openFab);
-  const dispatch = useDispatch();
+};
+
+function SheetFab({ iconA, iconB }: Props) {
+  const [fabState, setFabState] = useRecoilState(sheetFabState);
   const classes = useStyles();
 
   return (
     <>
-      <Zoom in={!open}>
+      <Zoom in={!fabState}>
         <Fab
           className={classes.sheetFab}
           color="secondary"
-          onClick={() => dispatch(setOpenFab(true))}
+          onClick={() => setFabState(true)}
         >
           {iconA}
         </Fab>
       </Zoom>
-      <Zoom in={open}>
+      <Zoom in={fabState}>
         <Fab
           className={classes.sheetFab}
           color="secondary"
-          onClick={() => dispatch(setOpenFab(false))}
+          onClick={() => setFabState(false)}
         >
           {iconB}
         </Fab>

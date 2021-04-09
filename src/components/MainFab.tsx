@@ -1,21 +1,23 @@
-import { useDispatch } from 'react-redux';
+import { useSetRecoilState } from 'recoil';
 
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-import { setOpen } from 'store/modules/mainAddform';
 import useStyles from 'styles';
+import { mainAddformState } from 'state/form';
 
 function MainFab() {
-  const dispatch = useDispatch();
   const classes = useStyles();
+  const setAddformState = useSetRecoilState(mainAddformState);
 
   return (
     <Fab
       className={classes.mainFab}
       aria-label="add"
       color="secondary"
-      onClick={() => dispatch(setOpen())}
+      onClick={() => {
+        setAddformState(true);
+      }}
     >
       <AddIcon />
     </Fab>

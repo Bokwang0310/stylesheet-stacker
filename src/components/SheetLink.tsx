@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 
 import ListItem from '@material-ui/core/ListItem';
@@ -12,13 +12,22 @@ import Box from '@material-ui/core/Box';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { removeSheet, SheetType } from 'store/modules/sheetList';
+import { sheetListState, Sheet } from 'state/sheets';
 
-function SheetLink({ sheet }: { sheet: SheetType }) {
-  const dispatch = useDispatch();
+type Props = {
+  sheet: Sheet;
+};
+
+function SheetLink({ sheet }: Props) {
+  const [sheetList, setSheetList] = useRecoilState(sheetListState);
+
+  const removeSheet = (id: string) => {
+    const newSheetLinkList = sheetList.filter(sheetLink => sheetLink.id !== id);
+    setSheetList(newSheetLinkList);
+  };
 
   return (
-    <ListItem button component={Link} to={sheet.href}>
+    <ListItem button component={Link} to={`/sheet/${sheet.id}`}>
       <ListItemAvatar>
         <Avatar color="default">
           <FolderIcon />
@@ -29,9 +38,7 @@ function SheetLink({ sheet }: { sheet: SheetType }) {
       </ListItemText>
       <ListItemSecondaryAction>
         <IconButton
-          onClick={() => {
-            dispatch(removeSheet(sheet.id));
-          }}
+          onClick={() => removeSheet(sheet.id)}
           edge="end"
           aria-label="delete"
         >

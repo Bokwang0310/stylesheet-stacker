@@ -1,14 +1,16 @@
 import { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import { useRecoilValue } from 'recoil';
 import { nanoid } from 'nanoid';
 
 import List from '@material-ui/core/List';
 
-import { RootState } from 'store/modules';
 import SectionContents from 'components/SectionContents';
+import { sheetListState } from 'state/sheets';
 
-function Section({ id }: { id: string }) {
-  const sheetList = useSelector((state: RootState) => state.sheet);
+type Props = { id: string };
+
+function Section({ id }: Props) {
+  const sheetList = useRecoilValue(sheetListState);
   const targetSheet = sheetList.filter(sheet => sheet.id === id)[0];
   return (
     <>

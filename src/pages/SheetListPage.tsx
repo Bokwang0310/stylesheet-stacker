@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRecoilState } from 'recoil';
 
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -8,14 +8,21 @@ import SheetLink from 'components/SheetLink';
 import MainFab from 'components/MainFab';
 import MainAddform from 'components/MainAddform';
 
-import { RootState } from 'store/modules';
-import { createSheet } from 'store/modules/sheet';
-import { addSheet } from 'store/modules/sheetList';
-import { isEmptyString } from 'utils';
+import { isEmptyString, formatDate } from 'utils';
+import { sheetListState } from 'state/sheets';
 
 function SheetListPage() {
-  const dispatch = useDispatch();
-  const sheetList = useSelector((state: RootState) => state.sheetList);
+  const [sheetList, setSheetList] = useRecoilState(sheetListState);
+
+  const createSheetLink = (name: string, id: string) => {
+    if (isEmptyString(name)) return;
+
+    const newSheetList = [
+      ...sheetList,
+      { id, name, date: formatDate(new Date()), sectionList: [] },
+    ];
+    setSheetList(newSheetList);
+  };
 
   return (
     <>
@@ -30,9 +37,8 @@ function SheetListPage() {
         title="Add Sheet"
         handleSubmit={(value: string) => {
           const id = nanoid();
-          dispatch(addSheet(value, id));
           if (isEmptyString(value)) return;
-          dispatch(createSheet(id));
+          createSheetLink(value, id);
         }}
       >
         Plese enter the name of your style sheet.

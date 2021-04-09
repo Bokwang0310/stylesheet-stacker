@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useRecoilState } from 'recoil';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -10,19 +9,30 @@ import TextField from '@material-ui/core/TextField';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { RootState } from 'store/modules';
 import useStyles from 'styles';
-import { updateSheet } from 'store/modules/sheetList';
+import { sheetListState } from 'state/sheets';
+import { isEmptyString } from 'utils';
 
-function Subheader({ id }: { id: string }) {
+type Props = { id: string };
+
+function Subheader({ id }: Props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const [modifyMode, setModifyMode] = useState(false);
-  const title = useSelector(
-    (state: RootState) =>
-      state.sheetList.filter(sheet => sheet.id === id)[0].name
-  );
+
+  const [sheetList, setSheetList] = useRecoilState(sheetListState);
+  const title = sheetList.filter(sheet => sheet.id === id)[0].name;
+
   const [tempTitle, setTempTitle] = useState(title);
+
+  const updateSheet = (id: string, name: string) => {
+    if (isEmptyString(name)) return;
+
+    const newSheetList = sheetList.map(sheet =>
+      sheet.id !== id ? sheet : { ...sheet, name }
+    );
+
+    setSheetList(newSheetList);
+  };
 
   return (
     <ListSubheader className={classes.subheader} component="div">
@@ -36,7 +46,7 @@ function Subheader({ id }: { id: string }) {
               onChange={e => setTempTitle(e.target.value)}
               onBlur={e => {
                 setModifyMode(false);
-                dispatch(updateSheet(id, e.target.value));
+                updateSheet(id, e.target.value);
               }}
               margin="dense"
             />

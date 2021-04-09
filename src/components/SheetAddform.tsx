@@ -1,6 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,9 +11,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import { RootState } from 'store/modules';
-import { setClose } from 'store/modules/sheetAddform';
 import useStyles from 'styles';
+import { sheetAddformState } from 'state/form';
 
 const types = {
   colorScheme: 'colorScheme',
@@ -23,25 +21,21 @@ const types = {
   customElement: 'customElement',
 };
 
-function SheetAddform({
-  handleSubmit,
-  title,
-  children,
-}: {
+type Props = {
   handleSubmit: (sectionType: string) => void;
   title: string;
   children: string;
-}) {
-  const dispatch = useDispatch();
-  const open = useSelector((state: RootState) => state.sheetAddform.open);
-  const classes = useStyles();
+};
 
+function SheetAddform({ handleSubmit, title, children }: Props) {
+  const classes = useStyles();
+  const [addformState, setAddformState] = useRecoilState(sheetAddformState);
   const [type, setType] = useState(types.colorScheme);
 
   return (
     <Dialog
-      open={open}
-      onClose={() => dispatch(setClose())}
+      open={addformState}
+      onClose={() => setAddformState(false)}
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
@@ -51,12 +45,7 @@ function SheetAddform({
           <Select
             id="section-type-select"
             value={type}
-            onChange={(
-              e: React.ChangeEvent<{
-                name?: string | undefined;
-                value: unknown;
-              }>
-            ) => {
+            onChange={e => {
               if (typeof e.target.value !== 'string') return;
               setType(e.target.value);
             }}
@@ -69,12 +58,12 @@ function SheetAddform({
         </FormControl>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => dispatch(setClose())} color="primary">
+        <Button onClick={() => setAddformState(false)} color="primary">
           Cancel
         </Button>
         <Button
           onClick={() => {
-            dispatch(setClose());
+            setAddformState(false);
             handleSubmit(type);
           }}
           color="primary"

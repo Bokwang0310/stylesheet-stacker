@@ -3,20 +3,12 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import sheetList from './sheetList';
-import mainAddform from './mainAddform';
 import sheet from './sheet';
-import sheetFab from './sheetFab';
-import sheetAddform from './sheetAddform';
-import mode from './mode';
 import setting from './setting';
 
 export const rootReducer = combineReducers({
   sheetList,
-  mainAddform,
   sheet,
-  sheetFab,
-  sheetAddform,
-  mode,
   setting,
 });
 export type RootState = ReturnType<typeof rootReducer>;

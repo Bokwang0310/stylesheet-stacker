@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,23 +6,23 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
-import { RootState } from 'store/modules';
 import ItemFormContent from 'components/ItemFormContent';
-import { closeItemForm } from 'store/modules/mode';
+import { itemFormState } from 'state/form';
+import { modifyTargetState } from 'state/modifyMode';
+import { sheetListState } from 'state/sheets';
 
-function ItemForm({ id }: { id: string }) {
-  const dispatch = useDispatch();
-  const open = useSelector((state: RootState) => state.mode.openItemForm);
-  const sheetList = useSelector((state: RootState) => state.sheet);
+type Props = { id: string };
+
+function ItemForm({ id }: Props) {
+  const sheetList = useRecoilValue(sheetListState);
   const targetSheet = sheetList.filter(sheet => sheet.id === id)[0];
-  const targetSectionID = useSelector(
-    (state: RootState) => state.mode.modifyTarget
-  );
+  const targetSectionID = useRecoilValue(modifyTargetState);
+  const [formState, setFormState] = useRecoilState(itemFormState);
 
   return (
     <Dialog
-      open={open}
-      onClose={() => dispatch(closeItemForm())}
+      open={formState}
+      onClose={() => setFormState(false)}
       aria-labelledby="form-dialog-title"
       fullScreen
       maxWidth="xl"
@@ -39,7 +39,7 @@ function ItemForm({ id }: { id: string }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => dispatch(closeItemForm())} color="primary">
+        <Button onClick={() => setFormState(false)} color="primary">
           Close
         </Button>
       </DialogActions>
