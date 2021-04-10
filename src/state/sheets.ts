@@ -8,41 +8,61 @@ export type Item = {
   //   variant?: string;
   //   type?: string;
   //   css?: string;
-} & (ColorItem | TypographyItem | ButtonItem | CustomElementItem);
+}; // } & (ColorItem | TypographyItem | ButtonItem | CustomElementItem);
 
-export type ColorItem = {
+export type ColorItem = Item & {
   color: string;
 };
-export type TypographyItem = {
+export type TypographyItem = Item & {
   text: string;
   variant: string;
   css: string;
 };
-export type ButtonItem = {
+export type ButtonItem = Item & {
   text: string;
   css: string;
 };
-export type CustomElementItem = {
+export type CustomElementItem = Item & {
   type: string;
   css: string;
 };
 
 export type Section = {
   id: string;
-  type: string;
-  itemList: Item[];
+};
+export type ColorSection = Section & {
+  type: 'colorScheme';
+  itemList: ColorItem[];
+};
+export type TypographySection = Section & {
+  type: 'typography';
+  itemList: TypographyItem[];
+};
+export type ButtonSection = Section & {
+  type: 'button';
+  itemList: ButtonItem[];
+};
+export type CustomElementSection = Section & {
+  type: 'customElement';
+  itemList: CustomElementItem[];
 };
 
 export type Sheet = {
   id: string;
   name: string;
   date: string;
-  sectionList: Section[];
+  sectionList:
+    | ColorSection[]
+    | TypographySection[]
+    | ButtonSection[]
+    | CustomElementSection[];
 };
 
-export const checkItemType = (section: Section) => {
-  section.itemList;
-};
+// type CheckItemType = (section: Section) => section is ColorItem;
+// export const checkItemType = (section: Section): section is  => {
+//   section.itemList;
+//   return "color" in section
+// };
 
 export const sheetListState = atom<Sheet[]>({
   key: 'sheetState',

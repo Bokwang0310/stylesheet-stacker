@@ -31,9 +31,10 @@ function ItemForm({ id }: Props) {
       <DialogContent>
         <ItemFormContent
           section={
-            targetSheet.sectionList.filter(
-              section => section.id === targetSectionID
-            )[0]
+            // targetSheet.sectionList.filter(
+            //   section => section.id === targetSectionID
+            // )[0]
+            targetSheet.sectionList[0]
           }
           id={id}
         />

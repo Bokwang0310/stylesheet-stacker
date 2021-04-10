@@ -7,9 +7,22 @@ import Button from 'components/ItemFormContent/Button';
 import CustomElement from 'components/ItemFormContent/CustomElement';
 
 import { useDispatchItem } from 'hooks/useDispatchItem';
-import { Section } from 'state/sheets';
+import {
+  ColorSection,
+  TypographySection,
+  ButtonSection,
+  CustomElementSection,
+} from 'state/sheets';
+import { nanoid } from 'nanoid';
 
-type Props = { section: Section; id: string };
+type Props = {
+  section:
+    | ColorSection
+    | TypographySection
+    | ButtonSection
+    | CustomElementSection;
+  id: string;
+};
 
 function ItemFormContent({ section, id }: Props) {
   const { createItem } = useDispatchItem();
@@ -28,7 +41,9 @@ function ItemFormContent({ section, id }: Props) {
             />
           ))}
           <AddButton
-            onClick={() => createItem(id, section.id, { color: '#ffffff' })}
+            onClick={() =>
+              createItem(id, section.id, { id: nanoid(), color: '#ffffff' })
+            }
           />
         </>
       );
@@ -48,6 +63,7 @@ function ItemFormContent({ section, id }: Props) {
           <AddButton
             onClick={() =>
               createItem(id, section.id, {
+                id: nanoid(),
                 variant: 'h4',
                 text: 'Exmaple Typography',
                 css: '{ background-color: red; }',
@@ -72,6 +88,7 @@ function ItemFormContent({ section, id }: Props) {
           <AddButton
             onClick={() =>
               createItem(id, section.id, {
+                id: nanoid(),
                 text: 'Ex Btn',
                 css: '{ color: red; }',
               })
@@ -95,6 +112,7 @@ function ItemFormContent({ section, id }: Props) {
           <AddButton
             onClick={() =>
               createItem(id, section.id, {
+                id: nanoid(),
                 type: 'input',
                 css: '{ color: red; }',
               })

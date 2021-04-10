@@ -7,8 +7,19 @@ import {
   ButtonItem,
   CustomElementItem,
 } from 'state/sheets';
+import {
+  ColorSection,
+  TypographySection,
+  ButtonSection,
+  CustomElementSection,
+} from 'state/sheets';
 
 type Payload = ColorItem | TypographyItem | ButtonItem | CustomElementItem;
+type Section =
+  | ColorSection
+  | TypographySection
+  | ButtonSection
+  | CustomElementSection;
 
 export function useDispatchItem() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);
@@ -19,12 +30,12 @@ export function useDispatchItem() {
 
       return {
         ...sheet,
-        sectionList: sheet.sectionList.map(section => {
+        sectionList: sheet.sectionList.map((section: Section) => {
           if (section.id !== sectionID) return section;
 
           return {
             ...section,
-            itemList: [...section.itemList, { id: nanoid(), ...payload }],
+            itemList: [...section.itemList, payload],
           };
         }),
       };
@@ -44,12 +55,12 @@ export function useDispatchItem() {
 
       return {
         ...sheet,
-        sectionList: sheet.sectionList.map(section => {
+        sectionList: sheet.sectionList.map((section: Section) => {
           if (section.id !== sectionID) return section;
 
           return {
             ...section,
-            itemList: section.itemList.map(item => {
+            itemList: section.itemList.map((item: Payload) => {
               if (item.id !== itemID) return item;
               return {
                 ...item,
@@ -70,12 +81,14 @@ export function useDispatchItem() {
 
       return {
         ...sheet,
-        sectionList: sheet.sectionList.map(section => {
+        sectionList: sheet.sectionList.map((section: Section) => {
           if (section.id !== sectionID) return section;
 
           return {
             ...section,
-            itemList: section.itemList.filter(item => item.id === itemID),
+            itemList: section.itemList.filter(
+              (item: Payload) => item.id === itemID
+            ),
           };
         }),
       };
