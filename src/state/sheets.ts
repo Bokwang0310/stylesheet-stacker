@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 import { nanoid } from 'nanoid';
 
 export type Item = ColorItem | TypographyItem | ButtonItem | CustomElementItem;
@@ -63,6 +64,10 @@ export type Sheet = {
   )[];
 };
 
+const { persistAtom } = recoilPersist({
+  key: 'sheets',
+});
+
 export const sheetListState = atom<Sheet[]>({
   key: 'sheetState',
   default: [
@@ -79,4 +84,5 @@ export const sheetListState = atom<Sheet[]>({
       ],
     },
   ],
+  effects_UNSTABLE: [persistAtom],
 });
