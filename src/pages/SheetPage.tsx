@@ -29,6 +29,7 @@ type Param = {
 
 function SheetPage() {
   const history = useHistory();
+
   const itemFormOpen = useRecoilValue(itemFormState);
   const setAddformState = useSetRecoilState(sheetAddformState);
   const [mode, setMode] = useRecoilState(modifyModeState);
@@ -59,7 +60,6 @@ function SheetPage() {
     });
 
     setSheetList(newSheetList);
-    console.log(newSheetList);
   };
 
   return (

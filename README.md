@@ -7,10 +7,8 @@
 
 > Low priority
 
-- deploy to netlify
 - set favicon
 - test PWA and optimize
-- combine store (addforms)
 - prettier 404 page
 
 # Memo

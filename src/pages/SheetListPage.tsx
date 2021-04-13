@@ -36,9 +36,8 @@ function SheetListPage() {
       <MainAddform
         title="Add Sheet"
         handleSubmit={(value: string) => {
-          const id = nanoid();
           if (isEmptyString(value)) return;
-          createSheetLink(value, id);
+          createSheetLink(value, nanoid());
         }}
       >
         Plese enter the name of your style sheet.
