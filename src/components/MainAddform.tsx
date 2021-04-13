@@ -11,15 +11,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { mainAddformState } from 'state/form';
 
-function MainAddform({
-  handleSubmit,
-  title,
-  children,
-}: {
+type Props = {
   handleSubmit: (value: string) => void;
   title: string;
   children: string;
-}) {
+};
+
+function MainAddform({ handleSubmit, title, children }: Props) {
   const [value, setValue] = useState('');
   const [addformState, setAddformState] = useRecoilState(mainAddformState);
 

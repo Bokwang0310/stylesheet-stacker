@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 import AddButton from 'components/ItemFormContent/AddButton';
@@ -13,7 +15,6 @@ import {
   ButtonSection,
   CustomElementSection,
 } from 'state/sheets';
-import { nanoid } from 'nanoid';
 
 type Props = {
   section:
@@ -28,7 +29,7 @@ function ItemFormContent({ section, id }: Props) {
   const { createItem } = useDispatchItem();
 
   switch (section.type) {
-    case 'colorScheme':
+    case 'color':
       return (
         <>
           <DialogContentText>Change Color scheme</DialogContentText>
@@ -113,7 +114,7 @@ function ItemFormContent({ section, id }: Props) {
             onClick={() =>
               createItem(id, section.id, {
                 id: nanoid(),
-                type: 'input',
+                elementType: 'input',
                 css: '{ color: red; }',
               })
             }

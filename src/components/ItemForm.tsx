@@ -11,7 +11,9 @@ import { itemFormState } from 'state/form';
 import { modifyTargetState } from 'state/modifyMode';
 import { sheetListState } from 'state/sheets';
 
-type Props = { id: string };
+type Props = {
+  id: string;
+};
 
 function ItemForm({ id }: Props) {
   const sheetList = useRecoilValue(sheetListState);
@@ -31,10 +33,9 @@ function ItemForm({ id }: Props) {
       <DialogContent>
         <ItemFormContent
           section={
-            // targetSheet.sectionList.filter(
-            //   section => section.id === targetSectionID
-            // )[0]
-            targetSheet.sectionList[0]
+            targetSheet.sectionList.filter(
+              section => section.id === targetSectionID
+            )[0]
           }
           id={id}
         />

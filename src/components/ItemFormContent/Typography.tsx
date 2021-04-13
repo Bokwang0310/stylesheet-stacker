@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
 
 import ListItem from '@material-ui/core/ListItem';
 import TextField from '@material-ui/core/TextField';
@@ -9,21 +8,19 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import DeleteButton from 'components/ItemFormContent/DeleteButton';
 
-import { ItemType } from 'store/modules/sheet';
 import useStyles from 'styles';
-import { updateItem, deleteItem } from 'store/modules/sheet';
+import { TypographyItem } from 'state/sheets';
+import { useDispatchItem } from 'hooks/useDispatchItem';
 
-function Typography({
-  sectionID,
-  item,
-  sheetID,
-}: {
+type Props = {
   sectionID: string;
-  item: ItemType;
+  item: TypographyItem;
   sheetID: string;
-}) {
+};
+
+function Typography({ sectionID, item, sheetID }: Props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const { updateItem, deleteItem } = useDispatchItem();
 
   return (
     <div key={item.id} className={classes.itemFormListItemContainer}>
@@ -35,11 +32,10 @@ function Typography({
             value={item.variant}
             onChange={e => {
               if (e.target.value !== 'string') return;
-              dispatch(
-                updateItem(sheetID, sectionID, item.id, {
-                  variant: e.target.value,
-                })
-              );
+              updateItem(sheetID, sectionID, item.id, {
+                ...item,
+                variant: e.target.value,
+              });
             }}
           >
             {[1, 2, 3, 4, 5, 6].map(variantNumber => (
@@ -54,16 +50,13 @@ function Typography({
           multiline
           value={item.text}
           onChange={e =>
-            dispatch(
-              updateItem(sheetID, sectionID, item.id, {
-                text: e.target.value,
-              })
-            )
+            updateItem(sheetID, sectionID, item.id, {
+              ...item,
+              text: e.target.value,
+            })
           }
         />
-        <DeleteButton
-          onClick={() => dispatch(deleteItem(sheetID, sectionID, item.id))}
-        />
+        <DeleteButton onClick={() => deleteItem(sheetID, sectionID, item.id)} />
       </ListItem>
       <ListItem>
         <TextField
@@ -71,11 +64,10 @@ function Typography({
           value={item.css}
           className={classes.cssInput}
           onChange={e =>
-            dispatch(
-              updateItem(sheetID, sectionID, item.id, {
-                css: e.target.value,
-              })
-            )
+            updateItem(sheetID, sectionID, item.id, {
+              ...item,
+              css: e.target.value,
+            })
           }
         />
       </ListItem>

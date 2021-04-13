@@ -1,7 +1,7 @@
 import React from 'react';
 import { createElement } from 'react';
-import { nanoid } from 'nanoid';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { nanoid } from 'nanoid';
 
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
@@ -12,7 +12,13 @@ import ModifyIcon from '@material-ui/icons/Create';
 
 import { detectMobile, cssToObj, checkValidTagName } from 'utils';
 import useStyles from 'styles';
-import { SheetType, ItemType } from 'store/modules/sheet';
+import {
+  Section,
+  ColorItem,
+  TypographyItem,
+  ButtonItem,
+  CustomElementItem,
+} from 'state/sheets';
 import { itemFormState } from 'state/form';
 import { modifyModeState, modifyTargetState } from 'state/modifyMode';
 
@@ -40,11 +46,11 @@ const ModifyButton = ({ id }: Props) => {
   ) : null;
 };
 
-function SectionContents({ section }: { section: SheetType }) {
+function SectionContents({ section }: { section: Section }) {
   const classes = useStyles();
 
   switch (section.type) {
-    case 'colorScheme':
+    case 'color':
       return (
         <ListItem className={classes.colorPaperRoot}>
           {[
@@ -98,7 +104,7 @@ const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
   // console.log('in touch start');
 };
 
-const generateColorScheme = (colorList: ItemType[]) =>
+const generateColorScheme = (colorList: ColorItem[]) =>
   colorList.map(color => {
     return (
       <Paper
@@ -112,7 +118,7 @@ const generateColorScheme = (colorList: ItemType[]) =>
     );
   });
 
-const generateTypography = (typographyList: ItemType[]) =>
+const generateTypography = (typographyList: TypographyItem[]) =>
   typographyList.map(typography => {
     if (
       typeof typography.variant === 'undefined' &&
@@ -133,23 +139,23 @@ const generateTypography = (typographyList: ItemType[]) =>
     return <Typography key={typography.id}>{typography.text}</Typography>;
   });
 
-const generateButton = (buttonList: ItemType[]) =>
+const generateButton = (buttonList: ButtonItem[]) =>
   buttonList.map(button => (
     <button key={button.id} style={cssToObj(button.css)}>
       {button.text}
     </button>
   ));
 
-const generateCustomElement = (elementList: ItemType[]) => {
+const generateCustomElement = (elementList: CustomElementItem[]) => {
   return elementList.map(element => {
     if (
-      typeof element.type === 'undefined' ||
+      typeof element.elementType === 'undefined' ||
       typeof element.css === 'undefined'
     )
       return null;
 
     return createElement(
-      checkValidTagName(element.type) ? element.type : 'p',
+      checkValidTagName(element.elementType) ? element.elementType : 'p',
       { style: cssToObj(element.css), key: element.id }
       // element.inner
     );

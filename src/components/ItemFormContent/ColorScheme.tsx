@@ -1,25 +1,21 @@
-import { useDispatch } from 'react-redux';
-
 import ListItem from '@material-ui/core/ListItem';
 import TextField from '@material-ui/core/TextField';
 
 import DeleteButton from 'components/ItemFormContent/DeleteButton';
 
-import { ItemType } from 'store/modules/sheet';
-import { updateItem, deleteItem } from 'store/modules/sheet';
 import useStyles from 'styles';
+import { ColorItem } from 'state/sheets';
+import { useDispatchItem } from 'hooks/useDispatchItem';
 
-function ColorScheme({
-  sectionID,
-  item,
-  sheetID,
-}: {
+type Props = {
   sectionID: string;
-  item: ItemType;
+  item: ColorItem;
   sheetID: string;
-}) {
+};
+
+function ColorScheme({ sectionID, item, sheetID }: Props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const { updateItem, deleteItem } = useDispatchItem();
 
   return (
     <div className={classes.itemFormListItemContainer}>
@@ -29,14 +25,13 @@ function ColorScheme({
           key={item.id}
           value={item.color}
           onChange={e => {
-            dispatch(
-              updateItem(sheetID, sectionID, item.id, { color: e.target.value })
-            );
+            updateItem(sheetID, sectionID, item.id, {
+              ...item,
+              color: e.target.value,
+            });
           }}
         />
-        <DeleteButton
-          onClick={() => dispatch(deleteItem(sheetID, sectionID, item.id))}
-        />
+        <DeleteButton onClick={() => deleteItem(sheetID, sectionID, item.id)} />
       </ListItem>
     </div>
   );

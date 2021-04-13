@@ -1,25 +1,21 @@
-import { useDispatch } from 'react-redux';
-
 import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 
 import DeleteButton from 'components/ItemFormContent/DeleteButton';
 
-import { updateItem, deleteItem } from 'store/modules/sheet';
 import useStyles from 'styles';
-import { ItemType } from 'store/modules/sheet';
+import { CustomElementItem } from 'state/sheets';
+import { useDispatchItem } from 'hooks/useDispatchItem';
 
-function CustomElement({
-  sectionID,
-  item,
-  sheetID,
-}: {
+type Props = {
   sectionID: string;
-  item: ItemType;
+  item: CustomElementItem;
   sheetID: string;
-}) {
+};
+
+function CustomElement({ sectionID, item, sheetID }: Props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const { updateItem, deleteItem } = useDispatchItem();
 
   return (
     <div className={classes.itemFormListItemContainer} key={item.id}>
@@ -27,18 +23,15 @@ function CustomElement({
         <TextField
           className={classes.typeInput}
           multiline
-          value={item.type}
+          value={item.elementType}
           onChange={e =>
-            dispatch(
-              updateItem(sheetID, sectionID, item.id, {
-                type: e.target.value,
-              })
-            )
+            updateItem(sheetID, sectionID, item.id, {
+              ...item,
+              elementType: e.target.value,
+            })
           }
         />
-        <DeleteButton
-          onClick={() => dispatch(deleteItem(sheetID, sectionID, item.id))}
-        />
+        <DeleteButton onClick={() => deleteItem(sheetID, sectionID, item.id)} />
       </ListItem>
       <ListItem>
         <TextField
@@ -46,11 +39,10 @@ function CustomElement({
           multiline
           value={item.css}
           onChange={e =>
-            dispatch(
-              updateItem(sheetID, sectionID, item.id, {
-                css: e.target.value,
-              })
-            )
+            updateItem(sheetID, sectionID, item.id, {
+              ...item,
+              css: e.target.value,
+            })
           }
         />
       </ListItem>

@@ -1,6 +1,8 @@
 import { atom } from 'recoil';
 import { nanoid } from 'nanoid';
 
+export type Item = ColorItem | TypographyItem | ButtonItem | CustomElementItem;
+
 export type ColorItem = {
   id: string;
   color: string;
@@ -21,6 +23,12 @@ export type CustomElementItem = {
   elementType: string;
   css: string;
 };
+
+export type Section =
+  | ColorSection
+  | TypographySection
+  | ButtonSection
+  | CustomElementSection;
 
 export type ColorSection = {
   type: 'color';
@@ -47,48 +55,12 @@ export type Sheet = {
   id: string;
   name: string;
   date: string;
-  sectionList:
-    | ColorSection[]
-    | TypographySection[]
-    | ButtonSection[]
-    | CustomElementSection[];
-};
-
-// export const isColorSection = (
-//   item: ColorSection | TypographySection | ButtonSection | CustomElementSection
-// ): item is ColorSection => {
-//   return (item as ColorSection).type === 'color';
-// };
-// export const isTypographySection = (
-//   item: ColorSection | TypographySection | ButtonSection | CustomElementSection
-// ): item is TypographySection => {
-//   return (item as TypographySection).type === 'typography';
-// };
-// export const isButtonSection = (
-//   item: ColorSection | TypographySection | ButtonSection | CustomElementSection
-// ): item is ButtonSection => {
-//   return (item as ButtonSection).type === 'button';
-// };
-// export const isCustomElementSection = (
-//   item: ColorSection | TypographySection | ButtonSection | CustomElementSection
-// ): item is CustomElementSection => {
-//   return (item as CustomElementSection).type === 'customElement';
-// };
-export const checkSectionType = <
-  T extends
+  sectionList: (
     | ColorSection
     | TypographySection
     | ButtonSection
     | CustomElementSection
->(
-  section:
-    | ColorSection
-    | TypographySection
-    | ButtonSection
-    | CustomElementSection,
-  targetType: string
-): section is T => {
-  return (section as T).type === targetType;
+  )[];
 };
 
 export const sheetListState = atom<Sheet[]>({

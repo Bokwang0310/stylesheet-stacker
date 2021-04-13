@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import Button from '@material-ui/core/Button';
@@ -15,7 +15,7 @@ import useStyles from 'styles';
 import { sheetAddformState } from 'state/form';
 
 const types = {
-  colorScheme: 'colorScheme',
+  colorScheme: 'color',
   typography: 'typography',
   button: 'button',
   customElement: 'customElement',

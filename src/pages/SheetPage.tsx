@@ -44,19 +44,17 @@ function SheetPage() {
     const newSheetList = sheetList.map(sheet => {
       if (sheet.id !== sheetID) return sheet;
 
-      const newSheet: Sheet = {
+      return {
         ...sheet,
         sectionList: [
           ...sheet.sectionList,
           {
-            id: nanoid(),
             type: sectionType,
+            id: nanoid(),
             itemList: [],
           },
         ],
-      };
-
-      return newSheet;
+      } as Sheet;
     });
 
     setSheetList(newSheetList);
