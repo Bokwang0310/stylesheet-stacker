@@ -4,8 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import DeleteButton from 'components/ItemFormContent/DeleteButton';
 
 import useStyles from 'styles';
-import { ColorItem } from 'state/sheets';
 import { useDispatchItem } from 'hooks/useDispatchItem';
+import { ColorItem } from 'state/types';
 
 type Props = {
   sectionID: string;

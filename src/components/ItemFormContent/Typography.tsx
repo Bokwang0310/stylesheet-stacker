@@ -9,8 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import DeleteButton from 'components/ItemFormContent/DeleteButton';
 
 import useStyles from 'styles';
-import { TypographyItem } from 'state/sheets';
 import { useDispatchItem } from 'hooks/useDispatchItem';
+import { TypographyItem } from 'state/types';
 
 type Props = {
   sectionID: string;

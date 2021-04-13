@@ -1,6 +1,7 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { nanoid } from 'nanoid';
 import Box from '@material-ui/core/Box';
 
 import ListIcon from '@material-ui/icons/List';
@@ -19,8 +20,8 @@ import ItemForm from 'components/ItemForm';
 
 import { itemFormState, sheetAddformState } from 'state/form';
 import { modifyModeState } from 'state/modifyMode';
-import { Sheet, sheetListState } from 'state/sheets';
-import { nanoid } from 'nanoid';
+import { sheetListState } from 'state/sheets';
+import { Sheet } from 'state/types';
 
 type Param = {
   id: string;

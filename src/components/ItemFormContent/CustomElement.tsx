@@ -4,8 +4,8 @@ import ListItem from '@material-ui/core/ListItem';
 import DeleteButton from 'components/ItemFormContent/DeleteButton';
 
 import useStyles from 'styles';
-import { CustomElementItem } from 'state/sheets';
 import { useDispatchItem } from 'hooks/useDispatchItem';
+import { CustomElementItem } from 'state/types';
 
 type Props = {
   sectionID: string;

@@ -12,15 +12,15 @@ import ModifyIcon from '@material-ui/icons/Create';
 
 import { detectMobile, cssToObj, checkValidTagName } from 'utils';
 import useStyles from 'styles';
+import { itemFormState } from 'state/form';
+import { modifyModeState, modifyTargetState } from 'state/modifyMode';
 import {
   Section,
   ColorItem,
   TypographyItem,
   ButtonItem,
   CustomElementItem,
-} from 'state/sheets';
-import { itemFormState } from 'state/form';
-import { modifyModeState, modifyTargetState } from 'state/modifyMode';
+} from 'state/types';
 
 type Props = { id: string };
 

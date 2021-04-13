@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { sheetListState } from 'state/sheets';
-import { Item, Section } from 'state/sheets';
+import { Item, Section } from 'state/types';
 
 export function useDispatchItem() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);

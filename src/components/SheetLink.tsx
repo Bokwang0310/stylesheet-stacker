@@ -12,7 +12,8 @@ import Box from '@material-ui/core/Box';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { sheetListState, Sheet } from 'state/sheets';
+import { sheetListState } from 'state/sheets';
+import { Sheet } from 'state/types';
 
 type Props = {
   sheet: Sheet;

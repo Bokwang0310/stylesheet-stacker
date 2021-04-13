@@ -14,7 +14,7 @@ import {
   TypographySection,
   ButtonSection,
   CustomElementSection,
-} from 'state/sheets';
+} from 'state/types';
 
 type Props = {
   section:
