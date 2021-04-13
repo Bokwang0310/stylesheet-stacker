@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import { useRecoilState } from 'recoil';
 import { sheetListState } from 'state/sheets';
 import {
+  Sheet,
   ColorItem,
   TypographyItem,
   ButtonItem,
@@ -13,6 +14,8 @@ import {
   ButtonSection,
   CustomElementSection,
 } from 'state/sheets';
+
+import { checkSectionType } from 'state/sheets';
 
 type Payload = ColorItem | TypographyItem | ButtonItem | CustomElementItem;
 type Section =
@@ -33,12 +36,36 @@ export function useDispatchItem() {
         sectionList: sheet.sectionList.map((section: Section) => {
           if (section.id !== sectionID) return section;
 
-          return {
-            ...section,
-            itemList: [...section.itemList, payload],
-          };
+          if (checkSectionType<ColorSection>(section, 'color')) {
+            return {
+              ...section,
+              itemList: [...section.itemList, payload as ColorItem],
+            } as ColorSection;
+          }
+          if (checkSectionType<TypographySection>(section, 'typography')) {
+            return {
+              ...section,
+              itemList: [...section.itemList, payload as TypographyItem],
+            } as TypographySection;
+          }
+          if (checkSectionType<ButtonSection>(section, 'button')) {
+            return {
+              ...section,
+              itemList: [...section.itemList, payload as ButtonItem],
+            } as ButtonSection;
+          }
+          if (
+            checkSectionType<CustomElementSection>(section, 'customElement')
+          ) {
+            return {
+              ...section,
+              itemList: [...section.itemList, payload as CustomElementItem],
+            } as CustomElementSection;
+          }
+
+          return section;
         }),
-      };
+      } as Sheet;
     });
 
     setSheetList(newSheetList);
