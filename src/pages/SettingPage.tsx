@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useRecoilState } from 'recoil';
 import { ChromePicker } from 'react-color';
 
 import Grid from '@material-ui/core/Grid';
@@ -14,20 +14,27 @@ import Switch from '@material-ui/core/Switch';
 import Box from '@material-ui/core/Box';
 
 import useStyles from 'styles';
-import { RootState } from 'store/modules';
-import {
-  changePrimaryColor,
-  changeSecondaryColor,
-  toggleNightMode,
-} from 'store/modules/setting';
+import { colorState, nightModeState } from 'state/setting';
 
 function SettingPage() {
   const [openPicker, setOpenPicker] = useState('');
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const { primaryColor, secondaryColor, nightMode } = useSelector(
-    (state: RootState) => state.setting
-  );
+
+  const [colorList, setColorList] = useRecoilState(colorState);
+  const [primaryColor, secondaryColor] = colorList;
+
+  const [nightMode, setNightMode] = useRecoilState(nightModeState);
+
+  const setPrimaryColor = (newColor: string) => {
+    setColorList([newColor, colorList[1]]);
+  };
+  const setSecondaryColor = (newColor: string) => {
+    setColorList([colorList[0], newColor]);
+  };
+
+  const toggleNightMode = () => {
+    setNightMode(!nightMode);
+  };
 
   return (
     <>
@@ -52,7 +59,7 @@ function SettingPage() {
             <Switch
               edge="end"
               onChange={() => {
-                dispatch(toggleNightMode());
+                toggleNightMode();
               }}
               checked={nightMode}
             ></Switch>
@@ -86,7 +93,7 @@ function SettingPage() {
                 disableAlpha
                 color={primaryColor}
                 onChange={color => {
-                  dispatch(changePrimaryColor(color.hex.toUpperCase()));
+                  setPrimaryColor(color.hex.toUpperCase());
                 }}
               />
             ) : openPicker === 'secondary' ? (
@@ -95,7 +102,7 @@ function SettingPage() {
                 disableAlpha
                 color={secondaryColor}
                 onChange={color => {
-                  dispatch(changeSecondaryColor(color.hex.toUpperCase()));
+                  setSecondaryColor(color.hex.toUpperCase());
                 }}
               />
             ) : null}

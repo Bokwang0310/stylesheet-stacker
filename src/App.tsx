@@ -1,5 +1,4 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useRecoilValue } from 'recoil';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -11,18 +10,17 @@ import SheetPage from './pages/SheetPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 import Header from './components/Header';
-import { RootState } from './store/modules';
+import { colorState, nightModeState } from 'state/setting';
 
 function App() {
-  const { primaryColor, secondaryColor, nightMode } = useSelector(
-    (state: RootState) => state.setting
-  );
+  const colorList = useRecoilValue(colorState);
+  const nightMode = useRecoilValue(nightModeState);
 
   const theme = createMuiTheme({
     palette: {
       type: nightMode ? 'dark' : 'light',
-      primary: { main: primaryColor },
-      secondary: { main: secondaryColor },
+      primary: { main: colorList[0] },
+      secondary: { main: colorList[1] },
     },
   });
 

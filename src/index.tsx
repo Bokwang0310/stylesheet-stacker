@@ -3,24 +3,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { store, persistor } from './store';
-import { PersistGate } from 'redux-persist/integration/react';
 import { RecoilRoot } from 'recoil';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate persistor={persistor}>
-      <RecoilRoot>
-        <BrowserRouter>
-          <CssBaseline />
-          <App />
-        </BrowserRouter>
-      </RecoilRoot>
-    </PersistGate>
-  </Provider>,
+  <RecoilRoot>
+    <BrowserRouter>
+      <CssBaseline />
+      <App />
+    </BrowserRouter>
+  </RecoilRoot>,
   document.getElementById('root')
 );
 
