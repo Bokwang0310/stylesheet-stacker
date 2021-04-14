@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -9,20 +9,12 @@ import MainFab from 'components/MainFab';
 import MainAddform from 'components/MainAddform';
 
 import { isEmptyString, formatDate } from 'utils';
-import { sheetListState } from 'state/sheets';
+import { defaultNewSection, sheetListState } from 'state/sheets';
+import { useDispatchSheet } from 'hooks/useDispatchSheet';
 
 function SheetListPage() {
-  const [sheetList, setSheetList] = useRecoilState(sheetListState);
-
-  const createSheetLink = (name: string, id: string) => {
-    if (isEmptyString(name)) return;
-
-    const newSheetList = [
-      ...sheetList,
-      { id, name, date: formatDate(new Date()), sectionList: [] },
-    ];
-    setSheetList(newSheetList);
-  };
+  const sheetList = useRecoilValue(sheetListState);
+  const { createSheet } = useDispatchSheet();
 
   return (
     <>
@@ -37,7 +29,12 @@ function SheetListPage() {
         title="Add Sheet"
         handleSubmit={(value: string) => {
           if (isEmptyString(value)) return;
-          createSheetLink(value, nanoid());
+          createSheet({
+            id: nanoid(),
+            date: formatDate(new Date()),
+            name: value,
+            sectionList: [defaultNewSection],
+          });
         }}
       >
         Plese enter the name of your style sheet.

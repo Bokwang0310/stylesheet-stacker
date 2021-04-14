@@ -18,10 +18,13 @@ type Props = {
 
 function ItemForm({ id }: Props) {
   const { getSheetByID } = useDispatchSheet();
-
-  const targetSectionID = useRecoilValue(modifyTargetState);
   const [formState, setFormState] = useRecoilState(itemFormState);
+
   const targetSheet = getSheetByID(id);
+  const targetSectionID = useRecoilValue(modifyTargetState);
+  const targetSection = targetSheet.sectionList.filter(
+    section => section.id === targetSectionID
+  )[0];
 
   return (
     <Dialog
@@ -33,14 +36,7 @@ function ItemForm({ id }: Props) {
     >
       <DialogTitle id="item-form-dialog-title">Modify</DialogTitle>
       <DialogContent>
-        <ItemFormContent
-          section={
-            targetSheet.sectionList.filter(
-              section => section.id === targetSectionID
-            )[0]
-          }
-          id={id}
-        />
+        <ItemFormContent section={targetSection} id={id} />
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setFormState(false)} color="primary">
