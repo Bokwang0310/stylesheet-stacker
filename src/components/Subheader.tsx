@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
 
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Grid from '@material-ui/core/Grid';
@@ -11,29 +10,20 @@ import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import useStyles from 'styles';
-import { sheetListState } from 'state/sheets';
 import { isEmptyString } from 'utils';
+import { useDispatchSheet } from 'hooks/useDispatchSheet';
 
-type Props = { id: string };
+type Props = {
+  id: string;
+};
 
 function Subheader({ id }: Props) {
   const classes = useStyles();
   const [modifyMode, setModifyMode] = useState(false);
+  const { getSheetByID, updateSheet } = useDispatchSheet();
 
-  const [sheetList, setSheetList] = useRecoilState(sheetListState);
-  const title = sheetList.filter(sheet => sheet.id === id)[0].name;
-
-  const [tempTitle, setTempTitle] = useState(title);
-
-  const updateSheet = (id: string, name: string) => {
-    if (isEmptyString(name)) return;
-
-    const newSheetList = sheetList.map(sheet =>
-      sheet.id !== id ? sheet : { ...sheet, name }
-    );
-
-    setSheetList(newSheetList);
-  };
+  const currentTitle = getSheetByID(id).name;
+  const [tempTitle, setTempTitle] = useState(currentTitle);
 
   return (
     <ListSubheader className={classes.subheader} component="div">
@@ -46,13 +36,16 @@ function Subheader({ id }: Props) {
               value={tempTitle}
               onChange={e => setTempTitle(e.target.value)}
               onBlur={e => {
+                const newTitle = e.target.value;
                 setModifyMode(false);
-                updateSheet(id, e.target.value);
+
+                if (isEmptyString(newTitle)) return;
+                updateSheet(id, { name: newTitle });
               }}
               margin="dense"
             />
           ) : (
-            <Typography variant="h6">{title}</Typography>
+            <Typography variant="h6">{currentTitle}</Typography>
           )}
         </Grid>
         <Grid item>

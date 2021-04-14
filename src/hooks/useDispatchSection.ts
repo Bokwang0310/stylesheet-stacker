@@ -26,7 +26,19 @@ export function useDispatchSection() {
     setSheetList(newSheetList);
   };
 
-  const deleteSection = () => {};
+  const deleteSection = (sheetID: string, sectionID: string) => {
+    const newSheetList = sheetList.map(sheet => {
+      if (sheet.id !== sheetID) return sheet;
+      return {
+        ...sheet,
+        sectionList: sheet.sectionList.filter(
+          section => section.id === sectionID
+        ),
+      };
+    });
+
+    setSheetList(newSheetList);
+  };
 
   return { createSection, deleteSection };
 }

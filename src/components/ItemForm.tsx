@@ -10,16 +10,18 @@ import ItemFormContent from 'components/ItemFormContent';
 import { itemFormState } from 'state/form';
 import { modifyTargetState } from 'state/modifyMode';
 import { sheetListState } from 'state/sheets';
+import { useDispatchSheet } from 'hooks/useDispatchSheet';
 
 type Props = {
   id: string;
 };
 
 function ItemForm({ id }: Props) {
-  const sheetList = useRecoilValue(sheetListState);
-  const targetSheet = sheetList.filter(sheet => sheet.id === id)[0];
+  const { getSheetByID } = useDispatchSheet();
+
   const targetSectionID = useRecoilValue(modifyTargetState);
   const [formState, setFormState] = useRecoilState(itemFormState);
+  const targetSheet = getSheetByID(id);
 
   return (
     <Dialog

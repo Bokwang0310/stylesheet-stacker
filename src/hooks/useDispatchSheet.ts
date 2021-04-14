@@ -2,18 +2,17 @@ import { useRecoilState } from 'recoil';
 import { sheetListState } from 'state/sheets';
 import { Sheet } from 'state/types';
 
+// Sheet 업데이트 시 변경시킬 수 있는 내용
 type Payload = {
   name?: string;
   date?: string;
 };
 
-export function useDispatchSection() {
+export function useDispatchSheet() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);
 
   const getSheetByID = (id: string) => {
-    const targetSheet = sheetList.filter(sheet => {
-      sheet.id === id;
-    })[0];
+    const targetSheet = sheetList.filter(sheet => sheet.id === id)[0];
     return targetSheet;
   };
 
