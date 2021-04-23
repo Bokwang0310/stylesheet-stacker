@@ -1,20 +1,7 @@
 import { useRecoilState } from 'recoil';
 import produce from 'immer';
 import { sheetListState } from 'state/sheets';
-import {
-  ButtonItem,
-  ColorItem,
-  CustomElementItem,
-  Item,
-  TypographyItem,
-} from 'state/types';
-import { WritableDraft } from 'immer/dist/types/types-external';
-
-type DraftItemList =
-  | WritableDraft<ColorItem>
-  | WritableDraft<TypographyItem>
-  | WritableDraft<ButtonItem>
-  | WritableDraft<CustomElementItem>;
+import { Item, DraftItemList } from 'state/types';
 
 export function useDispatchItem() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);

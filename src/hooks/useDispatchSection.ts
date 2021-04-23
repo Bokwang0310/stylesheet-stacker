@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
+import produce from 'immer';
+import { sheetListState, defaultNewItem } from 'state/sheets';
 import { nanoid } from 'nanoid';
-import { sheetListState } from 'state/sheets';
-import { defaultNewItem } from 'state/sheets';
 
 const {
   colorItem,
@@ -79,14 +79,15 @@ export function useDispatchSection() {
   };
 
   const deleteSection = (sheetID: string, sectionID: string) => {
-    const newSheetList = sheetList.map(sheet => {
-      if (sheet.id !== sheetID) return sheet;
-      return {
-        ...sheet,
-        sectionList: sheet.sectionList.filter(
-          section => section.id === sectionID
-        ),
-      };
+    const newSheetList = produce(sheetList, draft => {
+      const targetSectionList = draft.find(sheet => sheet.id === sheetID)
+        ?.sectionList;
+
+      const index = targetSectionList?.findIndex(
+        section => section.id === sectionID
+      );
+
+      targetSectionList?.splice(index as number, 1);
     });
 
     setSheetList(newSheetList);

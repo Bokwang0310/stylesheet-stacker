@@ -1,3 +1,7 @@
+import { WritableDraft } from 'immer/dist/types/types-external';
+
+export type SectionType = 'color' | 'typography' | 'button' | 'customElement';
+
 export type ColorItem = {
   id: string;
   color: string;
@@ -54,3 +58,16 @@ export type Sheet = {
   date: string;
   sectionList: Section[];
 };
+
+// immer를 사용시 itemList의 타입이 깨질 때 단언하기 위함
+export type DraftItemList =
+  | WritableDraft<ColorItem>
+  | WritableDraft<TypographyItem>
+  | WritableDraft<ButtonItem>
+  | WritableDraft<CustomElementItem>;
+
+export type DraftSectionList =
+  | WritableDraft<ColorSection>
+  | WritableDraft<TypographySection>
+  | WritableDraft<ButtonSection>
+  | WritableDraft<CustomElementSection>;

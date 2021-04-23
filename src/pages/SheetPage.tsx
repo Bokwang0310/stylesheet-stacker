@@ -1,7 +1,6 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { nanoid } from 'nanoid';
 import Box from '@material-ui/core/Box';
 
 import ListIcon from '@material-ui/icons/List';
@@ -21,7 +20,7 @@ import ItemForm from 'components/ItemForm';
 import { itemFormState, sheetAddformState } from 'state/form';
 import { modifyModeState } from 'state/modifyMode';
 import { sheetListState } from 'state/sheets';
-import { Sheet } from 'state/types';
+import { useDispatchSection } from 'hooks/useDispatchSection';
 
 type Param = {
   id: string;
@@ -29,11 +28,12 @@ type Param = {
 
 function SheetPage() {
   const history = useHistory();
+  const { createSection } = useDispatchSection();
 
   const itemFormOpen = useRecoilValue(itemFormState);
   const setAddformState = useSetRecoilState(sheetAddformState);
   const [mode, setMode] = useRecoilState(modifyModeState);
-  const [sheetList, setSheetList] = useRecoilState(sheetListState);
+  const [sheetList] = useRecoilState(sheetListState);
 
   const { id } = useParams<Param>();
   const idList = sheetList.map(sheet => sheet.id);
@@ -41,26 +41,6 @@ function SheetPage() {
   if (!idList.includes(id)) {
     return <NotFoundPage />;
   }
-
-  const createSection = (sheetID: string, sectionType: string) => {
-    const newSheetList = sheetList.map(sheet => {
-      if (sheet.id !== sheetID) return sheet;
-
-      return {
-        ...sheet,
-        sectionList: [
-          ...sheet.sectionList,
-          {
-            type: sectionType,
-            id: nanoid(),
-            itemList: [],
-          },
-        ],
-      } as Sheet;
-    });
-
-    setSheetList(newSheetList);
-  };
 
   return (
     <>
@@ -81,7 +61,7 @@ function SheetPage() {
       <SheetAddform
         title="Add Section"
         handleSubmit={(sectionType: string) => {
-          createSection(id, sectionType);
+          return createSection(id, sectionType);
         }}
       >
         Enter the name of your section.
