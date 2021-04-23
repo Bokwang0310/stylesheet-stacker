@@ -2,7 +2,6 @@ import { useRecoilState } from 'recoil';
 import { nanoid } from 'nanoid';
 import { sheetListState } from 'state/sheets';
 import { defaultNewItem } from 'state/sheets';
-import { Sheet } from 'state/types';
 
 const {
   colorItem,
@@ -10,8 +9,6 @@ const {
   buttonItem,
   customElementItem,
 } = defaultNewItem;
-
-// const
 
 export function useDispatchSection() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);
@@ -22,33 +19,60 @@ export function useDispatchSection() {
 
       switch (sectionType) {
         case 'color':
-          break;
+          return {
+            ...sheet,
+            sectionList: [
+              ...sheet.sectionList,
+              {
+                type: sectionType,
+                id: nanoid(),
+                itemList: [colorItem],
+              },
+            ],
+          };
 
         case 'typography':
-          break;
+          return {
+            ...sheet,
+            sectionList: [
+              ...sheet.sectionList,
+              {
+                type: sectionType,
+                id: nanoid(),
+                itemList: [typographyItem],
+              },
+            ],
+          };
 
         case 'button':
-          break;
+          return {
+            ...sheet,
+            sectionList: [
+              ...sheet.sectionList,
+              {
+                type: sectionType,
+                id: nanoid(),
+                itemList: [buttonItem],
+              },
+            ],
+          };
 
         case 'customElement':
-          break;
+          return {
+            ...sheet,
+            sectionList: [
+              ...sheet.sectionList,
+              {
+                type: sectionType,
+                id: nanoid(),
+                itemList: [customElementItem],
+              },
+            ],
+          };
 
         default:
           throw new Error();
       }
-      // const defaultItem =
-
-      return {
-        ...sheet,
-        sectionList: [
-          ...sheet.sectionList,
-          {
-            type: sectionType,
-            id: nanoid(),
-            itemList: [],
-          },
-        ],
-      } as Sheet;
     });
 
     setSheetList(newSheetList);

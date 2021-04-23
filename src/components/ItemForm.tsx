@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 import ItemFormContent from 'components/ItemFormContent';
 import { itemFormState } from 'state/form';
 import { modifyTargetState } from 'state/modifyMode';
-import { sheetListState } from 'state/sheets';
 import { useDispatchSheet } from 'hooks/useDispatchSheet';
 
 type Props = {
