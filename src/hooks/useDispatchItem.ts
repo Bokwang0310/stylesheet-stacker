@@ -6,7 +6,6 @@ import {
   ColorItem,
   CustomElementItem,
   Item,
-  Section,
   TypographyItem,
 } from 'state/types';
 import { WritableDraft } from 'immer/dist/types/types-external';
@@ -55,22 +54,14 @@ export function useDispatchItem() {
   };
 
   const deleteItem = (sheetID: string, sectionID: string, itemID: string) => {
-    const newSheetList = sheetList.map(sheet => {
-      if (sheet.id !== sheetID) return sheet;
+    const newSheetList = produce(sheetList, draft => {
+      const targetItemList = draft
+        .find(sheet => sheet.id === sheetID)
+        ?.sectionList.find(section => section.id === sectionID)
+        ?.itemList as DraftItemList[];
 
-      return {
-        ...sheet,
-        sectionList: sheet.sectionList.map(section => {
-          if (section.id !== sectionID) return section;
-
-          return {
-            ...section,
-            itemList: (section.itemList as Item[]).filter(
-              item => item.id === itemID
-            ),
-          } as Section;
-        }),
-      };
+      const index = targetItemList.findIndex(item => item.id === itemID);
+      targetItemList.splice(index, 1);
     });
 
     setSheetList(newSheetList);
