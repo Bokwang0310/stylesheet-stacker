@@ -1,5 +1,5 @@
-import { nanoid } from 'nanoid';
 import { useRecoilValue } from 'recoil';
+import { nanoid } from 'nanoid';
 
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -27,12 +27,12 @@ function SheetListPage() {
       </Grid>
       <MainAddform
         title="Add Sheet"
-        handleSubmit={(value: string) => {
-          if (isEmptyString(value)) return;
+        handleSubmit={(sheetName: string) => {
+          if (isEmptyString(sheetName)) return;
           createSheet({
             id: nanoid(),
             date: formatDate(new Date()),
-            name: value,
+            name: sheetName,
             sectionList: [defaultNewSection],
           });
         }}

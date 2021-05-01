@@ -1,4 +1,3 @@
-import { useRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 
 import ListItem from '@material-ui/core/ListItem';
@@ -12,20 +11,15 @@ import Box from '@material-ui/core/Box';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { sheetListState } from 'state/sheets';
 import { Sheet } from 'state/types';
+import { useDispatchSheet } from 'hooks/useDispatchSheet';
 
 type Props = {
   sheet: Sheet;
 };
 
 function SheetLink({ sheet }: Props) {
-  const [sheetList, setSheetList] = useRecoilState(sheetListState);
-
-  const removeSheet = (id: string) => {
-    const newSheetLinkList = sheetList.filter(sheetLink => sheetLink.id !== id);
-    setSheetList(newSheetLinkList);
-  };
+  const { deleteSheet } = useDispatchSheet();
 
   return (
     <ListItem button component={Link} to={`/sheet/${sheet.id}`}>
@@ -39,7 +33,7 @@ function SheetLink({ sheet }: Props) {
       </ListItemText>
       <ListItemSecondaryAction>
         <IconButton
-          onClick={() => removeSheet(sheet.id)}
+          onClick={() => deleteSheet(sheet.id)}
           edge="end"
           aria-label="delete"
         >

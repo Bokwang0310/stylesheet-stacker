@@ -22,6 +22,7 @@ import { modifyModeState } from 'state/modifyMode';
 import { sheetListState } from 'state/sheets';
 import { useDispatchSection } from 'hooks/useDispatchSection';
 
+// URL 파라미터를 받아오는 리액트 라우터 훅에 쓰임
 type Param = {
   id: string;
 };
@@ -35,9 +36,8 @@ function SheetPage() {
   const [mode, setMode] = useRecoilState(modifyModeState);
   const [sheetList] = useRecoilState(sheetListState);
 
-  const { id } = useParams<Param>();
   const idList = sheetList.map(sheet => sheet.id);
-
+  const { id } = useParams<Param>();
   if (!idList.includes(id)) {
     return <NotFoundPage />;
   }
@@ -60,13 +60,11 @@ function SheetPage() {
       </OptionalFab>
       <SheetAddform
         title="Add Section"
-        handleSubmit={(sectionType: string) => {
-          return createSection(id, sectionType);
-        }}
+        handleSubmit={(sectionType: string) => createSection(id, sectionType)}
       >
         Enter the name of your section.
       </SheetAddform>
-      {itemFormOpen ? <ItemForm id={id} /> : null}
+      {itemFormOpen && <ItemForm id={id} />}
     </>
   );
 }

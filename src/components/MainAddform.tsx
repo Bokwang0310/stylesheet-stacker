@@ -12,22 +12,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { mainAddformState } from 'state/form';
 
 type Props = {
-  handleSubmit: (value: string) => void;
+  handleSubmit: (sheetName: string) => void;
   title: string;
   children: string;
 };
 
 function MainAddform({ handleSubmit, title, children }: Props) {
-  const [value, setValue] = useState('');
+  const [sheetName, setSheetName] = useState('');
   const [addformState, setAddformState] = useRecoilState(mainAddformState);
+
+  const closeAddform = () => {
+    setAddformState(false);
+    setSheetName('');
+  };
 
   return (
     <Dialog
       open={addformState}
-      onClose={() => {
-        setAddformState(false);
-        setValue('');
-      }}
+      onClose={closeAddform}
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
@@ -40,25 +42,18 @@ function MainAddform({ handleSubmit, title, children }: Props) {
           label="Name"
           type="text"
           fullWidth
-          value={value}
-          onChange={e => setValue(e.target.value)}
+          value={sheetName}
+          onChange={e => setSheetName(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={() => {
-            setAddformState(false);
-            setValue('');
-          }}
-          color="primary"
-        >
+        <Button onClick={closeAddform} color="primary">
           Cancel
         </Button>
         <Button
           onClick={() => {
-            setAddformState(false);
-            handleSubmit(value);
-            setValue('');
+            closeAddform();
+            handleSubmit(sheetName);
           }}
           color="primary"
         >

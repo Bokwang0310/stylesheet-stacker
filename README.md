@@ -1,5 +1,6 @@
 # TODO
 
+- url 그냥 `/sheets` 말고 `/`로
 - create deleting section
 - initialize state of sheet fab when came out of `/sheet`
 - make it go to the sheet page after adding the sheet
@@ -8,8 +9,8 @@
 > Low priority
 
 - set favicon
-- test PWA and optimize
 - prettier 404 page
+- test PWA and optimize
 
 # Memo
 
@@ -17,9 +18,9 @@
 
 # Sheet Structure
 
-- Sheet (SectionList)
+- Sheet (has SectionList)
 - Sheet
-  - Section (ItemList)
+  - Section (has ItemList)
   - Section
     - Item
     - Item
