@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -31,25 +31,23 @@ function App() {
       {/* 다크테마가 앱 전체에 안먹혀서 임시 방편으로 박스를 두 개 겹쳐 놓음 */}
       <Box height="100vh" bgcolor="background.default">
         <Box bgcolor="background.default">
-          <Route path="/" exact>
-            <Redirect to="/sheets" />
-          </Route>
-
-          <Route path={['/sheets', '/setting']} exact>
+          {/* Header 컴포넌트를 나누면 상태도 나눠져서 탭 이동할 때 애니메이션이 일어나지 않음 */}
+          {/* 탭 상태를 전역으로 관리하면 되지 않을까.. */}
+          <Route path={['/', '/setting']} exact>
             <Header />
           </Route>
 
           <Switch>
-            <Route path="/sheets" exact>
-              <SheetListPage />
-            </Route>
-
-            <Route path="/setting" exact>
+            <Route path="/setting">
               <SettingPage />
             </Route>
 
             <Route path="/sheet/:id">
               <SheetPage />
+            </Route>
+
+            <Route path="/" exact>
+              <SheetListPage />
             </Route>
 
             <Route path="*">

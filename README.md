@@ -1,6 +1,6 @@
 # TODO
 
-- url 그냥 `/sheets` 말고 `/`로
+- `Nav` 컴포넌트 최적화
 - create deleting section
 - initialize state of sheet fab when came out of `/sheet`
 - make it go to the sheet page after adding the sheet

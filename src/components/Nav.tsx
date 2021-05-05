@@ -6,9 +6,12 @@ import Tab from '@material-ui/core/Tab';
 
 function Nav() {
   const history = useHistory();
-  const tabs = ['/sheets', '/setting', '/sheets/', '/setting/'];
+  const tabs = ['/', '/setting'];
 
   const [pathName, setPath] = useState(history.location.pathname);
+
+  // 탭 상태를 전역으로 관리하기 전 임시방편
+  if (pathName === '/setting/') setPath('/setting');
 
   useEffect(() => {
     const unlisten = history.listen((location, _) => {
@@ -24,7 +27,7 @@ function Nav() {
 
   return (
     <Tabs
-      value={currentPathIndex === 0 || currentPathIndex === 2 ? 0 : 1}
+      value={currentPathIndex}
       onChange={(_, newValue) => {
         history.push(newValue);
       }}
