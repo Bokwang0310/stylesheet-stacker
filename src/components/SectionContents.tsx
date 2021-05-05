@@ -5,7 +5,6 @@ import { nanoid } from 'nanoid';
 
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
 import ModifyIcon from '@material-ui/icons/Create';
@@ -22,7 +21,9 @@ import {
   CustomElementItem,
 } from 'state/types';
 
-type Props = { id: string };
+type Props = {
+  id: string;
+};
 
 const ModifyButton = ({ id }: Props) => {
   const classes = useStyles();
@@ -119,25 +120,13 @@ const generateColorScheme = (colorList: ColorItem[]) =>
   });
 
 const generateTypography = (typographyList: TypographyItem[]) =>
-  typographyList.map(typography => {
-    if (
-      typeof typography.variant === 'undefined' &&
-      typography.variant !== 'h1' &&
-      typography.variant !== 'h2' &&
-      typography.variant !== 'h3' &&
-      typography.variant !== 'h4' &&
-      typography.variant !== 'h5' &&
-      typography.variant !== 'h6'
-    ) {
-      return (
-        <Typography key={typography.id} variant={typography.variant}>
-          {typography.text}
-        </Typography>
-      );
-    }
-
-    return <Typography key={typography.id}>{typography.text}</Typography>;
-  });
+  typographyList.map(typography =>
+    createElement(typography.variant, {
+      style: cssToObj(typography.css),
+      key: typography.id,
+      children: typography.text,
+    })
+  );
 
 const generateButton = (buttonList: ButtonItem[]) =>
   buttonList.map(button => (

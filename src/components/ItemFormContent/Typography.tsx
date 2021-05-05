@@ -31,7 +31,7 @@ function Typography({ sectionID, item, sheetID }: Props) {
           <Select
             value={item.variant}
             onChange={e => {
-              if (e.target.value !== 'string') return;
+              if (typeof e.target.value !== 'string') return;
               updateItem(sheetID, sectionID, item.id, {
                 ...item,
                 variant: e.target.value,

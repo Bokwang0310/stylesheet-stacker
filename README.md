@@ -1,6 +1,5 @@
 # TODO
 
-- 타이포그래피 설정 안되는 문제
 - url 그냥 `/sheets` 말고 `/`로
 - create deleting section
 - initialize state of sheet fab when came out of `/sheet`
