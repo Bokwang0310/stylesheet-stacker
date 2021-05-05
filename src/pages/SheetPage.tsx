@@ -58,7 +58,7 @@ function SheetPage() {
         <Section id={id} />
       </Box>
       <SheetFab iconA={<ListIcon />} iconB={<CloseIcon />} />
-      <OptionalFab bottom={29} onClick={() => history.push('/sheets')}>
+      <OptionalFab bottom={29} onClick={() => history.push('/')}>
         <HomeIcon />
       </OptionalFab>
       <OptionalFab bottom={20} onClick={() => setMode(!mode)}>

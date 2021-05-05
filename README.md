@@ -1,5 +1,6 @@
 # TODO
 
+- 헤딩레벨 Variants 타입으로 만들어서 쓰기
 - `Nav` 컴포넌트 최적화
 - create deleting section
 - make it go to the sheet page after adding the sheet
