@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -17,6 +18,7 @@ import SheetAddform from 'components/SheetAddform';
 import Subheader from 'components/Subheader';
 import ItemForm from 'components/ItemForm';
 
+import { sheetFabState } from 'state/sheetFab';
 import { itemFormState, sheetAddformState } from 'state/form';
 import { modifyModeState } from 'state/modifyMode';
 import { sheetListState } from 'state/sheets';
@@ -35,6 +37,13 @@ function SheetPage() {
   const setAddformState = useSetRecoilState(sheetAddformState);
   const [mode, setMode] = useRecoilState(modifyModeState);
   const [sheetList] = useRecoilState(sheetListState);
+
+  const setFabState = useSetRecoilState(sheetFabState);
+  useEffect(() => {
+    return () => {
+      setFabState(false);
+    };
+  });
 
   const idList = sheetList.map(sheet => sheet.id);
   const { id } = useParams<Param>();

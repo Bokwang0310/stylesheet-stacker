@@ -16,7 +16,7 @@ const { persistAtom } = recoilPersist({
 });
 
 export const sheetListState = atom<Sheet[]>({
-  key: 'sheetState',
+  key: 'sheetListState',
   default: [
     {
       id: '1',

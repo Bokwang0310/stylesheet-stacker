@@ -10,7 +10,7 @@ const { persistAtom: persistNightMode } = recoilPersist({
 });
 
 export const colorState = atom<[string, string]>({
-  key: 'primaryColorState',
+  key: 'colorState',
   default: ['#7E57C2', '#7986CB'],
   effects_UNSTABLE: [persistColors],
 });
