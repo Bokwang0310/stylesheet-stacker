@@ -1,15 +1,16 @@
 # TODO
 
-- 헤딩레벨 Variants 타입으로 만들어서 쓰기
-- `Nav` 컴포넌트 최적화
-- create deleting section
-- create deleting alert dialog
+- 헤딩레벨 타입으로 만들어서 쓰기
+- section을 지우는 기능 추가
+- 뭔가 삭제 시 뜨는 경고창 추가
+- 404 페이지에 홈으로 돌아가는 버튼 추가
 
 > Low priority
 
-- set favicon
-- prettier 404 page
-- test PWA and optimize
+- 404 페이지 꾸미기
+- PWA 테스트하고 최적화
+- `Nav` 컴포넌트 최적화
+- favicon 설정
 
 # Memo
 
