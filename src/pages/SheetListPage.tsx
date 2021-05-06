@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { nanoid } from 'nanoid';
 
@@ -15,6 +16,7 @@ import { useDispatchSheet } from 'hooks/useDispatchSheet';
 function SheetListPage() {
   const sheetList = useRecoilValue(sheetListState);
   const { createSheet } = useDispatchSheet();
+  const history = useHistory();
 
   return (
     <>
@@ -29,12 +31,14 @@ function SheetListPage() {
         title="Add Sheet"
         handleSubmit={(sheetName: string) => {
           if (isEmptyString(sheetName)) return;
+          const id = nanoid();
           createSheet({
-            id: nanoid(),
+            id,
             date: formatDate(new Date()),
             name: sheetName,
             sectionList: [defaultNewSection],
           });
+          history.push(`/sheet/${id}`);
         }}
       >
         Plese enter the name of your style sheet.

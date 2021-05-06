@@ -39,8 +39,9 @@ function Subheader({ id }: Props) {
                 const newTitle = e.target.value;
                 setModifyMode(false);
 
-                if (isEmptyString(newTitle)) return;
-                updateSheet(id, { name: newTitle });
+                if (!isEmptyString(newTitle)) {
+                  updateSheet(id, { name: newTitle });
+                }
               }}
               margin="dense"
             />
@@ -53,7 +54,12 @@ function Subheader({ id }: Props) {
             aria-label="modify"
             color="default"
             className={classes.modifyIcon}
-            onClick={() => setModifyMode(true)}
+            onClick={() => {
+              // Sheet의 이름을 다 지워버렸을 경우 (공백만 입력했을 경우)
+              // 텍스트필드 상태를 빈문자열로 두는 게 아닌 현재 Sheet의 이름으로 초기화
+              if (isEmptyString(tempTitle)) setTempTitle(currentTitle);
+              setModifyMode(true);
+            }}
           >
             <CreateIcon fontSize="small" />
           </IconButton>
