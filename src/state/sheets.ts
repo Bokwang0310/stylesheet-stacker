@@ -56,7 +56,7 @@ export const defaultNewItem: DefaultNewItem = {
 
   typographyItem: {
     id: nanoid(),
-    variant: 'h6',
+    variant: 'h2',
     text: 'Someday',
     css: '',
   },
