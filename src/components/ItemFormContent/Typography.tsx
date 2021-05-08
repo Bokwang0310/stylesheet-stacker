@@ -10,7 +10,7 @@ import DeleteButton from 'components/ItemFormContent/DeleteButton';
 
 import useStyles from 'styles';
 import { useDispatchItem } from 'hooks/useDispatchItem';
-import { TypographyItem } from 'state/types';
+import { TypographyItem, isVariant } from 'state/types';
 
 type Props = {
   sectionID: string;
@@ -31,10 +31,12 @@ function Typography({ sectionID, item, sheetID }: Props) {
           <Select
             value={item.variant}
             onChange={e => {
-              if (typeof e.target.value !== 'string') return;
+              const { value: input } = e.target;
+              if (typeof input !== 'string') return;
+              if (!isVariant(input)) return;
               updateItem(sheetID, sectionID, item.id, {
                 ...item,
-                variant: e.target.value,
+                variant: input,
               });
             }}
           >

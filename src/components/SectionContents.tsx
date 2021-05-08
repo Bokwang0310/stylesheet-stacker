@@ -1,18 +1,13 @@
 import React from 'react';
 import { createElement } from 'react';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { nanoid } from 'nanoid';
 
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
 
-import ModifyIcon from '@material-ui/icons/Create';
-
+import ModifyButton from 'components/ModifyButton';
 import { detectMobile, cssToObj, checkValidTagName } from 'utils';
 import useStyles from 'styles';
-import { itemFormState } from 'state/form';
-import { modifyModeState, modifyTargetState } from 'state/modifyMode';
 import {
   Section,
   ColorItem,
@@ -22,32 +17,10 @@ import {
 } from 'state/types';
 
 type Props = {
-  id: string;
+  section: Section;
 };
 
-const ModifyButton = ({ id }: Props) => {
-  const classes = useStyles();
-
-  const modifyMode = useRecoilValue(modifyModeState);
-  const setModifyTarget = useSetRecoilState(modifyTargetState);
-
-  const setFormState = useSetRecoilState(itemFormState);
-
-  return modifyMode ? (
-    <IconButton
-      onClick={() => {
-        setModifyTarget(id);
-        setFormState(true);
-      }}
-      size="small"
-      className={classes.modifySectionButton}
-    >
-      <ModifyIcon fontSize="small" />
-    </IconButton>
-  ) : null;
-};
-
-function SectionContents({ section }: { section: Section }) {
+function SectionContents({ section }: Props) {
   const classes = useStyles();
 
   switch (section.type) {
