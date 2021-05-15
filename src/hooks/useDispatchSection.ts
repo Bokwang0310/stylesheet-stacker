@@ -3,12 +3,8 @@ import produce from 'immer';
 import { sheetListState, defaultNewItem } from 'state/sheets';
 import { nanoid } from 'nanoid';
 
-const {
-  colorItem,
-  typographyItem,
-  buttonItem,
-  customElementItem,
-} = defaultNewItem;
+const { colorItem, typographyItem, buttonItem, customElementItem } =
+  defaultNewItem;
 
 export function useDispatchSection() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);
@@ -80,14 +76,18 @@ export function useDispatchSection() {
 
   const deleteSection = (sheetID: string, sectionID: string) => {
     const newSheetList = produce(sheetList, draft => {
-      const targetSectionList = draft.find(sheet => sheet.id === sheetID)
-        ?.sectionList;
+      const targetSectionList = draft.find(
+        sheet => sheet.id === sheetID
+      )?.sectionList;
 
       const index = targetSectionList?.findIndex(
         section => section.id === sectionID
       );
 
-      targetSectionList?.splice(index as number, 1);
+      // Handle
+      if (typeof index !== 'number') return;
+
+      targetSectionList?.splice(index, 1);
     });
 
     setSheetList(newSheetList);

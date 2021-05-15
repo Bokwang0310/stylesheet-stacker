@@ -2,10 +2,13 @@ import React from 'react';
 import { createElement } from 'react';
 import { nanoid } from 'nanoid';
 
+import GridList from '@material-ui/core/GridList';
+import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 
 import ModifyButton from 'components/ModifyButton';
+import DeleteButton from 'components/DeleteButton';
 import { detectMobile, cssToObj, checkValidTagName } from 'utils';
 import useStyles from 'styles';
 import {
@@ -27,37 +30,41 @@ function SectionContents({ section }: Props) {
     case 'color':
       return (
         <ListItem className={classes.colorPaperRoot}>
-          {[
-            <ModifyButton id={section.id} key={nanoid()} />,
-            ...generateColorScheme(section.itemList),
-          ]}
+          {/* <Grid container direction="column" style={{ width: 40 }}> */}
+          <ModifyButton id={section.id} key={nanoid()} />
+          <DeleteButton id={section.id} />
+          {/* </Grid> */}
+          {[...generateColorScheme(section.itemList)]}
         </ListItem>
       );
     case 'typography':
       return (
         <ListItem className={classes.typographyRoot}>
-          {[
-            <ModifyButton id={section.id} key={nanoid()} />,
-            ...generateTypography(section.itemList),
-          ]}
+          <Grid container direction="column" style={{ width: 40 }}>
+            <ModifyButton id={section.id} key={nanoid()} />
+            <DeleteButton id={section.id} />
+          </Grid>
+          {[...generateTypography(section.itemList)]}
         </ListItem>
       );
     case 'button':
       return (
         <ListItem className={classes.buttonRoot}>
-          {[
-            <ModifyButton id={section.id} key={nanoid()} />,
-            ...generateButton(section.itemList),
-          ]}
+          <Grid container direction="column" style={{ width: 40 }}>
+            <ModifyButton id={section.id} key={nanoid()} />
+            <DeleteButton id={section.id} />
+          </Grid>
+          {[...generateButton(section.itemList)]}
         </ListItem>
       );
     case 'customElement':
       return (
         <ListItem className={classes.sectionContentRoot}>
-          {[
-            <ModifyButton id={section.id} key={nanoid()} />,
-            ...generateCustomElement(section.itemList),
-          ]}
+          <Grid container direction="column" style={{ width: 40 }}>
+            <ModifyButton id={section.id} key={nanoid()} />
+            <DeleteButton id={section.id} />
+          </Grid>
+          {[...generateCustomElement(section.itemList)]}
         </ListItem>
       );
 
