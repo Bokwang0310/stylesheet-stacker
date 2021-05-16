@@ -1,7 +1,6 @@
 # TODO
 
-- section/sheet 삭제 기능 추가
-- 뭔가 삭제 시 뜨는 경고창 추가
+- 삭제 시 뜨는 경고창 추가
 - `useDispatchSection.ts`에서 immer 사용하기 위해 타입 제대로 하기
 
 > Low priority

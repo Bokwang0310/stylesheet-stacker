@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Grid from '@material-ui/core/Grid';
@@ -20,10 +21,12 @@ type Props = {
 function Subheader({ id }: Props) {
   const classes = useStyles();
   const [modifyMode, setModifyMode] = useState(false);
-  const { getSheetByID, updateSheet } = useDispatchSheet();
+  const { getSheetByID, updateSheet, deleteSheet } = useDispatchSheet();
 
   const currentTitle = getSheetByID(id).name;
   const [tempTitle, setTempTitle] = useState(currentTitle);
+
+  const history = useHistory();
 
   return (
     <ListSubheader className={classes.subheader} component="div">
@@ -67,7 +70,11 @@ function Subheader({ id }: Props) {
             aria-label="modify"
             color="default"
             className={classes.deleteIcon}
-            onClick={() => console.log(`Delete this sheet!`)}
+            onClick={() => {
+              deleteSheet(id);
+              // Sheet를 삭제한 뒤 메인 페이지로 이동
+              history.push('/');
+            }}
           >
             <DeleteIcon fontSize="small" />
           </IconButton>
