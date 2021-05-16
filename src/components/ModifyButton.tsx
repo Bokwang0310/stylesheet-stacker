@@ -5,15 +5,12 @@ import ModifyIcon from '@material-ui/icons/Create';
 
 import { itemFormState } from 'state/form';
 import { modifyModeState, modifyTargetState } from 'state/modifyMode';
-import useStyles from 'styles';
 
 type Props = {
   id: string;
 };
 
 function ModifyButton({ id }: Props) {
-  const classes = useStyles();
-
   const modifyMode = useRecoilValue(modifyModeState);
   const setModifyTarget = useSetRecoilState(modifyTargetState);
 
@@ -26,7 +23,6 @@ function ModifyButton({ id }: Props) {
         setFormState(true);
       }}
       size="small"
-      className={classes.modifySectionButton}
     >
       <ModifyIcon fontSize="small" />
     </IconButton>

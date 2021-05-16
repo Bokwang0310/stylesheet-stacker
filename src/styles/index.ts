@@ -107,6 +107,12 @@ const useStyles = makeStyles(theme => ({
     width: '100vw',
     height: '100vh',
   },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginLeft: 15,
+  },
 }));
 
 export default useStyles;
