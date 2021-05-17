@@ -1,8 +1,8 @@
 # TODO
 
-- Section이 하나도 없을 때 수정 모드 비활성화
+- Section이 없을 때 수정 모드 버튼 비활성화
+- 홈 화면에 놀고 있는 리스트 버튼에 기능 추가하기
 - `useDispatchSection.ts`에서 immer 사용하기 위해 타입 제대로 하기
-- 홈 화면에 놀고 있는 리스트 버튼 기능 추가하기
 
 > Low priority
 
@@ -10,10 +10,7 @@
 - PWA 테스트하고 최적화
 - `Nav` 컴포넌트 최적화
 - favicon 설정
-
-# Memo
-
-- radial menu list: [create section, toggle modify mode, home]
+- `Dialog` 컴포넌트에 설명 속성 추가
 
 # Sheet Structure
 
