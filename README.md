@@ -2,7 +2,7 @@
 
 - Section이 하나도 없을 때 수정 모드 비활성화
 - `useDispatchSection.ts`에서 immer 사용하기 위해 타입 제대로 하기
-- 홈 화면에 놀고 있는 두 버튼 기능 추가하기
+- 홈 화면에 놀고 있는 리스트 버튼 기능 추가하기
 
 > Low priority
 

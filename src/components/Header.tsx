@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import InfoIcon from '@material-ui/icons/Info';
 
 import Nav from 'components/Nav';
 import useStyles from 'styles';
@@ -28,11 +28,12 @@ function Header() {
         </Typography>
         <IconButton
           edge="end"
-          className={classes.moreButton}
+          className={classes.infoButton}
           aria-label="more"
           color="default"
+          href="https://github.com/Bokwang0310/stylesheet-stacker"
         >
-          <MoreIcon />
+          <InfoIcon />
         </IconButton>
       </Toolbar>
       {/* Navigation */}

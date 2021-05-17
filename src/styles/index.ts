@@ -4,7 +4,7 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  moreButton: {
+  infoButton: {
     marginLeft: theme.spacing(2),
   },
   header: {
