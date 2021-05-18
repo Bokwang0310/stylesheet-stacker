@@ -1,13 +1,18 @@
 import { useRecoilState } from 'recoil';
 import produce from 'immer';
-import { sheetListState, defaultNewItem } from 'state/sheets';
 import { nanoid } from 'nanoid';
+import { sheetListState, defaultNewItem } from 'state/sheets';
 
 const { colorItem, typographyItem, buttonItem, customElementItem } =
   defaultNewItem;
 
 export function useDispatchSection() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);
+
+  const isEmptySection = (sheetID: string) => {
+    const targetSheet = sheetList.find(sheet => sheet.id === sheetID);
+    return !targetSheet?.sectionList.length;
+  };
 
   const createSection = (sheetID: string, sectionType: string) => {
     const newSheetList = sheetList.map(sheet => {
@@ -93,5 +98,5 @@ export function useDispatchSection() {
     setSheetList(newSheetList);
   };
 
-  return { createSection, deleteSection };
+  return { isEmptySection, createSection, deleteSection };
 }

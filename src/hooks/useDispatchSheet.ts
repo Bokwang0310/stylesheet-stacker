@@ -11,10 +11,8 @@ type Payload = {
 export function useDispatchSheet() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);
 
-  const getSheetByID = (id: string) => {
-    const targetSheet = sheetList.filter(sheet => sheet.id === id)[0];
-    return targetSheet;
-  };
+  const getSheetByID = (id: string) =>
+    sheetList.filter(sheet => sheet.id === id)[0];
 
   const createSheet = (newSheet: Sheet) => {
     const newSheetList = [...sheetList, newSheet];

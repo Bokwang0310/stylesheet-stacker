@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 import ListIcon from '@material-ui/icons/List';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
-import CreateIcon from '@material-ui/icons/Create';
+import ModifyIcon from '@material-ui/icons/Create';
 import HomeIcon from '@material-ui/icons/Home';
 
 import NotFoundPage from 'pages/NotFoundPage';
@@ -31,7 +31,7 @@ type Param = {
 
 function SheetPage() {
   const history = useHistory();
-  const { createSection } = useDispatchSection();
+  const { isEmptySection, createSection } = useDispatchSection();
 
   const itemFormOpen = useRecoilValue(itemFormState);
   const setAddformState = useSetRecoilState(sheetAddformState);
@@ -58,11 +58,16 @@ function SheetPage() {
         <Section id={id} />
       </Box>
       <SheetFab iconA={<ListIcon />} iconB={<CloseIcon />} />
+      {/* Home Modify Add */}
       <OptionalFab bottom={29} onClick={() => history.push('/')}>
         <HomeIcon />
       </OptionalFab>
-      <OptionalFab bottom={20} onClick={() => setMode(!mode)}>
-        <CreateIcon />
+      <OptionalFab
+        bottom={20}
+        onClick={() => setMode(!mode)}
+        disabled={isEmptySection(id)}
+      >
+        <ModifyIcon />
       </OptionalFab>
       <OptionalFab bottom={11} onClick={() => setAddformState(true)}>
         <AddIcon />

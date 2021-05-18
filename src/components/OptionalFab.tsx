@@ -1,8 +1,8 @@
 import { useRecoilState } from 'recoil';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
 import Slide from '@material-ui/core/Slide';
+import Fab from '@material-ui/core/Fab';
 
 import { sheetFabState } from 'state/sheetFab';
 
@@ -10,15 +10,17 @@ type Props = {
   bottom: number;
   children: JSX.Element;
   onClick: () => void;
+  disabled: boolean;
 };
 
-function OptionalFab({ bottom, children, onClick }: Props) {
+function OptionalFab({ bottom, children, onClick, disabled }: Props) {
   const [fabState, setFabState] = useRecoilState(sheetFabState);
   const classes = useStyles(bottom)();
 
   return (
     <Slide in={fabState} direction="up" mountOnEnter unmountOnExit>
       <Fab
+        disabled={disabled}
         className={classes.option}
         onClick={() => {
           setFabState(false);
@@ -30,6 +32,10 @@ function OptionalFab({ bottom, children, onClick }: Props) {
     </Slide>
   );
 }
+
+OptionalFab.defaultProps = {
+  disabled: false,
+};
 
 const useStyles = (bottom: number) =>
   makeStyles(theme => ({
