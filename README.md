@@ -8,13 +8,13 @@
 
 > Low priority
 
-- title 바꾸기
 - 404 페이지 꾸미기
 - PWA 테스트하고 최적화
 - `Nav` 컴포넌트 최적화
 - favicon 설정
 - `Dialog` 컴포넌트에 설명 속성 추가
 - `OptionalFab.ts`의 `useStyles` 수정
+- 언어 기능 추가
 
 # Sheet Structure
 
