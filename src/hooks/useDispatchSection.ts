@@ -14,6 +14,15 @@ export function useDispatchSection() {
     return !targetSheet?.sectionList.length;
   };
 
+  const getSectionByID = (sheetID: string, sectionID: string) => {
+    const targetSheet = sheetList.find(sheet => sheet.id === sheetID);
+    const targetSection = targetSheet?.sectionList.find(
+      section => section.id === sectionID
+    );
+
+    return targetSection;
+  };
+
   const createSection = (sheetID: string, sectionType: string) => {
     const newSheetList = sheetList.map(sheet => {
       if (sheet.id !== sheetID) return sheet;
@@ -98,5 +107,5 @@ export function useDispatchSection() {
     setSheetList(newSheetList);
   };
 
-  return { isEmptySection, createSection, deleteSection };
+  return { getSectionByID, isEmptySection, createSection, deleteSection };
 }

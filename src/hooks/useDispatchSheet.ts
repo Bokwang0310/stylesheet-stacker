@@ -11,8 +11,11 @@ type Payload = {
 export function useDispatchSheet() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);
 
-  const getSheetByID = (id: string) =>
-    sheetList.filter(sheet => sheet.id === id)[0];
+  const getSheetByID = (id: string) => {
+    const targetSheet = sheetList.find(sheet => sheet.id === id);
+    if (typeof targetSheet !== 'undefined') return targetSheet;
+    throw new Error(`${id}에 해당하는 sheet를 찾을 수 없습니다.`);
+  };
 
   const createSheet = (newSheet: Sheet) => {
     const newSheetList = [...sheetList, newSheet];

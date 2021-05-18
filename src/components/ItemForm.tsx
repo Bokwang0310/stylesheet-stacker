@@ -9,21 +9,23 @@ import Button from '@material-ui/core/Button';
 import ItemFormContent from 'components/ItemFormContent';
 import { itemFormState } from 'state/form';
 import { modifyTargetState } from 'state/modifyMode';
-import { useDispatchSheet } from 'hooks/useDispatchSheet';
+import { useDispatchSection } from 'hooks/useDispatchSection';
 
 type Props = {
   id: string;
 };
 
 function ItemForm({ id }: Props) {
-  const { getSheetByID } = useDispatchSheet();
+  const { getSectionByID } = useDispatchSection();
   const [formState, setFormState] = useRecoilState(itemFormState);
-
-  const targetSheet = getSheetByID(id);
   const targetSectionID = useRecoilValue(modifyTargetState);
-  const targetSection = targetSheet.sectionList.filter(
-    section => section.id === targetSectionID
-  )[0];
+
+  const targetSection = getSectionByID(id, targetSectionID);
+
+  if (typeof targetSection === 'undefined')
+    throw new Error(
+      `Sheet Id: ${id}, Section Id: ${targetSectionID}에 해당하는 section을 찾을 수 없습니다.`
+    );
 
   return (
     <Dialog
