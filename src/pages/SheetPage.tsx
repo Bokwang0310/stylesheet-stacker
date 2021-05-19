@@ -36,14 +36,13 @@ function SheetPage() {
   const itemFormOpen = useRecoilValue(itemFormState);
   const setAddformState = useSetRecoilState(sheetAddformState);
   const [mode, setMode] = useRecoilState(modifyModeState);
-  const [sheetList] = useRecoilState(sheetListState);
-
+  const sheetList = useRecoilValue(sheetListState);
   const setFabState = useSetRecoilState(sheetFabState);
-  useEffect(() => {
-    return () => {
-      setFabState(false);
-    };
-  });
+
+  useEffect(() => () => setFabState(false));
+
+  // 페이지를 나갈 때 수정 모드 끄기
+  useEffect(() => () => setMode(false), []);
 
   const idList = sheetList.map(sheet => sheet.id);
   const { id } = useParams<Param>();
