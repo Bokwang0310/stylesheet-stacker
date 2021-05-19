@@ -22,6 +22,7 @@ import { sheetFabState } from 'state/sheetFab';
 import { itemFormState, sheetAddformState } from 'state/form';
 import { modifyModeState } from 'state/modifyMode';
 import { sheetListState } from 'state/sheets';
+import { useDispatchSheet } from 'hooks/useDispatchSheet';
 import { useDispatchSection } from 'hooks/useDispatchSection';
 
 // URL 파라미터를 받아오는 리액트 라우터 훅에 쓰임
@@ -31,22 +32,22 @@ type Param = {
 
 function SheetPage() {
   const history = useHistory();
+  const { exist } = useDispatchSheet();
   const { isEmptySection, createSection } = useDispatchSection();
 
-  const itemFormOpen = useRecoilValue(itemFormState);
-  const setAddformState = useSetRecoilState(sheetAddformState);
   const [mode, setMode] = useRecoilState(modifyModeState);
+  const itemFormOpen = useRecoilValue(itemFormState);
   const sheetList = useRecoilValue(sheetListState);
+  const setAddformState = useSetRecoilState(sheetAddformState);
   const setFabState = useSetRecoilState(sheetFabState);
 
   useEffect(() => () => setFabState(false));
 
   // 페이지를 나갈 때 수정 모드 끄기
-  useEffect(() => () => setMode(false), []);
+  useEffect(() => () => setMode(false), [setMode]);
 
-  const idList = sheetList.map(sheet => sheet.id);
   const { id } = useParams<Param>();
-  if (!idList.includes(id)) {
+  if (!exist(id)) {
     return <NotFoundPage />;
   }
 

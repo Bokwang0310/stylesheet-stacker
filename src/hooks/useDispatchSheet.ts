@@ -11,6 +11,8 @@ type Payload = {
 export function useDispatchSheet() {
   const [sheetList, setSheetList] = useRecoilState(sheetListState);
 
+  const exist = (id: string) => sheetList.map(sheet => sheet.id).includes(id);
+
   const getSheetByID = (id: string) => {
     const targetSheet = sheetList.find(sheet => sheet.id === id);
     if (typeof targetSheet !== 'undefined') return targetSheet;
@@ -36,5 +38,5 @@ export function useDispatchSheet() {
     setSheetList(newSheetList);
   };
 
-  return { getSheetByID, createSheet, updateSheet, deleteSheet };
+  return { exist, getSheetByID, createSheet, updateSheet, deleteSheet };
 }
