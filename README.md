@@ -1,6 +1,5 @@
 # TODO
 
-- 삭제 경고창 버튼 색 생각
 - Netlify에 호스팅했을 때 URL을 `/setting`으로 해서 바로 들어가면 404 뜸
 - 홈 화면에 놀고 있는 리스트 버튼에 기능 추가하기
 - `useDispatchSection.ts`에서 immer 사용하기 위해 타입 제대로 하기

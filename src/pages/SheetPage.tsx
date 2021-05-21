@@ -21,7 +21,6 @@ import ItemForm from 'components/ItemForm';
 import { sheetFabState } from 'state/sheetFab';
 import { itemFormState, sheetAddformState } from 'state/form';
 import { modifyModeState } from 'state/modifyMode';
-import { sheetListState } from 'state/sheets';
 import { useDispatchSheet } from 'hooks/useDispatchSheet';
 import { useDispatchSection } from 'hooks/useDispatchSection';
 
@@ -37,7 +36,6 @@ function SheetPage() {
 
   const [mode, setMode] = useRecoilState(modifyModeState);
   const itemFormOpen = useRecoilValue(itemFormState);
-  const sheetList = useRecoilValue(sheetListState);
   const setAddformState = useSetRecoilState(sheetAddformState);
   const setFabState = useSetRecoilState(sheetFabState);
 

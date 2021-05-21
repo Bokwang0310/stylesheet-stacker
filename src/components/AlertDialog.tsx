@@ -31,11 +31,11 @@ function AlertDialog({
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onConfirm} color="secondary">
-          {confirmBtn}
-        </Button>
         <Button onClick={onClose} autoFocus>
           {cancelBtn}
+        </Button>
+        <Button onClick={onConfirm} color="secondary">
+          {confirmBtn}
         </Button>
       </DialogActions>
     </Dialog>
