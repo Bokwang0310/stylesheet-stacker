@@ -34,7 +34,7 @@ function AlertDialog({
         <Button onClick={onClose} autoFocus>
           {cancelBtn}
         </Button>
-        <Button onClick={onConfirm} color="secondary">
+        <Button onClick={onConfirm} color="primary">
           {confirmBtn}
         </Button>
       </DialogActions>

@@ -4,6 +4,10 @@
 - `useDispatchSection.ts`에서 immer 사용하기 위해 타입 제대로 하기
 - `getSheetByID` 함수와 `ItemForm.tsx` 내부의 에러 던지는 부분 수정
 
+> Major
+
+- Sheet의 순서 바꾸기 (업데이트 순 또는 드래그로 직접 설정)
+
 > Low priority
 
 - 404 페이지 꾸미기
@@ -28,9 +32,11 @@
 
 [Motivation](https://youtu.be/PtVOesopqD4?t=1547)
 
-![Home Page](https://user-images.githubusercontent.com/61522272/111319361-416a1b80-86a9-11eb-8873-78bb420119cf.png)
+![Home Page](https://user-images.githubusercontent.com/61522272/119142195-276e0000-ba81-11eb-94aa-2bf0e81b4362.png)
 
-![Setting Page](https://user-images.githubusercontent.com/61522272/111319398-4af38380-86a9-11eb-8bf3-5f83882118fe.png)
+![Sheet Page](https://user-images.githubusercontent.com/61522272/119142238-35238580-ba81-11eb-9fb6-d368e505eaff.png)
+
+![Setting Page](https://user-images.githubusercontent.com/61522272/119142280-42d90b00-ba81-11eb-8047-b648b53ab9d3.png)
 
 # Learn More
 
