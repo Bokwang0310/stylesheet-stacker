@@ -38,26 +38,41 @@ export type CustomElementItem = {
 
 export type Item = ColorItem | TypographyItem | ButtonItem | CustomElementItem;
 
-// 외부 파일에서 사용
-export type SectionType = 'color' | 'typography' | 'button' | 'customElement';
+export enum SectionType {
+  color = 'color',
+  typography = 'typography',
+  button = 'button',
+  customElement = 'customElement',
+}
+export const isSectionType = (str: string): str is SectionType => {
+  if (
+    str === 'color' ||
+    str === 'typography' ||
+    str === 'button' ||
+    str === 'customElement'
+  )
+    return true;
+
+  return false;
+};
 
 export type ColorSection = {
-  type: 'color';
+  type: SectionType.color;
   id: string;
   itemList: ColorItem[];
 };
 export type TypographySection = {
-  type: 'typography';
+  type: SectionType.typography;
   id: string;
   itemList: TypographyItem[];
 };
 export type ButtonSection = {
-  type: 'button';
+  type: SectionType.button;
   id: string;
   itemList: ButtonItem[];
 };
 export type CustomElementSection = {
-  type: 'customElement';
+  type: SectionType.customElement;
   id: string;
   itemList: CustomElementItem[];
 };

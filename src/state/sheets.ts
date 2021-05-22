@@ -9,6 +9,7 @@ import {
   Section,
   Sheet,
   TypographyItem,
+  SectionType,
 } from './types';
 
 const { persistAtom } = recoilPersist({
@@ -25,7 +26,7 @@ export const sheetListState = atom<Sheet[]>({
       sectionList: [
         {
           id: nanoid(),
-          type: 'color',
+          type: SectionType.color,
           itemList: [{ id: nanoid(), color: '#C1F1F3' }],
         },
       ],
@@ -37,7 +38,7 @@ export const sheetListState = atom<Sheet[]>({
 // Sheet를 새로 만들 때 들어갈 더미 데이터
 export const defaultNewSection: Section = {
   id: nanoid(),
-  type: 'color',
+  type: SectionType.color,
   itemList: [{ id: nanoid(), color: '#ffffff' }],
 };
 

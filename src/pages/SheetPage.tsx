@@ -20,6 +20,7 @@ import ItemForm from 'components/ItemForm';
 
 import { sheetFabState } from 'state/sheetFab';
 import { itemFormState, sheetAddformState } from 'state/form';
+import { SectionType } from 'state/types';
 import { modifyModeState } from 'state/modifyMode';
 import { useDispatchSheet } from 'hooks/useDispatchSheet';
 import { useDispatchSection } from 'hooks/useDispatchSection';
@@ -72,7 +73,9 @@ function SheetPage() {
       </OptionalFab>
       <SheetAddform
         title="Add Section"
-        handleSubmit={(sectionType: string) => createSection(id, sectionType)}
+        handleSubmit={(sectionType: SectionType) =>
+          createSection(id, sectionType)
+        }
       >
         Enter the name of your section.
       </SheetAddform>

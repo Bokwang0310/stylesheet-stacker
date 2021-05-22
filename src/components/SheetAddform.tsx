@@ -13,16 +13,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import useStyles from 'styles';
 import { sheetAddformState } from 'state/form';
-
-const types = {
-  colorScheme: 'color',
-  typography: 'typography',
-  button: 'button',
-  customElement: 'customElement',
-};
+import { SectionType, isSectionType } from 'state/types';
 
 type Props = {
-  handleSubmit: (sectionType: string) => void;
+  handleSubmit: (sectionType: SectionType) => void;
   title: string;
   children: string;
 };
@@ -30,7 +24,7 @@ type Props = {
 function SheetAddform({ handleSubmit, title, children }: Props) {
   const classes = useStyles();
   const [addformState, setAddformState] = useRecoilState(sheetAddformState);
-  const [type, setType] = useState(types.colorScheme);
+  const [type, setType] = useState(SectionType.color);
 
   return (
     <Dialog
@@ -46,14 +40,18 @@ function SheetAddform({ handleSubmit, title, children }: Props) {
             id="section-type-select"
             value={type}
             onChange={e => {
-              if (typeof e.target.value !== 'string') return;
-              setType(e.target.value);
+              const { value } = e.target;
+              if (typeof value !== 'string') return;
+              if (!isSectionType(value)) return;
+              setType(value);
             }}
           >
-            <MenuItem value={types.colorScheme}>Color Scheme</MenuItem>
-            <MenuItem value={types.typography}>Typography</MenuItem>
-            <MenuItem value={types.button}>Button</MenuItem>
-            <MenuItem value={types.customElement}>Custom Element</MenuItem>
+            <MenuItem value={SectionType.color}>Color Scheme</MenuItem>
+            <MenuItem value={SectionType.typography}>Typography</MenuItem>
+            <MenuItem value={SectionType.button}>Button</MenuItem>
+            <MenuItem value={SectionType.customElement}>
+              Custom Element
+            </MenuItem>
           </Select>
         </FormControl>
       </DialogContent>

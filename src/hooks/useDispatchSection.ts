@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil';
 import produce from 'immer';
 import { nanoid } from 'nanoid';
 import { sheetListState, defaultNewItem } from 'state/sheets';
+import { SectionType } from 'state/types';
 
 const { colorItem, typographyItem, buttonItem, customElementItem } =
   defaultNewItem;
@@ -23,12 +24,12 @@ export function useDispatchSection() {
     return targetSection;
   };
 
-  const createSection = (sheetID: string, sectionType: string) => {
+  const createSection = (sheetID: string, sectionType: SectionType) => {
     const newSheetList = sheetList.map(sheet => {
       if (sheet.id !== sheetID) return sheet;
 
       switch (sectionType) {
-        case 'color':
+        case SectionType.color:
           return {
             ...sheet,
             sectionList: [
@@ -41,7 +42,7 @@ export function useDispatchSection() {
             ],
           };
 
-        case 'typography':
+        case SectionType.typography:
           return {
             ...sheet,
             sectionList: [
@@ -54,7 +55,7 @@ export function useDispatchSection() {
             ],
           };
 
-        case 'button':
+        case SectionType.button:
           return {
             ...sheet,
             sectionList: [
@@ -67,7 +68,7 @@ export function useDispatchSection() {
             ],
           };
 
-        case 'customElement':
+        case SectionType.customElement:
           return {
             ...sheet,
             sectionList: [
