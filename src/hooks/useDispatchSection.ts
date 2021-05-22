@@ -21,7 +21,10 @@ export function useDispatchSection() {
       section => section.id === sectionID
     );
 
-    return targetSection;
+    if (typeof targetSection !== 'undefined') return targetSection;
+    throw Error(
+      `There is no suitable section for SheetId: ${sheetID} and SectionId: ${sectionID}.`
+    );
   };
 
   const createSection = (sheetID: string, sectionType: SectionType) => {
@@ -80,9 +83,6 @@ export function useDispatchSection() {
               },
             ],
           };
-
-        default:
-          throw new Error();
       }
     });
 

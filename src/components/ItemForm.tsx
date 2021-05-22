@@ -19,13 +19,7 @@ function ItemForm({ id }: Props) {
   const { getSectionByID } = useDispatchSection();
   const [formState, setFormState] = useRecoilState(itemFormState);
   const targetSectionID = useRecoilValue(modifyTargetState);
-
   const targetSection = getSectionByID(id, targetSectionID);
-
-  if (typeof targetSection === 'undefined')
-    throw new Error(
-      `Sheet Id: ${id}, Section Id: ${targetSectionID}에 해당하는 section을 찾을 수 없습니다.`
-    );
 
   return (
     <Dialog

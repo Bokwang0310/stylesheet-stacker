@@ -2,7 +2,6 @@
 
 - 홈 화면에 놀고 있는 리스트 버튼에 기능 추가하기
 - `useDispatchSection.ts`에서 immer 사용하기 위해 타입 제대로 하기
-- `getSheetByID` 함수와 `ItemForm.tsx` 내부의 에러 던지는 부분 수정
 
 > Major
 
