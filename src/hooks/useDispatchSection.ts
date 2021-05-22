@@ -71,7 +71,9 @@ export function useDispatchSection() {
             ],
           };
 
-        case SectionType.customElement:
+        // case SectionType.customElement:
+        // default에 대한 반환값이 정해지지 않아 경고를 내보내므로 마지막 경우의 수를 default로 처리
+        default:
           return {
             ...sheet,
             sectionList: [
